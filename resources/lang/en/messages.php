@@ -263,7 +263,7 @@ return [
     'title' => 'Title',
     'sub_title' => 'Sub Title',
     'why_choose_us' => 'Why Choose us',
-    '' => '',
+    'enquiries' => 'Enquiries',
     '' => '',
     '' => '',
     '' => '',
