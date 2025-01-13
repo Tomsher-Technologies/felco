@@ -130,11 +130,14 @@
                         <div class="swiper-slide">
                             <div class="product-card fl-product-card">
                                 <div class="product-image">
-                                    <img src="{{ asset($special_products->image) }}" class="fl-slider-img" alt="{{ $special_products->getTranslation('name', $lang) }}" />
+                                    <a href="{{ route('product-detail',['slug' => $special_products->slug]) }}">
+                                        <img src="{{ asset($special_products->image) }}" class="fl-slider-img" alt="{{ $special_products->getTranslation('name', $lang) }}" />
+                                    </a>
                                 </div>
                                 <div class="fl-product-details">
-                                    <p>{{ trans('messages.category') }}</p>
-                                    <h3>{{ $special_products->category->getTranslation('name', $lang) }}</h3>
+                                    {{-- <p>{{ trans('messages.category') }}</p> --}}
+                                    <p>{{ $special_products->category->getTranslation('name', $lang) }}</p>
+                                    <h3><a href="{{ route('product-detail',['slug' => $special_products->slug]) }}">{{ $special_products->unique_id }}</a></h3>
                                 </div>
                             </div>
                         </div>
