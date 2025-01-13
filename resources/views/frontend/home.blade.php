@@ -137,7 +137,7 @@
                                 <div class="fl-product-details">
                                     {{-- <p>{{ trans('messages.category') }}</p> --}}
                                     <p>{{ $special_products->category->getTranslation('name', $lang) }}</p>
-                                    <h3><a href="{{ route('product-detail',['slug' => $special_products->slug]) }}">{{ $special_products->unique_id }}</a></h3>
+                                    <h3><a  style="color:#000" href="{{ route('product-detail',['slug' => $special_products->slug]) }}">{{ $special_products->unique_id }}</a></h3>
                                 </div>
                             </div>
                         </div>
