@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row @if($lang != 'en') d-none @endif">
+                <div class="form-group row ">
                     <label class="col-sm-2 col-from-label" for="content">Address <span
                             class="text-danger">*</span> </label>
                     <div class="col-sm-10">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row @if($lang != 'en') d-none @endif">
+                <div class="form-group row ">
                     <label class="col-sm-2 col-from-label" for="heading2">Phone <span
                             class="text-danger">*</span> </label>
                     <div class="col-sm-10">
@@ -72,12 +72,30 @@
                     </div>
                 </div>
 
-                <div class="form-group row @if($lang != 'en') d-none @endif">
+                <div class="form-group row ">
                     <label class="col-sm-2 col-from-label" for="sub_heading2">Email <span
                             class="text-danger">*</span> </label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control" placeholder="Email"  @if($lang == 'ae') dir="rtl" @endif name="heading4"
                             value="{{ $page->getTranslation('heading4', $lang) }}">
+                    </div>
+                </div>
+
+                <h6 class="fw-600 mb-2 @if($lang != 'en') d-none @endif">Google Map Section</h6>
+
+                <div class="form-group row @if($lang != 'en') d-none @endif">
+                    <label class="col-sm-2 col-from-label" for="sub_heading1">Latitude <span
+                            class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="Latitude" name="image3" value="{{ $page->image3 }}">
+                    </div>
+                </div>
+
+                <div class="form-group row @if($lang != 'en') d-none @endif">
+                    <label class="col-sm-2 col-from-label" for="sub_heading1">Longitude <span
+                            class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="longitude" name="image4" value="{{ $page->image4 }}">
                     </div>
                 </div>
 
