@@ -104,7 +104,7 @@
                 </li>
 
                 <li>
-                    <a href="#">{{ trans('messages.service_support') }}</a>
+                    <a href="{{ route('service_support') }}">{{ trans('messages.service_support') }}</a>
                 </li>
 
                 <li>
@@ -125,7 +125,7 @@
                 </select>
             </div>
             <div class="contact-btn d-none d-md-block">
-                <a href="#" class="theme-btn fl-get-in-touch-icon">{{ trans('messages.get_in_touch') }}</a>
+                <a href="{{ route('contact') }}" class="theme-btn fl-get-in-touch-icon">{{ trans('messages.get_in_touch') }}</a>
             </div>
         </div>
     </nav>

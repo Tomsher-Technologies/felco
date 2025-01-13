@@ -114,11 +114,8 @@
     <!--  start contact-map -->
     <section class="contact-map-section">
 
-        <div class="contact-map">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462560.6827981485!2d54.897841244323324!3d25.07628045419027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai!5e0!3m2!1sen!2sae!4v1733469271071!5m2!1sen!2sae"
-                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="contact-map" id="map">
+           
         </div>
     </section>
 @endsection
@@ -137,5 +134,31 @@
         
     </script>
 @endif
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}"></script>
+<script>
+    function initMap() {
+        // Replace these values with the ones from your database
+        const latitude = {{ $page->image3 }};
+        const longitude = {{ $page->image4 }};
+
+        // Map options
+        const mapOptions = {
+            center: { lat: latitude, lng: longitude },
+            zoom: 13,
+        };
+
+        // Create the map
+        const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        // Add a marker
+        const marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+        });
+    }
+
+    // Initialize the map when the window loads
+    window.onload = initMap;
+</script>
 
 @endsection

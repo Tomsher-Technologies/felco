@@ -34,6 +34,8 @@ Route::get('/products', [FrontendController::class, 'products'])->name('products
 Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/contact-us', [FrontendController::class, 'submitContactForm'])->name('contact.submit');
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/service-support', [FrontendController::class, 'service_support'])->name('service_support');
 
 Route::post('/language_change', [FrontendController::class, 'changeLanguage'])->name('language.change');
 

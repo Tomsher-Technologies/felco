@@ -50,7 +50,7 @@
                 <div class="fl-footer-links">
                     <h4>{{ trans('messages.useful_links') }}</h4>
                     <ul>
-                        <li><a href="faq.html">{{ trans('messages.faq') }}</a></li>
+                        <li><a href="{{ route('faq') }}">{{ trans('messages.faq') }}</a></li>
                         <li><a href="{{ route('privacy') }}">{{ trans('messages.privacy_policy') }}</a></li>
                         <li><a href="{{ route('terms') }}">{{ trans('messages.terms_conditions') }}</a></li>
                     </ul>
