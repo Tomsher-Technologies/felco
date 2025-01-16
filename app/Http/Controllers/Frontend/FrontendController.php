@@ -437,7 +437,7 @@ class FrontendController extends Controller
             }
         
             // Retrieve filtered products
-            $products = $query->paginate(1);
+            $products = $query->paginate(15);
 
             $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
             $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');
