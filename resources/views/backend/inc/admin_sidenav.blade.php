@@ -131,7 +131,7 @@
                         </a>
                         <ul class="aiz-side-nav-list level-2">
                             <li class="aiz-side-nav-item">
-                                <a href="{{ route('website.header') }}" class="aiz-side-nav-link">
+                                <a href="{{ route('website.header', ['lang' => App::getLocale()]) }}" class="aiz-side-nav-link">
                                     <span class="aiz-side-nav-text">Header</span>
                                 </a>
                             </li>

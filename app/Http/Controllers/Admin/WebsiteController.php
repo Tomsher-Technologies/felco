@@ -15,8 +15,9 @@ class WebsiteController extends Controller
 {
 	public function header(Request $request)
 	{
+		$lang = $request->lang;
 		$categories = Category::where('is_active',1)->with('childrenCategories')->get();
-		return view('backend.website_settings.header', compact('categories'));
+		return view('backend.website_settings.header', compact('categories','lang'));
 	}
 	public function footer(Request $request)
 	{
