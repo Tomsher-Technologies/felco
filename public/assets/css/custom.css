@@ -2037,9 +2037,11 @@ color: #000!important;
             font-weight: bold;
             /* text-align: center;*/
         }
+
+       
         
         /* .image-overlay-container:hover .image-text {
-            background-color: rgba(0, 0, 0, 0.8); /* Darkens background on hover */
-            transform: translate(-50%, -50%) scale(1.1); /* Adds a zoom effect on hover */
-            transition: all 0.3s ease; /* Smooth transition for hover effect */
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: translate(-50%, -50%) scale(1.1); 
+            transition: all 0.3s ease; 
         } */

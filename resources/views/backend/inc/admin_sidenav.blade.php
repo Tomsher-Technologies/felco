@@ -70,21 +70,47 @@
                     </li>
                 @endcanany
 
-                <li class="aiz-side-nav-item">
-                    <a href="{{ route('enquiries.contact') }}"
-                        class="aiz-side-nav-link {{ areActiveRoutes(['enquiries.contact']) }}">
-                        <i class="las la-mail-bulk aiz-side-nav-icon"></i>
-                        <span class="aiz-side-nav-text">Contact Enquiries</span>
-                    </a>
-                </li>
+                @canany(['manage_brochures'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('brochures.all') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['brochures.all','brochure.create','brochure.edit', 'brochure-files.all', 'brochure-files.create','brochure-files.edit']) }}">
+                            <i class="las la-file aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Brochures</span>
+                        </a>
+                    </li>
+                @endcanany
 
-                <li class="aiz-side-nav-item">
-                    <a href="{{ route('subscribers.index') }}"
-                        class="aiz-side-nav-link {{ areActiveRoutes(['subscribers.index']) }}">
-                        <i class="las la-mail-bulk aiz-side-nav-icon"></i>
-                        <span class="aiz-side-nav-text">Newsletter Subscribers</span>
-                    </a>
-                </li>
+
+                @canany(['manage_cerificates'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('certificates.all') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['certificates.all','certificate.create','certificate.edit', 'sections.all', 'sections.create','sections.edit', 'certificate-files.all', 'certificate-files.create','certificate-files.edit']) }}">
+                            <i class="las la-certificate aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Certificates</span>
+                        </a>
+                    </li>
+                @endcanany
+                
+
+                @canany(['contact_enquiries'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('enquiries.contact') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['enquiries.contact']) }}">
+                            <i class="las la-mail-bulk aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Contact Enquiries</span>
+                        </a>
+                    </li>
+                @endcanany
+
+                @canany(['newsletter_subscribers'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('subscribers.index') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['subscribers.index']) }}">
+                            <i class="las la-mail-bulk aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Newsletter Subscribers</span>
+                        </a>
+                    </li>
+                @endcanany
 
                 @canany(['website_setup'])
                     <li class="aiz-side-nav-item">
