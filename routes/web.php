@@ -43,6 +43,11 @@ Route::get('/category/{category_slug}', [FrontendController::class, 'filterByCat
 Route::get('/product-detail', [FrontendController::class, 'productDetails'])->name('product-detail');
 Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('newsletter.subscribe');
 
+Route::get('/brochures', [FrontendController::class, 'brochures'])->name('brochures');
+Route::get('/certificates', [FrontendController::class, 'certificates'])->name('certificates');
+Route::get('/manuals', [FrontendController::class, 'manuals'])->name('manuals');
+Route::get('/service-after-sales', [FrontendController::class, 'service_sales'])->name('service_sales');
+
 
 
 

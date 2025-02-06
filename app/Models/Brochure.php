@@ -32,6 +32,6 @@ class Brochure extends Model
     
     public function files()
     {
-        return $this->hasMany(BrochureFile::class);
+        return $this->hasMany(BrochureFile::class)->where('status',1)->orderBy('sort_order','ASC');
     }
 }

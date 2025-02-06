@@ -34,4 +34,9 @@ class ManualSection extends Model
     {
         return $this->hasMany(ManualSectionTranslation::class);
     }
+
+    public function files()
+    {
+        return $this->hasMany(ManualFile::class)->where('status',1)->orderBy('sort_order','ASC');
+    }
 }

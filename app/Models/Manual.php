@@ -33,12 +33,12 @@ class Manual extends Model
 
     public function sections()
     {
-        return $this->hasMany(ManualSection::class);
+        return $this->hasMany(ManualSection::class)->where('status',1)->orderBy('sort_order','ASC');;
     }
     
-    public function files()
-    {
-        return $this->hasMany(ManualFile::class);
-    }
+    // public function files()
+    // {
+    //     return $this->hasMany(ManualFile::class);
+    // }
 }
 

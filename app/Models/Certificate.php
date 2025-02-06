@@ -33,12 +33,12 @@ class Certificate extends Model
 
     public function sections()
     {
-        return $this->hasMany(CertificateSection::class);
+        return $this->hasMany(CertificateSection::class)->where('status',1)->orderBy('sort_order','ASC');
     }
     
-    public function files()
-    {
-        return $this->hasMany(CertificateFile::class);
-    }
+    // public function files()
+    // {
+    //     return $this->hasMany(CertificateFile::class)->where('status',1)->orderBy('sort_order','ASC');
+    // }
 }
 

@@ -2,7 +2,7 @@
     @php
         $lang = getActiveLanguage();
         $details = getCategoryHeader();
-        
+
     @endphp
     <nav class="navbar">
         <div class="brand-and-icon">
@@ -36,27 +36,29 @@
                             <div class="col-md-9">
                                 <div class="fl-grid-container">
 
-                                    @if(!empty($details['header_categories']))
-                                        @foreach($details['header_categories'] as $header_categories)
-                                            
+                                    @if (!empty($details['header_categories']))
+                                        @foreach ($details['header_categories'] as $header_categories)
                                             <div class="fl-grid-item">
-                                                <a href="{{ route('products.category',['category_slug' => $header_categories->slug]) }}">
+                                                <a
+                                                    href="{{ route('products.category', ['category_slug' => $header_categories->slug]) }}">
                                                     <div class="fl-category-title">
-        
+
                                                         <span class="fl-divider"></span>
                                                         <div class="">
-                                                            <h3>{{ $header_categories->getTranslation('name', $lang) }}</h3>
-                                                            <p>{{ $header_categories->getTranslation('home_content', $lang) }}</p>
+                                                            <h3>{{ $header_categories->getTranslation('name', $lang) }}
+                                                            </h3>
+                                                            <p>{{ $header_categories->getTranslation('home_content', $lang) }}
+                                                            </p>
                                                         </div>
                                                         <i class="bi bi-arrow-right"></i>
-        
+
                                                     </div>
                                                 </a>
-        
+
                                             </div>
                                         @endforeach
-                                    @endif  
-                                    
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -97,14 +99,85 @@
                                     </div>
                                 </a>
                             </div>
-                            
+
                         </div>
 
                     </div>
                 </li>
 
+                {{-- <li>
+                    <a href="{{ route('service_support') }}"></a>
+                </li> --}}
+
                 <li>
-                    <a href="{{ route('service_support') }}">{{ trans('messages.service_support') }}</a>
+                    <a href="#" class="menu-link">
+                        {{ trans('messages.service_support') }}
+                        <span class="drop-icon">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                    </a>
+                    <div class="sub-menu">
+                        <!-- item -->
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="fl-grid-container">
+                                    <div class="fl-grid-item">
+                                        <a href="{{ route('brochures') }}">
+                                            <div class="fl-category-title">
+                                                <span class="fl-divider"></span>
+                                                <div class="">
+                                                    <h3>Brochures</h3>
+                                                    <p>
+                                                        Browse our brochures or download catalogs for more information.
+                                                    </p>
+                                                </div>
+                                                <i class="bi bi-arrow-right"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="fl-grid-item">
+                                        <a href="{{ route('certificates') }}">
+                                            <div class="fl-category-title">
+                                                <span class="fl-divider"></span>
+                                                <div class="">
+                                                    <h3>Certificates</h3>
+                                                    <p>Explore our marine, industrial, and material certificates below.
+                                                    </p>
+                                                </div>
+                                                <i class="bi bi-arrow-right"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="fl-grid-item">
+                                        <a href="{{ route('manuals') }}">
+                                            <div class="fl-category-title">
+                                                <span class="fl-divider"></span>
+                                                <div class="">
+                                                    <h3>Manuals</h3>
+                                                    <p>Find manuals for our motors here. Contact us anytime for
+                                                        assistance</p>
+                                                </div>
+                                                <i class="bi bi-arrow-right"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="fl-grid-item">
+                                        <a href="{{ route('service_sales')  }}">
+                                            <div class="fl-category-title">
+                                                <span class="fl-divider"></span>
+                                                <div class="">
+                                                    <h3>Service/After Sales</h3>
+                                                    <p>We maintain close cooperation with our global distributors. </p>
+                                                </div>
+                                                <i class="bi bi-arrow-right"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
 
                 <li>
@@ -125,7 +198,8 @@
                 </select>
             </div>
             <div class="contact-btn d-none d-md-block">
-                <a href="{{ route('contact') }}" class="theme-btn fl-get-in-touch-icon">{{ trans('messages.get_in_touch') }}</a>
+                <a href="{{ route('contact') }}"
+                    class="theme-btn fl-get-in-touch-icon">{{ trans('messages.get_in_touch') }}</a>
             </div>
         </div>
     </nav>

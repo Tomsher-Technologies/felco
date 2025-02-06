@@ -34,4 +34,8 @@ class CertificateSection extends Model
     {
         return $this->hasMany(CertificateSectionTranslation::class);
     }
+    public function files()
+    {
+        return $this->hasMany(CertificateFile::class)->where('status',1)->orderBy('sort_order','ASC');
+    }
 }
