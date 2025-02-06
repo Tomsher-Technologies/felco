@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\BusinessSetting;
 use App\Models\Faq;
 use App\Models\Subscriber;
+use App\Models\ServiceSale;
 use App\Models\Product;
 use App\Models\Contacts;
 use Storage;
@@ -102,6 +103,8 @@ class PageController extends Controller
             return view('backend.website_settings.pages.faq', compact('page','lang','page_id'));
           }else if ($id == 'marine' || $id == 'oil_gas' || $id == 'hvac') {
             return view('backend.website_settings.pages.industries', compact('page','lang','page_id'));
+          }else if ($id == 'service_sales') {
+            return view('backend.website_settings.pages.service_sales', compact('page','lang','page_id'));
           }else{
             return view('backend.website_settings.pages.edit', compact('page','lang','page_id'));
           }
@@ -162,6 +165,22 @@ class PageController extends Controller
                             'answer' => $faq['answer'],
                             'sort_order' => $faq['order'] ?? 0,
                             'type' => $page->type,
+                            'lang' => $request->lang
+                        ]);
+                    }
+                }
+            }
+
+            $services = $request->input('sections');
+            if($services){
+                ServiceSale::where('lang', $request->lang)->delete();
+                foreach ($services as $ser) {
+                    if($ser['section_title'] != NULL && $ser['section_content'] != NULL){
+                        ServiceSale::create([
+                            'title' => $ser['section_title'],
+                            'content' => $ser['section_content'],
+                            'sort_order' => $ser['order'] ?? 0,
+                            'image' => $ser['image'],
                             'lang' => $request->lang
                         ]);
                     }
