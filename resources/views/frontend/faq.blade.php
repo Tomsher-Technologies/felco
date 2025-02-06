@@ -71,7 +71,7 @@
                                 }
                                 $faqs = $query->get();
                             }
-                        @endphp
+                        @endphp 
 
                         @foreach ($faqs as $key => $faq)
                             <div class="accordion-item">

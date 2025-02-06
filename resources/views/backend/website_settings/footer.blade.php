@@ -300,7 +300,7 @@
                                 </div>
                                 <input type="hidden" name="types[]" value="linkedin_link">
                                 <input type="text" class="form-control" placeholder="http://" name="linkedin_link"
-                                    value="{{ get_setting('linkedin_link') }}">
+                                    value="{{ get_setting('linkedin_link') }}
                             </div>
                             <div class="input-group form-group d-none">
                                 <div class="input-group-prepend">
