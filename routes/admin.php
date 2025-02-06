@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\BusinessSettingsController;
 use App\Http\Controllers\Admin\HomeSliderController;
 use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\ManualController;
 use App\Http\Controllers\Admin\BrochureController;
 
 Route::group(['middleware' => ['guest']], function () {
@@ -148,6 +149,31 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/certificate/files/update-status', [CertificateController::class, 'updateCertificateFileStatus'])->name('certificate-files.update-status');
     Route::get('/certificate/files/delete/{id}', [CertificateController::class, 'destroyCertificateFile'])->name('certificate-files.delete');
 
+    // Manage Manuals 
 
+    Route::get('/manuals/all', [ManualController::class, 'allManuals'])->name('manuals.all');
+    Route::get('/manuals/create', [ManualController::class, 'createManual'])->name('manual.create');
+    Route::post('/manuals/store/', [ManualController::class, 'storeManual'])->name('manual.store');
+    Route::get('/manuals/{id}/edit', [ManualController::class, 'editManual'])->name('manual.edit');
+    Route::post('/manuals/update/{id}', [ManualController::class, 'updateManual'])->name('manual.update');
+    Route::post('/manuals/update-status', [ManualController::class, 'updateManualStatus'])->name('manual.update-status');
+    Route::get('/manuals/delete/{id}', [ManualController::class, 'destroyManual'])->name('manual.delete');
+
+    Route::get('/manual/sections/all/{id}', [ManualController::class, 'allManualSections'])->name('manual-sections.all');
+    Route::get('/manuals/sections/create/{id}', [ManualController::class, 'createSection'])->name('manual-sections.create');
+    Route::post('/manuals/sections/store/', [ManualController::class, 'storeSection'])->name('manual-sections.store');
+    Route::get('/manuals/sections/{id}/edit', [ManualController::class, 'editSection'])->name('manual-sections.edit');
+    Route::post('/manuals/sections/update/{id}', [ManualController::class, 'updateSection'])->name('manual-sections.update');
+    Route::post('/manuals/sections/update-status', [ManualController::class, 'updateSectionStatus'])->name('manual-sections.update-status');
+    Route::get('/manuals/sections/delete/{id}', [ManualController::class, 'destroySection'])->name('manual-sections.delete');
+    
+    
+    Route::get('/manual/files/all/{manual_id}/{section_id}', [ManualController::class, 'allManualFiles'])->name('manual-files.all');
+    Route::get('/manual/files/create/{section_id}', [ManualController::class, 'createManualFile'])->name('manual-files.create');
+    Route::post('/manual/files/store/', [ManualController::class, 'storeManualFile'])->name('manual-files.store');
+    Route::get('/manual/files/{id}/edit', [ManualController::class, 'editManualFile'])->name('manual-files.edit');
+    Route::post('/manual/files/update/{id}', [ManualController::class, 'updateManualFile'])->name('manual-files.update');
+    Route::post('/manual/files/update-status', [ManualController::class, 'updateManualFileStatus'])->name('manual-files.update-status');
+    Route::get('/manual/files/delete/{id}', [ManualController::class, 'destroyManualFile'])->name('manual-files.delete');
 
 });

@@ -74,7 +74,7 @@
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('brochures.all') }}"
                             class="aiz-side-nav-link {{ areActiveRoutes(['brochures.all','brochure.create','brochure.edit', 'brochure-files.all', 'brochure-files.create','brochure-files.edit']) }}">
-                            <i class="las la-file aiz-side-nav-icon"></i>
+                            <i class="las la-file-pdf aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">Brochures</span>
                         </a>
                     </li>
@@ -91,6 +91,15 @@
                     </li>
                 @endcanany
                 
+                @canany(['manage_manuals'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('manuals.all') }}"
+                            class="aiz-side-nav-link {{ areActiveRoutes(['manuals.all','manual.create','manual.edit', 'manual-sections.all', 'manual-sections.create','manual-sections.edit', 'manual-files.all', 'manual-files.create','manual-files.edit']) }}">
+                            <i class="las la-book aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Manuals</span>
+                        </a>
+                    </li>
+                @endcanany
 
                 @canany(['contact_enquiries'])
                     <li class="aiz-side-nav-item">
@@ -106,7 +115,7 @@
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('subscribers.index') }}"
                             class="aiz-side-nav-link {{ areActiveRoutes(['subscribers.index']) }}">
-                            <i class="las la-mail-bulk aiz-side-nav-icon"></i>
+                            <i class=" las la-newspaper aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">Newsletter Subscribers</span>
                         </a>
                     </li>
@@ -153,7 +162,7 @@
                 @canany(['manage_staffs'])
                     <li class="aiz-side-nav-item">
                         <a href="#" class="aiz-side-nav-link">
-                            <i class="las la-user-tie aiz-side-nav-icon"></i>
+                            <i class="las la-users aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">{{  trans('messages.staffs') }}</span>
                             <span class="aiz-side-nav-arrow"></span>
                         </a>
@@ -177,7 +186,7 @@
                 @canany(['manage_roles'])
                     <li class="aiz-side-nav-item">
                         <a href="#" class="aiz-side-nav-link">
-                            <i class="las la-user-tie aiz-side-nav-icon"></i>
+                            <i class="las la-user-lock aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">{{ trans('messages.roles_permissions')}}</span>
                             <span class="aiz-side-nav-arrow"></span>
                         </a>
