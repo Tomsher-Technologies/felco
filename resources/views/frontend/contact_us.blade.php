@@ -22,24 +22,21 @@
                         @csrf
                         <div class="row g-3">
                             <div class="col-6">
-                                <input type="text" class="form-control" id="firstName" name="firstName"
-                                    placeholder="{{ trans('messages.first_name') }}*">
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{ trans('messages.first_name') }}*"  value="{{ old('firstName') }}">
                                 @error('firstName')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="col-6">
-                                <input type="text" class="form-control" id="lastName" name="lastName"
-                                    placeholder="{{ trans('messages.last_name') }}*">
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{ trans('messages.last_name') }}*"  value="{{ old('lastName') }}">
                                 @error('lastName')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="col-6">
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="{{ trans('messages.email') }}*">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="{{ trans('messages.email') }}*" value="{{ old('email') }}">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -50,10 +47,10 @@
                             <div class="col-6">
                                 <select class="form-select" id="subject" name="subject" aria-label="Default select example">
                                     <option value="">{{ trans('messages.select_subject') }}</option>
-                                    <option value="general_enquiry">{{ trans('messages.general_enquiry') }}</option>
-                                    <option value="support">{{ trans('messages.support') }}</option>
-                                    <option value="feedback">{{ trans('messages.feedback') }}</option>
-                                    <option value="custom_request">{{ trans('messages.custom_request') }}</option>
+                                    <option @if(old('message') == 'general_enquiry') selected @endif  value="general_enquiry">{{ trans('messages.general_enquiry') }}</option>
+                                    <option @if(old('message') == 'support') selected @endif value="support">{{ trans('messages.support') }}</option>
+                                    <option @if(old('message') == 'feedback') selected @endif value="feedback">{{ trans('messages.feedback') }}</option>
+                                    <option @if(old('message') == 'custom_request') selected @endif value="custom_request">{{ trans('messages.custom_request') }}</option>
                                 </select>
                                 @error('subject')
                                     <span class="text-danger">{{ $message }}</span>
@@ -61,7 +58,7 @@
                             </div>
 
                             <div class="col-12">
-                                <textarea class="form-control" id="message" name="message"  rows="5" placeholder="{{ trans('messages.message') }}..."></textarea>
+                                <textarea class="form-control" id="message" name="message"  rows="5" placeholder="{{ trans('messages.message') }}...">{{ old('message') }}</textarea>
                                 @error('message')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
