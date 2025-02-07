@@ -66,6 +66,10 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-12">
+                                <div class="g-recaptcha" data-sitekey="{{env('NOCAPTCHA_SITEKEY')}}"></div>
+                            </div>
                             <div class="col-12">
                                 <button type="submit" class="theme-btn fl-get-in-touch-icon float-end">{{ trans('messages.submit') }}</button>
                             </div>
@@ -134,6 +138,7 @@
 @endsection
 
 @section('script')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @if (session('scrollTo'))
     <script>
         document.addEventListener('DOMContentLoaded', function () {
