@@ -2263,3 +2263,13 @@ section.help_section .card .card-text {
     font-weight: bold;
     /* text-align: center;*/
 }
+
+/*  Jisha Custom Styles  */
+
+.menu-active {
+    border-bottom-color: #000 !important;
+}
+
+.menu-active > a{
+    opacity: 0.7 !important;
+}
