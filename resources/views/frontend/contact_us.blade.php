@@ -47,10 +47,10 @@
                             <div class="col-6">
                                 <select class="form-select" id="subject" name="subject" aria-label="Default select example">
                                     <option value="">{{ trans('messages.select_subject') }}</option>
-                                    <option @if(old('message') == 'general_enquiry') selected @endif  value="general_enquiry">{{ trans('messages.general_enquiry') }}</option>
-                                    <option @if(old('message') == 'support') selected @endif value="support">{{ trans('messages.support') }}</option>
-                                    <option @if(old('message') == 'feedback') selected @endif value="feedback">{{ trans('messages.feedback') }}</option>
-                                    <option @if(old('message') == 'custom_request') selected @endif value="custom_request">{{ trans('messages.custom_request') }}</option>
+                                    <option @if(old('subject') == 'general_enquiry') selected @endif  value="general_enquiry">{{ trans('messages.general_enquiry') }}</option>
+                                    <option @if(old('subject') == 'support') selected @endif value="support">{{ trans('messages.support') }}</option>
+                                    <option @if(old('subject') == 'feedback') selected @endif value="feedback">{{ trans('messages.feedback') }}</option>
+                                    <option @if(old('subject') == 'custom_request') selected @endif value="custom_request">{{ trans('messages.custom_request') }}</option>
                                 </select>
                                 @error('subject')
                                     <span class="text-danger">{{ $message }}</span>
