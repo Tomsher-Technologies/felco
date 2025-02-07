@@ -18,7 +18,7 @@
     <section class="about-us-section about-us-page-section section-padding p-b-0">
         <div class="container ">
             <div class="row">
-                <div class="col-12 col-md-7">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7">
                     <div class="section-title">
 
                         <h2>{{ $page->getTranslation('heading1', $lang) }}</h2>
@@ -28,7 +28,7 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-12 col-sm-12 col-md-12 col-lg-5">
                     <div class="img-holder about-image">
                         <img src="{{ asset($page->image) }}" class="h-100 img-fluid" alt>
                     </div>

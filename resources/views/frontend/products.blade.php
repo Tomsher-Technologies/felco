@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row">
                 <div class="col col-xs-12">
-                    <div class="service-grids clearfix border">
+                    <div class="service-grids clearfix">
                         @if (count($categories) > 0)
                             @foreach ($categories as $cat)
                                 <div class="grid">

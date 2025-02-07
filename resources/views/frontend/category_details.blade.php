@@ -36,7 +36,7 @@
 
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-5">
 
                 @if ($category->frame_size != NULL)
                     <div class="col-md-3 mb-1">
