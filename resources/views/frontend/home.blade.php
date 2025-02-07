@@ -170,7 +170,7 @@
                     <span>{{ $page->getTranslation('heading6', $lang) }}</span>
                     <h2>{{ $page->getTranslation('heading7', $lang) }}</h2>
                 </div>
-                <a href="#" class="theme-btn fl-get-in-touch-icon fl-btn">{{ trans('messages.learn_more') }}</a>
+                <a href="{{ route('about_us') }}" class="theme-btn fl-get-in-touch-icon fl-btn">{{ trans('messages.learn_more') }}</a>
             </div>
 
             <div class="details fl-details">
