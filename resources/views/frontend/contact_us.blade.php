@@ -70,7 +70,7 @@
                             <div class="col-12">
                                 <div class="g-recaptcha" data-sitekey="{{env('NOCAPTCHA_SITEKEY')}}"></div>
                                 @error('g-recaptcha-response')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">This field is required</span>
                                 @enderror
                             </div>
                             <div class="col-12">
