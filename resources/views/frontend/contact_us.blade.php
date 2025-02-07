@@ -105,13 +105,13 @@
                         <div class="social_link">
                             <ul>
                                 <li>
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
+                                    <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="bi bi-facebook"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
+                                    <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="bi bi-instagram"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                                    <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="bi bi-linkedin"></i></a>
                                 </li>
                             </ul>
                         </div>

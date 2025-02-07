@@ -67,7 +67,7 @@
             </div>
 
             <div class="fl-footer-bottom">
-                <p> {!! get_setting('frontend_copyright_text', null, $lang) !!} | {{ trans('messages.designed_by') }} <a href="https://www.tomsher.com/" target="_blank">{{ trans('messages.tomsher') }}</a></p>
+                <p> © {{ date('Y') }} {!! get_setting('frontend_copyright_text', null, $lang) !!} | {{ trans('messages.designed_by') }} <a href="https://www.tomsher.com/" target="_blank">{{ trans('messages.tomsher') }}</a></p>
                 <div class="social_link m-0 p-0">
                     <ul>
                         <li>
