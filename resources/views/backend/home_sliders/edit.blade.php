@@ -97,9 +97,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-md-3 col-form-label">Sub Title</label>
+                                    <label class="col-md-3 col-form-label">Subtitle</label>
                                     <div class="col-md-9">
-                                        <input type="text" placeholder="Enter Sub Title" value="{{ old('sub_title', $homeSlider->getTranslation('sub_title', $lang)) }}" id="sub_title"
+                                        <input type="text" placeholder="Enter Subtitle" value="{{ old('sub_title', $homeSlider->getTranslation('sub_title', $lang)) }}" id="sub_title"
                                             name="sub_title" class="form-control">
                                     </div>
                                 </div>

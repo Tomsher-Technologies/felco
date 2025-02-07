@@ -261,7 +261,7 @@ return [
     'oil_gas' => 'Oil & Gas',
     'hvac' => 'HVAC',
     'title' => 'Title',
-    'sub_title' => 'Sub Title',
+    'sub_title' => 'Subtitle',
     'why_choose_us' => 'Why Choose us',
     'enquiries' => 'Enquiries',
     'settings' => 'Settings',

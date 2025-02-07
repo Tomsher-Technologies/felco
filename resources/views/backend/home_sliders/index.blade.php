@@ -28,7 +28,7 @@
                                     <th class="text-left">Name</th>
                                     <th class="text-center">Image</th>
                                     <th class="text-left">Title</th>
-                                    <th class="text-left">Sub Title</th>
+                                    <th class="text-left">Subtitle</th>
                                     <th class="text-left">Button Text</th>
                                     <th class="text-left">Link</th>
                                     <th class="text-center">Sort Order</th>
