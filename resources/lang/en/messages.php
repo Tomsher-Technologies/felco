@@ -274,7 +274,7 @@ return [
     'manual' => 'Manual',
     'manuals' => 'Manuals',
     'service_after_sales' => 'Service/After Sales',
-    '' => '',
+    'required_field' => 'This field is required',
     '' => '',
     '' => '',
     '' => '',

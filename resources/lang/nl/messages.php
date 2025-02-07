@@ -274,6 +274,7 @@ return [
     'manual' => 'Handleiding',
     'manuals' => 'Handleidingen',
     'service_after_sales' => 'Service/After Sales',
+    'required_field' => 'Dit veld is verplicht',
     '' => '',
     '' => '',
     '' => '',
