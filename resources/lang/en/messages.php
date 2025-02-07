@@ -273,7 +273,7 @@ return [
     'brochure' => 'Brochure',
     'manual' => 'Manual',
     'manuals' => 'Manuals',
-    '' => '',
+    'service_after_sales' => 'Service/After Sales',
     '' => '',
     '' => '',
     '' => '',
