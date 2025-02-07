@@ -30,6 +30,7 @@
 .language-dropdown {
     position: relative;
     display: inline-block;
+    margin-right: 5%;
 }
 
 .language-dropdown select {
