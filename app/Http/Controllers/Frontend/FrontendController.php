@@ -375,7 +375,7 @@ class FrontendController extends Controller
             'phone' => 'nullable|string|max:20',
             'subject' => 'required|string',
             'message' => 'required|string|max:5000',
-            'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required'
         ]);
 
         $con                = new Contacts;
