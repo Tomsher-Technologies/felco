@@ -72,7 +72,12 @@
                     <p class="fl-description">
                         {{ $page->getTranslation('content2', $lang) }}
                     </p>
-                    <button class="fl-cta fl-button-style-2 fl-learn-more-btn">{{ trans('messages.learn_more') }} <span><img src="{{ asset('assets/images/arrow-right.png') }}" alt=""></span></button>
+                    <a href="{{ route('marine') }}">
+                        <button class="fl-cta fl-button-style-2 fl-learn-more-btn">
+                            {{ trans('messages.learn_more') }} 
+                            <span><img src="{{ asset('assets/images/arrow-right.png') }}" alt=""></span>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -83,8 +88,12 @@
                 <p class="fl-hover-content fl-description2">
                     {{ $page->getTranslation('content3', $lang) }}
                 </p>
-                <button class="fl-hover-cta fl-button-style-2 fl-learn-more-btn">{{ trans('messages.learn_more') }}
-                    <span><img src="{{ asset('assets/images/arrow-right.png') }}" alt=""></span></button>
+                <a href="{{ route('oil_gas') }}">
+                    <button class="fl-hover-cta fl-button-style-2 fl-learn-more-btn">
+                        {{ trans('messages.learn_more') }}
+                        <span><img src="{{ asset('assets/images/arrow-right.png') }}" alt=""></span>
+                    </button>
+                </a>
             </div>
         </div>
         <div class="fl-column fl-hover-column" data-content="Column 3">
@@ -94,8 +103,12 @@
                 <p class="fl-hover-content fl-description2">
                     {{ $page->getTranslation('content4', $lang) }}
                 </p>
-                <button class="fl-hover-cta fl-button-style-2 fl-learn-more-btn">{{ trans('messages.learn_more') }}
-                    <span><img src="{{ asset('assets/images/arrow-right.png') }}" alt=""></span></button>
+                <a href="{{ route('hvac') }}">
+                    <button class="fl-hover-cta fl-button-style-2 fl-learn-more-btn">
+                        {{ trans('messages.learn_more') }}
+                        <span><img src="{{ asset('assets/images/arrow-right.png') }}" alt=""></span>
+                    </button>
+                </a>
             </div>
         </div>
     </div>
@@ -157,7 +170,7 @@
                     <span>{{ $page->getTranslation('heading6', $lang) }}</span>
                     <h2>{{ $page->getTranslation('heading7', $lang) }}</h2>
                 </div>
-                <a href="#" class="theme-btn fl-get-in-touch-icon fl-btn">{{ trans('messages.learn_more') }}</a>
+                <a href="{{ route('about_us') }}" class="theme-btn fl-get-in-touch-icon fl-btn">{{ trans('messages.learn_more') }}</a>
             </div>
 
             <div class="details fl-details">

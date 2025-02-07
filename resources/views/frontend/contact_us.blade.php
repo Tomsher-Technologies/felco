@@ -66,6 +66,10 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-12">
+                                <div class="g-recaptcha" data-sitekey="{{env('NOCAPTCHA_SITEKEY')}}"></div>
+                            </div>
                             <div class="col-12">
                                 <button type="submit" class="theme-btn fl-get-in-touch-icon float-end">{{ trans('messages.submit') }}</button>
                             </div>
@@ -84,21 +88,34 @@
                         <div>
                             <h5>{{ $page->getTranslation('heading2', $lang) }}</h5>
                             <ul>
-                                <li><i class="bi bi-geo-alt"></i>{{ $page->getTranslation('content', $lang) }}</li>
-                                <li><i class="bi bi-telephone"></i> {{ $page->getTranslation('heading3', $lang) }}</li>
-                                <li><i class="bi bi-envelope"></i> {{ $page->getTranslation('heading4', $lang) }}</li>
+                                <li>
+                                    <i class="bi bi-geo-alt"></i>
+                                    {{ $page->getTranslation('content', $lang) }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-telephone"></i> 
+                                    <a href="tel:{{ $page->getTranslation('heading3', $lang) }}" style="color: #fff;">
+                                        {{ $page->getTranslation('heading3', $lang) }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <i class="bi bi-envelope"></i> 
+                                    <a href="mailto:{{ $page->getTranslation('heading4', $lang) }}" style="color: #fff;">
+                                        {{ $page->getTranslation('heading4', $lang) }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div class="social_link">
                             <ul>
                                 <li>
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
+                                    <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="bi bi-facebook"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
+                                    <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="bi bi-instagram"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                                    <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="bi bi-linkedin"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -121,6 +138,7 @@
 @endsection
 
 @section('script')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @if (session('scrollTo'))
     <script>
         document.addEventListener('DOMContentLoaded', function () {
