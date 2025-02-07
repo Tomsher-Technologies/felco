@@ -129,7 +129,7 @@
                                                 <div class="">
                                                     <h3>{{ trans('messages.brochures') }}</h3>
                                                     <p>
-                                                        {{ get_setting('brochure_content') }}
+                                                        {{ get_setting('brochure_content', null, $lang) }}
                                                     </p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
@@ -142,7 +142,7 @@
                                                 <span class="fl-divider"></span>
                                                 <div class="">
                                                     <h3>{{ trans('messages.certificates') }}</h3>
-                                                    <p>{{ get_setting('certificate_content') }}</p>
+                                                    <p>{{ get_setting('certificate_content', null, $lang) }}</p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
                                             </div>
@@ -154,7 +154,7 @@
                                                 <span class="fl-divider"></span>
                                                 <div class="">
                                                     <h3>{{ trans('messages.manuals') }}</h3>
-                                                    <p>{{ get_setting('manuals_content') }}</p>
+                                                    <p>{{ get_setting('manuals_content', null, $lang) }}</p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
                                             </div>
@@ -166,7 +166,7 @@
                                                 <span class="fl-divider"></span>
                                                 <div class="">
                                                     <h3>{{ trans('messages.service_after_sales') }}</h3>
-                                                    <p>{{ get_setting('service_sales_content') }}</p>
+                                                    <p>{{ get_setting('service_sales_content', null, $lang) }}</p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
                                             </div>
