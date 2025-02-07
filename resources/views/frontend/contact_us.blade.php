@@ -17,7 +17,7 @@
     <section class="contact-pg-section section-padding">
         <div class="container">
             <div class="row">
-                <div class="col col-md-7">
+                <div class="col col-sm-12 col-md-12 col-lg-7">
                     <form action="{{ route('contact.submit') }}" method="post" class="zk-contact-form__form">
                         @csrf
                         <div class="row g-3">
@@ -81,7 +81,7 @@
 
                 </div>
 
-                <div class="col col-md-5">
+                <div class="col col-sm-12 col-md-12 col-lg-5">
 
                     <div class="office-info">
 
