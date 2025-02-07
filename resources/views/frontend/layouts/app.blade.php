@@ -19,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @yield('header')
 </head>
 <body>

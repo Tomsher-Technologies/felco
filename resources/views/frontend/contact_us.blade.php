@@ -138,7 +138,7 @@
 @endsection
 
 @section('script')
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 @if (session('scrollTo'))
     <script>
         document.addEventListener('DOMContentLoaded', function () {
