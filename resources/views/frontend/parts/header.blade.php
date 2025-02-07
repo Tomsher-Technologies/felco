@@ -127,9 +127,9 @@
                                             <div class="fl-category-title">
                                                 <span class="fl-divider"></span>
                                                 <div class="">
-                                                    <h3>Brochures</h3>
+                                                    <h3>{{ trans('messages.brochures') }}</h3>
                                                     <p>
-                                                        Browse our brochures or download catalogs for more information.
+                                                        {{ get_setting('brochure_content') }}
                                                     </p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
@@ -141,9 +141,8 @@
                                             <div class="fl-category-title">
                                                 <span class="fl-divider"></span>
                                                 <div class="">
-                                                    <h3>Certificates</h3>
-                                                    <p>Explore our marine, industrial, and material certificates below.
-                                                    </p>
+                                                    <h3>{{ trans('messages.certificates') }}</h3>
+                                                    <p>{{ get_setting('certificate_content') }}</p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
                                             </div>
@@ -154,9 +153,8 @@
                                             <div class="fl-category-title">
                                                 <span class="fl-divider"></span>
                                                 <div class="">
-                                                    <h3>Manuals</h3>
-                                                    <p>Find manuals for our motors here. Contact us anytime for
-                                                        assistance</p>
+                                                    <h3>{{ trans('messages.manuals') }}</h3>
+                                                    <p>{{ get_setting('manuals_content') }}</p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
                                             </div>
@@ -167,8 +165,8 @@
                                             <div class="fl-category-title">
                                                 <span class="fl-divider"></span>
                                                 <div class="">
-                                                    <h3>Service/After Sales</h3>
-                                                    <p>We maintain close cooperation with our global distributors. </p>
+                                                    <h3>{{ trans('messages.service_after_sales') }}</h3>
+                                                    <p>{{ get_setting('service_sales_content') }}</p>
                                                 </div>
                                                 <i class="bi bi-arrow-right"></i>
                                             </div>

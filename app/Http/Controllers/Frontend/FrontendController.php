@@ -29,6 +29,7 @@ use App\Models\ManualFile;
 use App\Models\ManualFileTranslation;
 use App\Models\ManualSection;
 use App\Models\ManualSectionTranslation;
+use App\Models\ServiceSale;
 use App\Models\BusinessSetting;
 use App\Models\Subscriber;
 use App\Models\Contacts;
@@ -546,6 +547,27 @@ class FrontendController extends Controller
         $manuals = Manual::where('status', 1)->orderBy('sort_order', 'ASC')->get();
        
         return view('frontend.manuals',compact('page','lang','manuals'));
+    }
+
+    public function service_sales(){
+        $page = Page::where('type','service_sales')->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+            ];
+
+        $this->loadSEO($seo);
+        $service_sales = ServiceSale::where('status', 1)->where('lang', $lang)->orderBy('sort_order',
+        'ASC')->get();
+
+        return view('frontend.service_sales',compact('page','lang','service_sales'));
     }
 
 }
