@@ -8,6 +8,7 @@
     {{-- <title>{{ env('APP_NAME') }}</title> --}}
     {!! SEO::generate() !!}
 
+    <link rel="canonical" href="{{ request()->url() }}">
     <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
