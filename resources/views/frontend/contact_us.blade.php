@@ -84,9 +84,22 @@
                         <div>
                             <h5>{{ $page->getTranslation('heading2', $lang) }}</h5>
                             <ul>
-                                <li><i class="bi bi-geo-alt"></i>{{ $page->getTranslation('content', $lang) }}</li>
-                                <li><i class="bi bi-telephone"></i> {{ $page->getTranslation('heading3', $lang) }}</li>
-                                <li><i class="bi bi-envelope"></i> {{ $page->getTranslation('heading4', $lang) }}</li>
+                                <li>
+                                    <i class="bi bi-geo-alt"></i>
+                                    {{ $page->getTranslation('content', $lang) }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-telephone"></i> 
+                                    <a href="tel:{{ $page->getTranslation('heading3', $lang) }}" style="color: #fff;">
+                                        {{ $page->getTranslation('heading3', $lang) }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <i class="bi bi-envelope"></i> 
+                                    <a href="mailto:{{ $page->getTranslation('heading4', $lang) }}" style="color: #fff;">
+                                        {{ $page->getTranslation('heading4', $lang) }}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div class="social_link">

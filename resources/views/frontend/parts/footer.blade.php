@@ -60,7 +60,7 @@
                     <h4>{{ trans('messages.contact_us') }}</h4>
                     <ul>
                         <li>{{ get_setting('footer_address') }}</li>
-                        <li>{{ trans('messages.phone') }}: {{ get_setting('footer_phone') }}</li>
+                        <li>{{ trans('messages.phone') }}: <a href="tel:{{ get_setting('footer_phone') }}">{{ get_setting('footer_phone') }}</a></li>
                         <li>{{ trans('messages.email') }}: <a href="mailto:{{ get_setting('footer_email') }}">{{ get_setting('footer_email') }}</a></li>
                     </ul>
                 </div>
