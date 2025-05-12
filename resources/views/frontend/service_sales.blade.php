@@ -25,7 +25,7 @@
                                 <div class="manuals_items">
                                     <div class="down_items_start">
                                         <h5>{{ $sale->title }}</h5>
-                                        <p>{!! $sale->content !!}</p>
+                                        <p>{!! nl2br(e($sale->content)) !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                 <div class="manuals_items">
                                     <div class="down_items_start">
                                         <h5>{{ $sale->title }}</h5>
-                                        <p>{!! $sale->content !!}</p>
+                                        <p>{!! nl2br(e($sale->content)) !!}</p>
                                     </div>
                                 </div>
                             </div>
