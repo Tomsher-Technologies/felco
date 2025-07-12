@@ -29,9 +29,12 @@
             <div class="fl-footer-content">
             
                 <div class="fl-footer-description">
-                    <div class="fl-logo mt-0 mb-3">
-                        <img src="{{ asset('assets/images/logo/logo-white.png') }}" alt="Felco Motors Logo" />
-                    </div>
+                
+                
+<div class="fl-logo mt-0 mb-3">
+    <img src="{{ asset('assets/images/logo/logo-text.svg') }}" alt="Felco Motors Logo" style="max-width: 190px; height: auto;" />
+</div>
+
 
                     <p> {!! get_setting('footer_description', null, $lang) !!}</p>
                     

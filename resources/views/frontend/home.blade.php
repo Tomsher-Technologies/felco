@@ -31,7 +31,9 @@
         <div class="swiper-button-prev"></div>
     </div>
 </section>
-<section class="features-section-s2">
+
+
+<section class="features-section-s2 features-bg">
     <div class="container">
         <h2 class="fl-section-title">{{ $page->getTranslation('heading1', $lang) }}</h2>
         <div class="fl-grid-container">
@@ -42,8 +44,8 @@
                     <div class="fl-grid-item">
                         <a href="{{ route('products.category',['category_slug' => $product_categories->slug]) }}">
                             <div class="fl-category-title">
-                                <img src="{{ uploaded_asset($product_categories->icon) }}" alt="{{ $product_categories->getTranslation('name', $lang) }}">
-                                <span class="fl-divider"></span>
+                                <!-- <img src="{{ uploaded_asset($product_categories->icon) }}" alt="{{ $product_categories->getTranslation('name', $lang) }}"> -->
+                                <!-- <span class="fl-divider"></span> -->
                                 <h3>{{ $product_categories->getTranslation('name', $lang) }}</h3>
                             </div>
                             <p>{{ $product_categories->getTranslation('home_content', $lang) }}</p>
@@ -55,6 +57,45 @@
         </div>
     </div>
 </section>
+
+
+
+
+<style>
+
+.features-bg {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.features-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/assets/images/logo/wheel.gif') center center no-repeat;
+    background-size: cover;
+    opacity: 0.1; /* Adjust to your desired transparency */
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Hide background on small screens */
+@media (max-width: 767.98px) {
+    .features-bg::before {
+        display: none;
+    }
+}
+
+
+</style>
+
+
+
+
 <section class="fl-industries-serve section-padding p-b-0 p-t-0">
     <div class="container">
         <div class="fl-section-title-area">
@@ -161,7 +202,10 @@
 
     </div>
 </section>
-<section class="about-us-section-s2 section-padding">
+
+
+
+<section class="about-us-section-s2 section-padding" style="background: url('{{ asset('assets/images/bg-about.png') }}') center center no-repeat; background-size: cover; background-attachment: fixed;">
     <div class="container">
         <div class="fl-about-details">
 
@@ -182,4 +226,7 @@
         </div>
     </div>
 </section>
+
+
+
 @endsection
