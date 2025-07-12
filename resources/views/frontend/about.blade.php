@@ -18,7 +18,7 @@
     <section class="about-us-section about-us-page-section section-padding p-b-0">
         <div class="container ">
             <div class="row">
-                <div class="col-12 col-md-7">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7">
                     <div class="section-title">
 
                         <h2>{{ $page->getTranslation('heading1', $lang) }}</h2>
@@ -28,7 +28,7 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-12 col-sm-12 col-md-12 col-lg-5">
                     <div class="img-holder about-image">
                         <img src="{{ asset($page->image) }}" class="h-100 img-fluid" alt>
                     </div>
@@ -104,53 +104,31 @@
                     </div>
                     <div class="faq-section">
                         <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        What services does Felcon Motors offer?
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <p>Felcon Motors provides a variety of automotive services, including vehicle
-                                            maintenance, repairs, and car sales. We specialize in delivering high-quality
-                                            service and ensuring customer satisfaction.</p>
+                            @php
+                                $faqs = \App\Models\Faq::where('type','about_us')->where('lang', $lang)->orderBy('sort_order','asc')->get();
+                                if(empty($faqs[0])){
+                                    $faqs = \App\Models\Faq::where('type','about_us')->where('lang', 'en')->orderBy('sort_order','asc')->get();
+                                }
+                            @endphp
+
+                            @foreach ($faqs as $key => $faq)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne_{{$key}}" aria-expanded="true" aria-controls="collapseOne_{{$key}}">
+                                            {{ $faq->question }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne_{{$key}}" class="accordion-collapse collapse @if($key == 0) show @endif"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>{{ $faq->answer }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        How can I book a service appointment?
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <p>You can book an appointment online via our website or by calling our customer
-                                            service team. Simply fill out the form or contact us directly to schedule a
-                                            time.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Do you provide car repair services for all car brands?
-                                    </button>
-                                </h2>
-                                <div id="collapseThree" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <p>Yes, Felcon Motors offers repair services for all major car brands. Our
-                                            technicians are trained to handle a wide range of models and makes.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+                            
+                            
                         </div>
                     </div>
                 </div>

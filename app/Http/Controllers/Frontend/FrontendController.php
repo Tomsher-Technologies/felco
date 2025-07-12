@@ -13,6 +13,23 @@ use App\Models\Brand;
 use App\Models\HomeSlider;
 use App\Models\Occasion;
 use App\Models\Partners;
+use App\Models\Brochure;
+use App\Models\BrochureTranslation;
+use App\Models\BrochureFile;
+use App\Models\BrochureFileTranslation;
+use App\Models\Certificate;
+use App\Models\CertificateTranslation;
+use App\Models\CertificateFile;
+use App\Models\CertificateFileTranslation;
+use App\Models\CertificateSection;
+use App\Models\CertificateSectionTranslation;
+use App\Models\Manual;
+use App\Models\ManualTranslation;
+use App\Models\ManualFile;
+use App\Models\ManualFileTranslation;
+use App\Models\ManualSection;
+use App\Models\ManualSectionTranslation;
+use App\Models\ServiceSale;
 use App\Models\BusinessSetting;
 use App\Models\Subscriber;
 use App\Models\Contacts;
@@ -291,6 +308,43 @@ class FrontendController extends Controller
         return view('frontend.privacy_policy',compact('page','lang'));
     }
 
+    public function faq()
+    {
+        $page = Page::where('type','faq')->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+        return view('frontend.faq',compact('page','lang'));
+    }
+
+    public function service_support()
+    {
+        $page = Page::where('type','service_support')->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+        return view('frontend.service_support',compact('page','lang'));
+    }
 
     public function contact()
     {
@@ -321,6 +375,7 @@ class FrontendController extends Controller
             'phone' => 'nullable|string|max:20',
             'subject' => 'required|string',
             'message' => 'required|string|max:5000',
+            'g-recaptcha-response' => 'required'
         ]);
 
         $con                = new Contacts;
@@ -400,7 +455,7 @@ class FrontendController extends Controller
             }
         
             // Retrieve filtered products
-            $products = $query->paginate(1);
+            $products = $query->paginate(15);
 
             $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
             $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');
@@ -430,6 +485,90 @@ class FrontendController extends Controller
         // die;
 
         return view('frontend.product_details', compact('lang','product'));
+    }
+
+    public function brochures()
+    {
+        $page = Page::where('type','brochures')->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+        $brochures = Brochure::where('status', 1)->orderBy('sort_order', 'ASC')->get();
+        
+        return view('frontend.brochures',compact('page','lang','brochures'));
+    }
+
+    public function certificates()
+    {
+        $page = Page::where('type','certificates')->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+        $certificates = Certificate::where('status', 1)->orderBy('sort_order', 'ASC')->get();
+        
+        return view('frontend.certificates',compact('page','lang','certificates'));
+    }
+
+    public function manuals()
+    {
+        $page = Page::where('type','manuals')->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        $this->loadSEO($seo);
+        $manuals = Manual::where('status', 1)->orderBy('sort_order', 'ASC')->get();
+       
+        return view('frontend.manuals',compact('page','lang','manuals'));
+    }
+
+    public function service_sales(){
+        $page = Page::where('type','service_sales')->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+            ];
+
+        $this->loadSEO($seo);
+        $service_sales = ServiceSale::where('status', 1)->where('lang', $lang)->orderBy('sort_order',
+        'ASC')->get();
+
+        return view('frontend.service_sales',compact('page','lang','service_sales'));
     }
 
 }

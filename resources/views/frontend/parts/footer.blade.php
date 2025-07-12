@@ -50,7 +50,7 @@
                 <div class="fl-footer-links">
                     <h4>{{ trans('messages.useful_links') }}</h4>
                     <ul>
-                        <li><a href="faq.html">{{ trans('messages.faq') }}</a></li>
+                        <li><a href="{{ route('faq') }}">{{ trans('messages.faq') }}</a></li>
                         <li><a href="{{ route('privacy') }}">{{ trans('messages.privacy_policy') }}</a></li>
                         <li><a href="{{ route('terms') }}">{{ trans('messages.terms_conditions') }}</a></li>
                     </ul>
@@ -60,14 +60,14 @@
                     <h4>{{ trans('messages.contact_us') }}</h4>
                     <ul>
                         <li>{{ get_setting('footer_address') }}</li>
-                        <li>{{ trans('messages.phone') }}: {{ get_setting('footer_phone') }}</li>
+                        <li>{{ trans('messages.phone') }}: <a href="tel:{{ get_setting('footer_phone') }}">{{ get_setting('footer_phone') }}</a></li>
                         <li>{{ trans('messages.email') }}: <a href="mailto:{{ get_setting('footer_email') }}">{{ get_setting('footer_email') }}</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="fl-footer-bottom">
-                <p> {!! get_setting('frontend_copyright_text', null, $lang) !!} | {{ trans('messages.designed_by') }} <a href="https://www.tomsher.com/" target="_blank">{{ trans('messages.tomsher') }}</a></p>
+                <p> © {{ date('Y') }} {!! get_setting('frontend_copyright_text', null, $lang) !!} | {{ trans('messages.designed_by') }} <a href="https://www.tomsher.com/" target="_blank">{{ trans('messages.tomsher') }}</a></p>
                 <div class="social_link m-0 p-0">
                     <ul>
                         <li>

@@ -9,7 +9,9 @@ use App\Models\Page;
 use App\Models\PageTranslation;
 use App\Models\Category;
 use App\Models\BusinessSetting;
+use App\Models\Faq;
 use App\Models\Subscriber;
+use App\Models\ServiceSale;
 use App\Models\Product;
 use App\Models\Contacts;
 use Storage;
@@ -17,6 +19,10 @@ use File;
 
 class PageController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function index(Request $request)
 	{
@@ -72,8 +78,8 @@ class PageController extends Controller
         return back();
     }
 
-   public function edit(Request $request, $id)
-   {
+    public function edit(Request $request, $id)
+    {
         $lang = $request->lang;
         $page_name = $request->page;
         $page = Page::where('type', $id)->first();
@@ -87,8 +93,8 @@ class PageController extends Controller
             
             return view('backend.website_settings.pages.home_page_edit', compact('page', 'categories', 'products','lang','page_id'));
             
-          }else if ($id == 'find_us' || $id == 'news') {
-            return view('backend.website_settings.pages.find_us', compact('page','lang','page_id'));
+          }else if ($id == 'service_support') {
+            return view('backend.website_settings.pages.service_support', compact('page','lang','page_id'));
           }else if ($id == 'contact_us') {
             return view('backend.website_settings.pages.contact_us', compact('page','lang','page_id'));
           }else if ($id == 'about_us') {
@@ -97,6 +103,8 @@ class PageController extends Controller
             return view('backend.website_settings.pages.faq', compact('page','lang','page_id'));
           }else if ($id == 'marine' || $id == 'oil_gas' || $id == 'hvac') {
             return view('backend.website_settings.pages.industries', compact('page','lang','page_id'));
+          }else if ($id == 'service_sales') {
+            return view('backend.website_settings.pages.service_sales', compact('page','lang','page_id'));
           }else{
             return view('backend.website_settings.pages.edit', compact('page','lang','page_id'));
           }
@@ -111,6 +119,9 @@ class PageController extends Controller
         $page = Page::findOrFail($id);
      
         if ($page) {
+            $page->image3              = $request->has('image3') ? $request->image3 : NULL;
+            $page->image4              = $request->has('image4') ? $request->image4 : NULL;
+            $page->save();
             if ($request->hasfile('image')) {
                 $photo = uploadImage('page', $request->image, time().'image_1');
                 $page->image = $photo;
@@ -143,6 +154,39 @@ class PageController extends Controller
             $page_translation->image1               = $request->has('image1') ? $request->image1 : NULL;
             $page_translation->save();
 
+            $data = $request->input('faqs');
+
+            if($data){
+                Faq::where('type',$page->type)->where('lang', $request->lang)->delete();
+                foreach ($data as $faq) {
+                    if($faq['question'] != NULL && $faq['answer'] != NULL){
+                        Faq::create([
+                            'question' => $faq['question'],
+                            'answer' => $faq['answer'],
+                            'sort_order' => $faq['order'] ?? 0,
+                            'type' => $page->type,
+                            'lang' => $request->lang
+                        ]);
+                    }
+                }
+            }
+
+            $services = $request->input('sections');
+            if($services){
+                ServiceSale::where('lang', $request->lang)->delete();
+                foreach ($services as $ser) {
+                    if($ser['section_title'] != NULL && $ser['section_content'] != NULL){
+                        ServiceSale::create([
+                            'title' => $ser['section_title'],
+                            'content' => $ser['section_content'],
+                            'sort_order' => $ser['order'] ?? 0,
+                            'image' => $ser['image'],
+                            'lang' => $request->lang
+                        ]);
+                    }
+                }
+            }
+            
             flash(trans('messages.page').' '.trans('messages.updated_msg'))->success();
             return redirect()->route('website.pages');
         }

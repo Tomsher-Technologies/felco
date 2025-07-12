@@ -36,7 +36,7 @@
 
             </div>
 
-            <div class="row mb-3">
+            <div class="row mb-5">
 
                 @if ($category->frame_size != NULL)
                     <div class="col-md-3 mb-1">
@@ -258,15 +258,17 @@
             </div>
         </div>
     </section>
-    @if ($category->childs)
+    @if ($category->childs->where('is_active', 1)->isNotEmpty())
         <section class="services-section-s2 product-category">
             <div class="container">
                 <div class="row">
                     <div class="col col-xs-12">
                         <div class="service-grids clearfix">
-                        
+                            @php
+                                $activeChildCategories = $category->childs->where('is_active', 1);
+                            @endphp
                             
-                            @foreach ($category->childs as $cat)
+                            @foreach ($activeChildCategories as $cat)
                                 <div class="grid">
                                     <div class="img-holder">
                                         <img src="{{ uploaded_asset($cat->image) }}" alt>

@@ -7,7 +7,7 @@
                     <h2>{{ $product->unique_id }}</h2>
                 </div>
                 <div class="col-md-8">
-                    <img src="{{ asset($product->image) }}" class="img-fluid h-100" alt="">
+                    <img src="{{ asset($product->image) }}" class="img-fluid w-100 h-100" alt="">
                 </div>
                 <div class="col-md-4">
                     <div class="product_details_info">

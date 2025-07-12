@@ -37,9 +37,9 @@
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-from-label" for="name">Sub Title <span class="text-danger">*</span></label>
+				<label class="col-sm-2 col-from-label" for="name">Subtitle <span class="text-danger">*</span></label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" placeholder="Sub Title" name="sub_title" value="{{ $page->getTranslation('sub_title',$lang) }}" required >
+					<input type="text" class="form-control" placeholder="Subtitle" name="sub_title" value="{{ $page->getTranslation('sub_title',$lang) }}" required >
 				</div>
 			</div>
 

@@ -11,10 +11,10 @@
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
                                     <span class=" d-block">{{  trans('messages.total') }}</span>
-                                    {{  trans('messages.customer') }}
+                                    {{  trans('messages.products') }}
                                 </div>
                                 <div class="h3 fw-700 mb-3">
-                                    {{ \App\Models\User::where('user_type', 'customer')->where('email_verified_at', '!=', null)->count() }}
+                                    {{ \App\Models\Product::count() }}
                                 </div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -24,7 +24,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="col-3">
+                    {{-- <div class="col-3">
                         <div class="bg-grad-3 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
@@ -39,7 +39,7 @@
                                 </path>
                             </svg>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-3">
                         <div class="bg-grad-1 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
@@ -61,9 +61,9 @@
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
                                     <span class=" d-block">{{  trans('messages.total') }}</span>
-                                    {{  trans('messages.product_brand') }}
+                                    {{  trans('messages.enquiries') }}
                                 </div>
-                                <div class="h3 fw-700 mb-3">0</div>
+                                <div class="h3 fw-700 mb-3">{{ \App\Models\Contacts::count() }}</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                                 <path fill="rgba(255,255,255,0.3)" fill-opacity="1"

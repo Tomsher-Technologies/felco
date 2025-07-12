@@ -1,5 +1,24 @@
 @extends('backend.layouts.app')
 
+@section('header')
+    <style>
+        .section-heading {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        .section-heading h4 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="aiz-titlebar text-left mt-2 mb-3">
         <div class="row align-items-center">
@@ -199,6 +218,73 @@
                             value="{{ $page->getTranslation('heading7', $lang) }}" required>
                     </div>
                 </div>
+
+                @php
+                    $faqs = \App\Models\Faq::where('type','about_us')->where('lang', $lang)->get();
+                @endphp
+                <div class=" repeater">
+                    <div data-repeater-list="faqs">
+                        
+                        @foreach($faqs as $faq)
+                            <div data-repeater-item>
+                                <hr>
+                                
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-from-label">Question:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="question" class="form-control"  value="{{ $faq->question }}" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-from-label">Answer:</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="answer" class="form-control">{{ $faq->answer }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-from-label">Order:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="order" class="form-control"  value="{{ $faq->sort_order }}">
+                                    </div>
+                                </div>
+                                <div class="form-group text-right">
+                                    <button type="button" class="btn btn-danger" data-repeater-delete>Delete</button>
+                                </div>
+                            </div>
+                        @endforeach
+
+
+                        <div data-repeater-item style="display: none;">
+
+                            <hr>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-from-label">Question:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="question" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-from-label">Answer:</label>
+                                <div class="col-sm-10">
+                                    <textarea name="answer" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-from-label">Order:</label>
+                                <div class="col-sm-10">
+                                    <input type="number" name="order" class="form-control" value="0">
+                                </div>
+                            </div>
+                            <div class="form-group text-right">
+                                <button type="button" class="btn btn-danger" data-repeater-delete>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-repeater-create>Add FAQ</button>
+                </div>
                 
             </div>
 
@@ -230,7 +316,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-from-label" for="name">{{ trans('messages.og_title') }}</label>
                     <div class="col-sm-10">
@@ -245,7 +330,6 @@
                         <textarea  @if($lang == 'ae') dir="rtl" @endif class="resize-off form-control" placeholder="{{ trans('messages.og_description') }}" name="og_description">{!! $page->getTranslation('og_description', $lang) !!}</textarea>
                     </div>
                 </div>
-
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-from-label" for="name">{{ trans('messages.twitter_title') }}</label>
@@ -263,7 +347,6 @@
                     </div>
                 </div>
 
-        
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Update Page</button>
                 </div>
@@ -272,20 +355,36 @@
     </div>
 @endsection
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/jquery.repeater/jquery.repeater.min.js"></script>
+
 <script>
+    
     $(document).ready(function () {
         var lang = '{{ $lang }}';
        
-        if(lang == 'ae'){
-            setEditorDirection(true);
-        }else{
-            setEditorDirection(false);
-        }
-        function setEditorDirection(isRtl) {
-            const editor = $('.aiz-text-editor').next('.note-editor').find('.note-editable');
-            editor.attr('dir', isRtl ? 'rtl' : 'ltr'); // Set direction
-            editor.css('text-align', isRtl ? 'right' : 'left');
-        }
+        $('.repeater').repeater({
+            initEmpty: false,
+            show: function() {
+                $(this).slideDown();
+                // updateRepeaterHeadings();
+            },
+            hide: function(deleteElement) {
+                if (confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                    // updateRepeaterHeadings();
+                }
+            },
+        });
+
+        // function updateRepeaterHeadings() {
+        //     $('.repeater [data-repeater-item]').each(function (index) {
+        //         alert(index);
+        //         $(this).find('.repeater-index').html(index + 1); // Update heading with correct number
+        //     });
+        // }
+
+        // updateRepeaterHeadings();
+        
     });
 </script>
 

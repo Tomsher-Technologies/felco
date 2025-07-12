@@ -288,6 +288,15 @@ if (!function_exists('areActiveRoutes')) {
     }
 }
 
+if (!function_exists('areWebActiveRoutes')) {
+    function areWebActiveRoutes(array $routes, $output = "menu-active")
+    {
+        foreach ($routes as $route) {
+            if (Route::currentRouteName() == $route) return $output;
+        }
+    }
+}
+
 if (!function_exists('storage_asset')) {
     /**
      * Generate an asset path for the application.

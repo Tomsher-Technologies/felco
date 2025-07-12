@@ -70,9 +70,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Newsletter Sub Title</label>
+                                    <label>Newsletter Subtitle</label>
                                     <input type="hidden" name="types[][{{ $lang }}]" value="newsletter_sub_title">
-                                    <input type="text" class="form-control" placeholder="Enter sub title" name="newsletter_sub_title"
+                                    <input type="text" class="form-control" placeholder="Enter Subtitle" name="newsletter_sub_title"
                                         value="{{ get_setting('newsletter_sub_title', null, $lang) }}">
                                 </div>
                                 {{-- <div class="form-group">
@@ -251,7 +251,7 @@
                         </div>
 
                         <div class="form-group d-none">
-                            <label>Social Links Sub Title</label>
+                            <label>Social Links Subtitle</label>
                             <div class="input-group form-group">
                                 <input type="hidden" name="types[]" value="social_sub_title">
                                 <input type="text" class="form-control" placeholder="" name="social_sub_title"
