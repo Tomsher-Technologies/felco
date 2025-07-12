@@ -5,14 +5,19 @@
         
     @endphp
     <nav class="navbar">
-        <div class="brand-and-icon">
-            <a href="{{ route('home') }}" class="navbar-brand">
-                <img src="{{ asset('assets/images/logo/logo-black-and-color.png') }}" alt="">
-            </a>
-            <button type="button" class="navbar-toggler">
-                <i class="bi bi-list"></i>
-            </button>
-        </div>
+<div class="brand-and-icon">
+    <a href="{{ route('home') }}" class="navbar-brand" aria-label="Homepage">
+        <img src="{{ asset('assets/images/logo/logo-color.svg') }}"
+             alt="Site Logo"
+             width="auto"
+             height="40"
+             style="max-height: 40px; display: block;">
+    </a>
+    <button type="button" class="navbar-toggler" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+    </button>
+</div>
+
 
         <div class="navbar-collapse order-3 order-md-2">
             <ul class="navbar-nav">
