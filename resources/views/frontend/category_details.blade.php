@@ -1,305 +1,405 @@
 @extends('frontend.layouts.app')
-@section('header')
+
+@push('styles')
 <style>
-    .active>.page-link, .page-link.active {
-        z-index: 3;
-        color: var(--bs-pagination-active-color);
-        background-color: #000000;
-        border-color: #000000;
+    /* A subtle grid background pattern for the dark sections */
+    .dark-grid-background {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 2rem 2rem;
+    }
+    /* Suggestion for premium headings */
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
+    . {
+        font-family: 'Libre Baskerville', serif;
     }
 </style>
-@endsection
+@endpush
+
 @section('content')
-    <section class="catagory_details section-padding">
-        <div class="container  ">
 
-            <div class="row">
-                <div class="col col-xs-12">
-                    <div class="catagory_start">
-                        <h2>{{ $category->getTranslation('name',$lang) }}</h2>
-                        <p>
-                            {!! $category->getTranslation('description',$lang) !!}
-                        </p>
+{{-- 1. Hero Section --}}
+@include('components.page-title', [
+    'title' => $category->getTranslation('name', $lang),
+    'description' => $category->getTranslation('description', $lang),
+    'image' => uploaded_asset($category->image),
+    'theme' => 'dark',
+])
+
+
+
+
+
+
+{{-- 2. Key Specs "Dashboard" Section (Light Theme) --}}
+<section class="my-16">
+    <x-container>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+            {{-- Frame Size --}}
+            @if ($category->frame_size)
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+                {{-- Sliding accent background --}}
+                <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
+
+                {{-- Content on top --}}
+                <div class="relative flex items-center gap-4 z-20">
+                    <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
+                        <svg class="w-[38px] h-[38px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m0 0v2.25m0-2.25h1.5m-1.5 0H7.5m6-9v1.5m0 0v1.5m0-1.5h1.5m-1.5 0H12m6 0v1.5m0 0v1.5m0-1.5h1.5m-1.5 0H18M9 21l-1.5-1.5m0 0l-1.5-1.5m3 3l1.5-1.5m0 0l1.5-1.5m-3-3l-1.5 1.5m0 0l-1.5 1.5m3-3l1.5 1.5m0 0l1.5 1.5M3 9l1.5 1.5m0 0l1.5 1.5m-3-3L6 12m0 0l1.5-1.5M9 3l1.5 1.5m0 0l1.5 1.5M12 6l1.5-1.5m0 0l1.5-1.5m-3 3L15 3m0 0l1.5 1.5m0 0l1.5 1.5M21 9l-1.5 1.5m0 0l-1.5 1.5m3-3L18 12m0 0l-1.5-1.5" />
+                        </svg>
                     </div>
-
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="col-md-12">
-                    <div class="catagory_main_img">
-                        <img src="{{ uploaded_asset($category->image) }}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-
-            </div>
-
-            <div class="row mb-5">
-
-                @if ($category->frame_size != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.frame_size') }}</h3>
-                            <span>{{ $category->frame_size }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->output != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.output') }}</h3>
-                            <span>{{ $category->output }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->ip_class != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.ip_class') }}</h3>
-                            <span>{{ $category->ip_class }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->insulation_class != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.insulation_class') }}</h3>
-                            <span>{{ $category->insulation_class }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->brake != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.brake') }}</h3>
-                            <span>{{ $category->brake }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->encoder != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.encoder') }}</h3>
-                            <span>{{ $category->encoder }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->voltages != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.voltages') }}</h3>
-                            <span>{{ $category->voltages }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->efficiency != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.efficiency') }}</h3>
-                            <span>{{ $category->efficiency }}</span>
-                        </div>
-                    </div>
-                @endif
-
-                @if ($category->approvals != NULL)
-                    <div class="col-md-3 mb-1">
-                        <div class="catagory_spec">
-                            <h3>{{ trans('messages.approvals') }}</h3>
-                            <span>{{ $category->approvals }}</span>
-                        </div>
-                    </div>
-                @endif
-                
-               
-            </div>
-            @if (!empty($products[0]) || $keyword != NULL || request('frame_size') != NULL || request('poles') != NULL || request('power') != NULL || request('mounting') != NULL || request('voltage') != NULL)
-            
-                <form method="GET" action="{{ route('products.category', $category->slug) }}">
-                    <div class="row" id="productsDiv">
-                        <div class="col-md-12">
-                            <h3 class="filter_label">Search and Filter</h3>
-                            <div class="catagory_filter">
-                                <form action="#">
-                                    <div class="row g-3">
-                                        <div class="col-md-3">
-                                            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search for product id..." value="{{ $keyword }}">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select name="frame_size" id="frame_size" class="form-select">
-                                                <option selected disabled>{{ trans('messages.frame_size') }}</option>
-                                                @foreach($frameSizes as $frameSize)
-                                                    <option value="{{ $frameSize }}" 
-                                                        {{ request('frame_size') == $frameSize ? 'selected' : '' }}>
-                                                        {{ $frameSize }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select name="poles" id="poles" class="form-select">
-                                                <option selected disabled>{{ trans('messages.poles') }}</option>
-                                                @foreach($poles as $pole)
-                                                    <option value="{{ $pole }}" 
-                                                        {{ request('poles') == $pole ? 'selected' : '' }}>
-                                                        {{ $pole }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select name="power" id="power" class="form-select">
-                                                <option selected disabled>{{ trans('messages.power') }}</option>
-                                                @foreach($powers as $power)
-                                                    <option value="{{ $power }}" 
-                                                        {{ request('power') == $power ? 'selected' : '' }}>
-                                                        {{ $power }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select name="mounting" id="mounting" class="form-select">
-                                                <option selected disabled>{{ trans('messages.mounting') }}</option>
-                                                @foreach($mountings as $mounting)
-                                                    <option value="{{ $mounting }}" 
-                                                        {{ request('mounting') == $mounting ? 'selected' : '' }}>
-                                                        {{ $mounting }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <select name="voltage" id="voltage" class="form-select">
-                                                <option selected disabled>{{ trans('messages.voltage') }}</option>
-                                                @foreach($voltages as $voltage)
-                                                    <option value="{{ $voltage }}" 
-                                                        {{ request('voltage') == $voltage ? 'selected' : '' }}>
-                                                        {{ $voltage }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2 nextprev_wrarpper">
-                                            <button type="submit" class="theme-btn fl-get-in-touch-icon" style="margin-top: 0px;background: #000;color: white;">Filter</button>
-                                            <a href="{{ route('products.category', $category->slug) }}" class="theme-btn fl-get-in-touch-icon" style="margin-top: 0px;">Cancel</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="product_card_head">
-                            <span>{{ trans('messages.product') }} {{ trans('messages.id') }}</span>
-                            <span>{{ trans('messages.frame_size') }}</span>
-                            <span>{{ trans('messages.poles') }}</span>
-                            <span>{{ trans('messages.power') }}</span>
-                            <span>{{ trans('messages.mounting') }}</span>
-                            <span>{{ trans('messages.voltage') }}</span>
-                            <span>{{ trans('messages.display') }} {{ trans('messages.name') }}</span>
-                        </div>
-                        <div class="product_card_body">
-                            @if (!empty($products[0]))
-                                @foreach ($products as $prod)
-                                    <a href="{{ route('product-detail',['slug' => $prod->slug]) }}">
-                                        <div class="product_card_list">
-                                            <span>{{ $prod->unique_id }}</span>
-                                            <span>{{ $prod->frame_size }}</span>
-                                            <span>{{ $prod->poles }}</span>
-                                            <span>{{ $prod->power }}</span>
-                                            <span>{{ $prod->mounting }}</span>
-                                            <span>{{ $prod->voltage }}</span>
-                                            <span>{{ $prod->getTranslation('name', $lang) }}</span>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            @else
-                                <div class="text-center mt-4">
-                                    <span>{{ trans('messages.no_product') }}</span>
-                                </div>
-                            @endif
-
-                            <div class="aiz-pagination mt-5">
-                                {{ $products->appends(request()->input())->links('pagination::bootstrap-5') }}
-                            </div>
-                            
-                        </div>
+                    <div>
+                        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider group-hover:text-orange-700 transition-all">Frame Size</h3>
+                        <span class="text-xl font-semibold text-gray-800 block transition-all duration-500 ease-in-out group-hover:text-2xl">
+                            {{ $category->frame_size }}
+                        </span>
                     </div>
                 </div>
+            </div>
             @endif
 
-            <div class="row mt-5">
-                <div class="col-md-12">
-                    <div class="category-brief">
-                        <h4>{{ $category->getTranslation('title1',$lang) }}</h4>
-                        <p>
-                            {!! $category->getTranslation('content1',$lang) !!}
-                        </p>
-
-                        
-                        <h4>{{ $category->getTranslation('title2',$lang) }}</h4>
-
-                        <p>{!! $category->getTranslation('content2',$lang) !!}</p>
+            {{-- Output --}}
+            @if ($category->output)
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+                <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
+                <div class="relative flex items-center gap-4 z-20">
+                    <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
+                        <svg class="w-[38px] h-[38px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                        </svg>
                     </div>
-
+                    <div>
+                        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider group-hover:text-orange-700 transition-all">Output</h3>
+                        <span class="text-xl font-semibold text-gray-800 block transition-all duration-500 ease-in-out group-hover:text-2xl">
+                            {{ $category->output }}
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    @if ($category->childs->where('is_active', 1)->isNotEmpty())
-        <section class="services-section-s2 product-category">
-            <div class="container">
-                <div class="row">
-                    <div class="col col-xs-12">
-                        <div class="service-grids clearfix">
-                            @php
-                                $activeChildCategories = $category->childs->where('is_active', 1);
-                            @endphp
-                            
-                            @foreach ($activeChildCategories as $cat)
-                                <div class="grid">
-                                    <div class="img-holder">
-                                        <img src="{{ uploaded_asset($cat->image) }}" alt>
-                                    </div>
-                                    <div class="details">
-                            
-                                        <h3><a href="{{ route('products.category',['category_slug' => $cat->slug]) }}">{{ $cat->getTranslation('name',$lang) }}</a></h3>
-                                        <a href="{{ route('products.category',['category_slug' => $cat->slug]) }}" class="theme-btn fl-get-in-touch-icon w-full">{{ trans('messages.read_more') }}</a>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+            @endif
+
+            {{-- IP Class --}}
+            @if ($category->ip_class)
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+                <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
+                <div class="relative flex items-center gap-4 z-20">
+                    <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
+                        <svg class="w-[38px] h-[38px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider group-hover:text-orange-700 transition-all">IP Class</h3>
+                        <span class="text-xl font-semibold text-gray-800 block transition-all duration-500 ease-in-out group-hover:text-2xl">
+                            {{ $category->ip_class }}
+                        </span>
                     </div>
                 </div>
-            </div> <!-- end container -->
-        </section>
-    @endif
-    
-@endsection
+            </div>
+            @endif
 
-@section('script')
-<script>
-$(document).ready(function () {
-    // Check if the URL contains the keyword 'page'
-    if (window.location.search.includes('page') || window.location.search.includes('keyword')) {
-        // $('html, body').animate({
-        //     scrollTop: $('#productsDiv').offset().top
-        // }, 1000); 
-        const targetOffset = $('#productsDiv').offset().top;
-        window.scrollTo(0, targetOffset);
-    }
-});
-</script>
+            {{-- Insulation --}}
+            @if ($category->insulation_class)
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+                <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
+                <div class="relative flex items-center gap-4 z-20">
+                    <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
+                        <svg class="w-[38px] h-[38px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider group-hover:text-orange-700 transition-all">Insulation</h3>
+                        <span class="text-xl font-semibold text-gray-800 block transition-all duration-500 ease-in-out group-hover:text-2xl">
+                            {{ $category->insulation_class }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            {{-- Efficiency --}}
+            @if ($category->efficiency)
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+                <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
+                <div class="relative flex items-center gap-4 z-20">
+                    <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
+                        <svg class="w-[38px] h-[38px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-medium text-gray-500 uppercase tracking-wider group-hover:text-orange-700 transition-all">Efficiency</h3>
+                        <span class="text-xl font-semibold text-gray-800 block transition-all duration-500 ease-in-out group-hover:text-2xl">
+                            {{ $category->efficiency }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    </x-container>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 4. Description Sections --}}
+@if($category->getTranslation('title1', $lang) || $category->getTranslation('title2', $lang))
+<section class="py-10 md:py-16 bg-gradient-to-tr from-stone-50 via-stone-100 to-stone-50">
+    <x-container class="max-w-4xl mx-auto space-y-20">
+        @if($category->getTranslation('title1', $lang))
+        <div class="relative bg-white  animate-on-scroll  shadow-lg px-8 py-12 md:px-12 md:py-16 overflow-hidden">
+            {{-- Decorative vertical accent line --}}
+            <span class="absolute top-15 left-8 h-10 w-1 bg-[#0a8268] "></span>
+
+            {{-- Heading with shadow and tracking --}}
+            <h3 class="relative  animate-on-scroll text-4xl md:text-3xl  font-light text-stone-900 mb-8 tracking-wide drop-shadow-sm">
+                {{ $category->getTranslation('title1', $lang) }}
+            </h3>
+
+            {{-- Content with prose styling and subtle text shadow --}}
+            <div class="prose  animate-on-scroll prose-lg max-w-none text-stone-700 leading-relaxed drop-shadow-[0_0_1px_rgba(0,0,0,0.03)]">
+                {!! $category->getTranslation('content1', $lang) !!}
+            </div>
+        </div>
+        @endif
+
+        @if($category->getTranslation('title2', $lang))
+        <div class="relative bg-white  shadow-lg px-8 py-12 md:px-12 md:py-16 overflow-hidden mt-16">
+            {{-- Decorative vertical accent line, different color for variety --}}
+            <span class="absolute top-15 left-8 h-10 w-1 bg-orange-400 "></span>
+
+            <h3 class="relative  animate-on-scroll text-4xl md:text-3xl  font-light text-stone-900 mb-8 tracking-wide drop-shadow-sm">
+                {{ $category->getTranslation('title2', $lang) }}
+            </h3>
+
+            <div class="prose  animate-on-scroll prose-lg max-w-none text-stone-700 leading-relaxed drop-shadow-[0_0_1px_rgba(0,0,0,0.03)]">
+                {!! $category->getTranslation('content2', $lang) !!}
+            </div>
+        </div>
+        @endif
+    </x-container>
+</section>
+@endif
+
+
+
+
+
+
+
+{{-- 2. Filter Bar: Expand/Collapse Filters (Light Theme) --}}
+<section class="pt-[50px] pb-[20px] bg-white" x-data="{ open: false }">
+    <x-container>
+        @php
+            $filterOptions = [
+                'frame_size' => $frameSizes ?? [],
+                'poles'      => $poles ?? [],
+                'power'      => $powers ?? [],
+                'mounting'   => $mountings ?? [],
+                'voltage'    => $voltages ?? [],
+            ];
+        @endphp
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 w-full">
+            <!-- Show/Hide Filters Toggle -->
+            <div class="w-full md:w-full">
+                <button
+                    type="button"
+                    class="mb-4 bg-orange-600 text-white px-6 py-2  shadow hover:bg-orange-700 transition font-medium flex items-center gap-2"
+                    @click="open = !open"
+                    :aria-expanded="open"
+                >
+                    <svg :class="{'rotate-180': open}" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                    <span x-text="open ? 'Hide Filters' : 'Show Filters'"></span>
+                </button>
+
+                <!-- Collapsible Filter Form -->
+                <div
+                    x-show="open"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 -translate-y-2 scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
+                    class="w-full"
+                >
+                    <form id="live-filter-form"
+                        class="mt-4 w-full flex flex-wrap gap-4"
+                        method="GET"
+                        action="{{ route('products.category', $category->slug) }}"
+                    >
+                        @foreach (['frame_size', 'poles', 'power', 'mounting', 'voltage'] as $filter)
+                            <div class="flex flex-col min-w-[120px]">
+                                <label class="block text-sm font-semibold text-gray-800 mb-2 capitalize">
+                                    {{ trans("messages.$filter") }}
+                                </label>
+                                <select name="{{ $filter }}"
+                                    class="form-select w-full bg-white text-gray-900 border-gray-300  shadow-sm focus:border-orange-400 focus:ring-orange-300"
+                                >
+                                    <option value="">{{ trans("messages.$filter") }}</option>
+                                    @foreach($filterOptions[$filter] as $opt)
+                                        <option value="{{ $opt }}" @selected(request($filter) == $opt)>{{ $opt }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endforeach
+
+                        <div class="flex  justify-end gap-2 items-end  mt-6 md:mt-0">
+                            <button type="submit"
+                                class="bg-orange-600 text-white px-6 py-2 h-[40px]  shadow hover:bg-orange-700 transition w-full"
+                            >
+                                Apply
+                            </button>
+                            <a href="{{ route('products.category', $category->slug) }}"
+                                class="bg-white text-orange-700 border border-orange-400 px-6 py-2  shadow hover:bg-orange-50 transition w-full text-center"
+                            >
+                                Reset
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Search Form (Always Visible, LIGHT) -->
+            <form class="w-full md:w-auto max-w-lg ml-auto flex mt-4 md:mt-0"
+                method="GET"
+                action="{{ route('products.category', $category->slug) }}"
+                autocomplete="off">
+                <input name="keyword"
+                    type="text"
+                    value="{{ request('keyword') }}"
+                    placeholder="Search by ID or Name..."
+                    class="form-input w-full bg-white text-gray-900 border-gray-300  shadow-sm focus:border-orange-400 focus:ring-orange-300" />
+                <button type="submit"
+                    class="bg-[#0a8268] text-white px-6 py-2  shadow hover:bg-[#f06425] transition">
+                    Search
+                </button>
+            </form>
+        </div>
+    </x-container>
+</section>
+
+
+
+{{-- 3. Main Product Grid (Light Theme) --}}
+<section class="pt-[30px] pb-[70px] bg-gray-50">
+    <x-container>
+        <main>
+            @if ($products->isNotEmpty())
+                {{-- Product Grid Header --}}
+                <div class="mb-8">
+                    <h2 class="text-3xl font-light text-gray-900">
+                        Showing {{ $products->total() }} Products
+                    </h2>
+                </div>
+
+                <div id="product-grid"
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    @foreach ($products as $prod)
+                        <div class="group relative block bg-white/90 p-6 border border-gray-200 hover:border-orange-400 transition-all duration-300 transform hover:-translate-y-1 shadow-sm">
+                            <div class="relative z-10">
+                                <h4 class="text-lg font-bold text-gray-900 mb-1 truncate">{{ $prod->unique_id }}</h4>
+                                <p class="text-sm text-gray-500 mb-4 h-10 truncate">{{ $prod->getTranslation('name', $lang) }}</p>
+                                <div class="mt-4 pt-4 border-t border-gray-200 grid grid-cols-2 gap-3 text-xs">
+                                    <div><span class="text-gray-400">Power:</span><strong class="block text-gray-700">{{ $prod->power }}</strong></div>
+                                    <div><span class="text-gray-400">Poles:</span><strong class="block text-gray-700">{{ $prod->poles }}</strong></div>
+                                    <div><span class="text-gray-400">Frame:</span><strong class="block text-gray-700">{{ $prod->frame_size }}</strong></div>
+                                    <div><span class="text-gray-400">Voltage:</span><strong class="block text-gray-700">{{ $prod->voltage }}</strong></div>
+                                </div>
+                                <a href="{{ route('product-detail', ['slug' => $prod->slug]) }}" class="absolute inset-0 z-20" aria-label="View details for {{ $prod->unique_id }}"></a>
+                            </div>
+                            {{-- Bottom-right arrow action --}}
+                            <div class="absolute bottom-6 right-6 z-10 text-white bg-[#0a8268] p-2  opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
+                     
+
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 128 128">
+                                        <path d="M44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z" fill="currentColor"></path>
+                                    </svg>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Load More Button --}}
+                @if ($products->hasMorePages())
+                    <div class="mt-12 flex justify-center">
+                        <button id="load-more"
+                            data-next-page="{{ $products->currentPage() + 1 }}"
+                            class="bg-[#0a8268] text-white px-8 py-3  shadow hover:bg-cyan-700 transition font-medium text-lg flex items-center gap-2">
+                            <svg class="w-5 h-5 animate-spin hidden" id="loader-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                            </svg>
+                            <span id="load-more-label">Load More</span>
+                        </button>
+                    </div>
+                @endif
+            @else
+                <div class="text-center py-20 bg-white border border-dashed border-gray-300">
+                    <svg class="mx-auto h-12 w-12 text-[#f06425] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <h4 class="mt-4 text-xl font-light text-gray-700">No Products Found</h4>
+                    <p class="text-gray-400 mt-2">There are currently no products listed in this category.</p>
+                </div>
+            @endif
+        </main>
+    </x-container>
+</section>
+
+
+
+
+
+
+
+
+
+{{-- 5. Related Categories --}}
+@if ($category->childs->where('is_active', 1)->isNotEmpty())
+<section class="py-16 md:py-24 bg-stone-100 border-t border-stone-200">
+    <x-container>
+        <div class="flex justify-between items-end mb-8">
+            <h2 class="text-3xl font-light text-stone-900  animate-on-scroll">Related Categories</h2>
+        </div>
+        <div class="custom-scrollbar  animate-on-scroll -mx-4 overflow-x-auto pb-8">
+            <div class="flex gap-6 px-4">
+            @foreach ($category->childs->where('is_active', 1) as $cat)
+                <a href="{{ route('products.category',['category_slug' => $cat->slug]) }}" class="group relative block w-80 md:w-96 flex-shrink-0 h-[28rem] overflow-hidden shadow-lg">
+                    <img src="{{ uploaded_asset($cat->image) }}" alt="{{ $cat->getTranslation('name', $lang) }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
+                        <h3 class="text-xl font-normal leading-tight text-white">{{ $cat->getTranslation('name', $lang) }}</h3>
+                 
+                    </div>
+                    {{-- Arrow Action (same as main cards) --}}
+                    <div class="absolute bottom-6 right-6 z-10 text-white bg-[#0a8268] p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 128 128">
+                            <path d="M44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                </a>
+            @endforeach
+            </div>
+        </div>
+    </x-container>
+</section>
+@endif
+
+
 @endsection

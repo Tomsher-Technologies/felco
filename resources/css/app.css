@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+
+@import 'animate.css';
+@import 'swiper/css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base Layer Customizations ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-gray-800 bg-white antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-gray-900;
+  }
+  a {
+    @apply text-primary hover:text-primary/80 transition;
+  }
+  button {
+    @apply transition focus:outline-none focus:ring-2 focus:ring-primary/50;
+  }
+}
+
+/* ---------- Swiper Height Fixes ---------- */
+/* Ensure full height for Swiper and its slides */
+#felco-hero,
+#felco-hero .swiper,
+#felco-hero .swiper-wrapper,
+#felco-hero .swiper-slide {
+  height: 100% !important;
+  min-height: 0;
+}
+
+/* Tailwind base or custom CSS */
+.gsap-fade-up {
+  will-change: transform, opacity;
+}
+
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+
+.faq-content p{
+  color: black !important;
+}
+
+
+    .custom-list {
+        position: relative;
+    }
+
+    .custom-list br + *::before {
+        content: "• ";
+        color: #f06425; /* optional accent color */
+        font-weight: bold;
+        margin-right: 0.25rem;
+    }
+
+    .custom-list br {
+        display: block;
+        margin-top: 0.5rem;
+        content: "";
+    }
+
+    .custom-list {
+        white-space: pre-line;
+    }
+
+
+
+.swiper-button-prev, .swiper-button-next{
+
+      color: #ffffff;
+   
+}
+
+
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after{
+  font-size: 20px !important;
+}
+
+.swiper-pagination-bullet-active{
+background : #f06425 !important
+}
+
+.swiper-pagination-bullet{
+  background : #fff !important
+}

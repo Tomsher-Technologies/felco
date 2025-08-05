@@ -251,7 +251,10 @@ class FrontendController extends Controller
 
     public function industries()
     {
-        $page = Page::where('type','industries')->first();
+        $allind = Page::where('industy', 1)
+            ->where('status', 1)
+            ->get();
+            $page = Page::where('type','industries')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -265,9 +268,32 @@ class FrontendController extends Controller
         ];
         
         $this->loadSEO($seo);
-        return view('frontend.industries',compact('page','lang'));
+        return view('frontend.industries',compact('page','lang','allind'));
     }
 
+    public function industryDetails(Request $request,$type){
+        $page = Page::where('type',$type)->first();
+        $lang = getActiveLanguage();
+        $seo = [
+            'title'                 => $page->getTranslation('title', $lang),
+            'meta_title'            => $page->getTranslation('meta_title', $lang),
+            'meta_description'      => $page->getTranslation('meta_description', $lang),
+            'keywords'              => $page->getTranslation('keywords', $lang),
+            'og_title'              => $page->getTranslation('og_title', $lang),
+            'og_description'        => $page->getTranslation('og_description', $lang),
+            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+        ];
+        
+        
+        $this->loadSEO($seo);
+        return view('frontend.industrydetails',compact('page','lang'));
+        
+        // echo '<pre>';
+        // print_r($product);
+        // die;
+    }
+    
     public function products()
     {
         $page = Page::where('type','products')->first();
@@ -417,55 +443,71 @@ class FrontendController extends Controller
         return response()->json(['success' => trans('messages.newsletter_success')]);
     }
 
-    public function filterByCategory(Request $request, $category_slug){
-        $request->session()->put('last_url', url()->full());
 
-        $lang = getActiveLanguage();
-        $category = Category::where('slug', $category_slug)->first();
-        $products = [];
-        $frameSizes = $poles = $powers = $mountings = $voltages = [];
-        $keyword = null;
 
-        if($category){
-            $query = Product::where('category_id', $category->id)
-                                ->where('published', 1);
 
-            if($request->has('keyword')){
-                $keyword = $request->keyword;
-                $query->where('unique_id', 'like', '%' . $keyword . '%');
-            }
-            if ($request->has('frame_size') && !empty($request->frame_size)) {
-                $query->where('frame_size', $request->frame_size);
-            }
-        
-            if ($request->has('poles') && !empty($request->poles)) {
-                $query->where('poles', $request->poles);
-            }
-        
-            if ($request->has('power') && !empty($request->power)) {
-                $query->where('power', $request->power);
-            }
-        
-            if ($request->has('mounting') && !empty($request->mounting)) {
-                $query->where('mounting', $request->mounting);
-            }
-        
-            if ($request->has('voltage') && !empty($request->voltage)) {
-                $query->where('voltage', $request->voltage);
-            }
-        
-            // Retrieve filtered products
-            $products = $query->paginate(15);
 
-            $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
-            $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');
-            $powers = Product::where('category_id', $category->id)->distinct()->pluck('power');
-            $mountings = Product::where('category_id', $category->id)->distinct()->pluck('mounting');
-            $voltages = Product::where('category_id', $category->id)->distinct()->pluck('voltage');
-        }
-        
-        return view('frontend.category_details',compact('category','lang','products','frameSizes','poles','powers','mountings','voltages','keyword'));
+
+public function filterByCategory(Request $request, $category_slug){
+    $request->session()->put('last_url', url()->full());
+
+    $lang = getActiveLanguage();
+
+    // 🛠 Alias mapping for old or alternative slugs
+    $slugMap = [
+        'slip-ring-motors' => 'felco-special-motors-slip-ring-motors',
+        // Add more aliases here if needed
+    ];
+    $resolvedSlug = $slugMap[$category_slug] ?? $category_slug;
+
+    $category = Category::where('slug', $resolvedSlug)->first();
+
+    if (!$category) {
+        abort(404); // Category not found
     }
+
+    $products = [];
+    $frameSizes = $poles = $powers = $mountings = $voltages = [];
+    $keyword = null;
+
+    $query = Product::where('category_id', $category->id)->where('published', 1);
+
+    if($request->has('keyword')) {
+        $keyword = $request->keyword;
+        $query->where('unique_id', 'like', '%' . $keyword . '%');
+    }
+
+    if ($request->filled('frame_size')) $query->where('frame_size', $request->frame_size);
+    if ($request->filled('poles')) $query->where('poles', $request->poles);
+    if ($request->filled('power')) $query->where('power', $request->power);
+    if ($request->filled('mounting')) $query->where('mounting', $request->mounting);
+    if ($request->filled('voltage')) $query->where('voltage', $request->voltage);
+
+    $products = $query->paginate(15);
+
+    $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
+    $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');
+    $powers = Product::where('category_id', $category->id)->distinct()->pluck('power');
+    $mountings = Product::where('category_id', $category->id)->distinct()->pluck('mounting');
+    $voltages = Product::where('category_id', $category->id)->distinct()->pluck('voltage');
+
+    return view('frontend.category_details', compact('category','lang','products','frameSizes','poles','powers','mountings','voltages','keyword'));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function productDetails(Request $request){
         $slug = $request->has('slug') ? $request->slug :  ''; 

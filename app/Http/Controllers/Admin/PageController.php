@@ -101,7 +101,8 @@ class PageController extends Controller
             return view('backend.website_settings.pages.about_us', compact('page','lang','page_id'));
           }else if ($id == 'faq') {
             return view('backend.website_settings.pages.faq', compact('page','lang','page_id'));
-          }else if ($id == 'marine' || $id == 'oil_gas' || $id == 'hvac') {
+         // }else if ($id == 'marine' || $id == 'oil_gas' || $id == 'hvac') {
+          }else if ($page->industy == 1) {
             return view('backend.website_settings.pages.industries', compact('page','lang','page_id'));
           }else if ($id == 'service_sales') {
             return view('backend.website_settings.pages.service_sales', compact('page','lang','page_id'));

@@ -1,5 +1,26 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * {
     font-family: "Public Sans", sans-serif !important;
     font-optical-sizing: auto;
@@ -13,6 +34,116 @@
 
     --light-gray-bg: rgba(0, 0, 0, 0.05);
 }
+
+
+
+
+
+.page-title h2 {
+
+    margin-bottom: 1rem;
+    position: relative;
+    /* display: inline-block; */
+    padding-bottom: 8px;
+}
+
+.page-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #f06425;
+    border-radius: 2px;
+}
+
+
+
+
+#sec-title {
+    position: relative;
+}
+
+#sec-title .main-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    color: #222;
+    letter-spacing: 0.5px;
+}
+
+#sec-title .main-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 3px;
+    background-color: #ff6a00;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+#sec-title:hover .main-title::after {
+    width: 100px;
+}
+
+
+
+
+/* Left-aligned section title */
+.fl-section-title-area {
+    text-align: left;
+    margin-bottom: 1rem;
+    padding-top: 3rem;
+    position: relative;
+}
+
+/* Main title styling */
+.fl-section-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+    color: #222;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* Orange underline that animates on hover */
+.fl-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #ff6a00;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.fl-section-title-area:hover .fl-section-title::after {
+    width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* spacing */
 
@@ -1061,7 +1192,7 @@
 }
 
 .fl-product-details {
-    margin: 20px 0;
+    /* margin: 20px 0; */
 }
 
 .fl-product-details p {
@@ -1150,7 +1281,7 @@
 .product-category .grid {
 
     border: 1px solid #ccc;
-    padding: 30px;
+    padding: 10px;
 }
 
 .product-category .details {
@@ -2273,4 +2404,201 @@ section.help_section .card .card-text {
 
 .menu-active > a{
     opacity: 0.7 !important;
+}
+
+/*.category-brief {*/
+/*    padding: 30px;*/
+/*    background: #0101010d;*/
+/*    border-top: 5px solid #f06425;*/
+/*    border-bottom: 5px solid #0a8268;*/
+/*    color: #000000;*/
+/*    margin-bottom: 60px;*/
+/*    font-size: 18px;*/
+/*}*/
+
+/*.catagory_start p {*/
+/*    color: #687187;*/
+/*    line-height: 42px;*/
+/*    font-size: 40px;*/
+/*    font-weight: 200;*/
+/*    background: linear-gradient(90deg, #f06425, #000000);*/
+/*    -webkit-background-clip: text;*/
+/*    -webkit-text-fill-color: transparent;*/
+/*    background-clip: text;*/
+/*    color: transparent;*/
+    /* text-transform: uppercase; */
+/*    text-decoration: underline;*/
+/*    margin-top: 40px;*/
+/*}*/
+
+.catagory_start h2 {
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 40px;
+}
+
+.products-used ul {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.products-used ul li {
+    padding: 30px;
+    font-size: 22px;
+    border-radius: 6px;
+    font-weight: 200;
+    text-transform: uppercase;
+    flex-basis: 50%;
+    line-height: 28px;
+    min-height: 160px;
+}
+
+.products-used ul li:nth-child(1) {
+
+  background-color: #fef5ee;
+  color:#802816;
+}
+
+.products-used ul li:nth-child(2) {
+
+  background-color: #fde9d7;
+  color:#802816;
+}
+
+.products-used ul li:nth-child(3) {
+
+  background-color: #fbcfad;
+  color:#802816;
+}
+
+.products-used ul li:nth-child(4) {
+
+  background-color: #f9b381;
+  color:#802816;
+}
+
+.products-used ul li:nth-child(5) {
+
+  background-color: #ee8f5b;
+  color:#fff;
+}
+
+
+.applications ul {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+
+.applications ul li {
+    border:1px solid #dadada;
+    padding: 30px;
+    font-size: 22px;
+    border-radius: 6px;
+    font-weight: 200;
+    flex-basis: 50%;
+    line-height: 28px;
+    min-height: 160px;
+    color: #000;
+}
+
+.applications ul li span {
+
+    font-size: 22px!important;
+    font-weight: 200;
+    line-height: 28px;
+    color: #000;
+}
+
+
+
+/*section.catagory_details.section-padding {*/
+/*    position: relative;*/
+/*    z-index: 0;*/
+/*}*/
+
+/*section.catagory_details.section-padding:after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    background-image: url(https://felco.tomsher.net/assets/images/felco-icon.png);*/
+/*    background-repeat: no-repeat;*/
+/*    background-position: right top;*/
+/*    z-index: -1;*/
+/*    opacity: 0.1;*/
+/*    background-attachment: fixed;*/
+/*    background-size: 50% 100%;*/
+/*}*/
+
+
+/*.catagory_red-bg{*/
+/*    background-color: #f06425;*/
+/*}*/
+
+/*.catagory_red-bg h3, .catagory_red-bg span {*/
+/*color: #fff;*/
+/*}*/
+
+/*.catagory_green-bg{*/
+/*    background-color: #0a8268;*/
+/*}*/
+
+/*.catagory_green-bg h3, .catagory_green-bg span {*/
+/*color: #fff;*/
+/*}*/
+
+.catagory_bg1{
+  background-color: #fef5ee;
+  color:#802816;
+}
+.catagory_bg2{
+      background-color: #fde9d7;
+  color:#802816;
+}
+.catagory_bg3{
+      background-color: #fbcfad;
+  color:#802816;
+}
+.catagory_bg4{
+      background-color: #f9b381;
+  color:#802816;
+}
+
+.catagory_bg5{
+  background-color: #ee8f5b;
+  color:#fff;
+}
+
+
+
+.catagory_start h2 {
+    font-weight: 500;
+    font-size: 50px;
+}
+
+.catagory_start p {
+    padding-top: 30px;
+}
+
+.products-used {
+    margin-bottom: 50px;
+}
+
+.catagory_details .category-brief h4 {
+    margin-bottom: 22px;
+}
+
+.catagory_spec {
+    border: 0;
+    padding: 20px 40px 60px 30px;
+    border-radius: 6px;
+
 }

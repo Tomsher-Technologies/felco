@@ -2396,9 +2396,22 @@ img {
   left: 25px;
 }
 
-.hero-slider .swiper-button-prev:before {
-  font-family: "themify";
-  content: "\e629";
+
+
+/* Swiper Prev Arrow (Left) */
+.hero-slider .swiper-button-prev::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f104"; /* fa-chevron-left */
+  font-weight: 900;
+  font-size: 20px;
+  color: #fff;
+}
+
+/* Swiper Next Arrow (Right) */
+.hero-slider .swiper-button-next::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f105"; /* fa-chevron-right */
+  font-weight: 900;
   font-size: 20px;
   color: #fff;
 }
@@ -2407,12 +2420,17 @@ img {
   right: 25px;
 }
 
-.hero-slider .swiper-button-next:before {
-  font-family: "themify";
-  content: "\e628";
+
+/* Swiper Next Arrow (Right) */
+.hero-slider .swiper-button-next::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f105"; /* fa-chevron-right */
+  font-weight: 900;
   font-size: 20px;
   color: #fff;
 }
+
+
 
 .hero-slider .swiper-pagination-bullet {
   width: 10px;
