@@ -454,11 +454,14 @@ public function filterByCategory(Request $request, $category_slug){
     $lang = getActiveLanguage();
 
     // 🛠 Alias mapping for old or alternative slugs
-    $slugMap = [
-        'slip-ring-motors' => 'felco-special-motors-slip-ring-motors',
-        // Add more aliases here if needed
-    ];
-    $resolvedSlug = $slugMap[$category_slug] ?? $category_slug;
+    // $slugMap = [
+    //     'slip-ring-motors' => 'felco-special-motors-slip-ring-motors',
+       
+    // ];
+    // $resolvedSlug = $slugMap[$category_slug] ?? $category_slug;
+
+
+    $resolvedSlug =  $category_slug;
 
     $category = Category::where('slug', $resolvedSlug)->first();
 
