@@ -295,52 +295,81 @@
 
 
 
-{{-- 3. Main Product Grid (Light Theme) --}}
+
+
+
+
+
+{{-- 3. Main Product Table (Light Theme) --}}
 <section class="pt-[30px] pb-[70px] bg-gray-50">
     <x-container>
         <main>
             @if ($products->isNotEmpty())
-                {{-- Product Grid Header --}}
+                {{-- Product Count Header --}}
                 <div class="mb-8">
                     <h2 class="text-3xl font-light text-gray-900">
                         Showing {{ $products->total() }} Products
                     </h2>
                 </div>
 
-                <div id="product-grid"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    @foreach ($products as $prod)
-                        <div class="group relative block bg-white/90 p-6 border border-gray-200 hover:border-orange-400 transition-all duration-300 transform hover:-translate-y-1 shadow-sm">
-                            <div class="relative z-10">
-                                <h4 class="text-lg font-bold text-gray-900 mb-1 truncate">{{ $prod->unique_id }}</h4>
-                                <p class="text-sm text-gray-500 mb-4 h-10 truncate">{{ $prod->getTranslation('name', $lang) }}</p>
-                                <div class="mt-4 pt-4 border-t border-gray-200 grid grid-cols-2 gap-3 text-xs">
-                                    <div><span class="text-gray-400">Power:</span><strong class="block text-gray-700">{{ $prod->power }}</strong></div>
-                                    <div><span class="text-gray-400">Poles:</span><strong class="block text-gray-700">{{ $prod->poles }}</strong></div>
-                                    <div><span class="text-gray-400">Frame:</span><strong class="block text-gray-700">{{ $prod->frame_size }}</strong></div>
-                                    <div><span class="text-gray-400">Voltage:</span><strong class="block text-gray-700">{{ $prod->voltage }}</strong></div>
-                                </div>
-                                <a href="{{ route('product-detail', ['slug' => $prod->slug]) }}" class="absolute inset-0 z-20" aria-label="View details for {{ $prod->unique_id }}"></a>
-                            </div>
-                            {{-- Bottom-right arrow action --}}
-                            <div class="absolute bottom-6 right-6 z-10 text-white bg-[#0a8268] p-2  opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
-                     
-
-<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 128 128">
-                                        <path d="M44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z" fill="currentColor"></path>
-                                    </svg>
-
-                            </div>
+                {{-- Product Table --}}
+                <div class="bg-white border border-gray-200 shadow-sm overflow-x-auto">
+                    {{-- We use divs with ARIA roles for better styling control with Tailwind CSS --}}
+                    <div role="table" class="min-w-full">
+                        
+                        {{-- Table Header --}}
+                        <div role="rowheader" class="grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] bg-gray-100/70 text-xs font-semibold text-gray-600 uppercase tracking-wider border-b-2 border-gray-200">
+                            <div class="p-4 text-left">Product</div>
+                            <div class="p-4 text-left">Power</div>
+                            <div class="p-4 text-left">Poles</div>
+                            <div class="p-4 text-left">Frame</div>
+                            <div class="p-4 text-left">Voltage</div>
+                            <div class="p-4 text-right"><span class="sr-only">Details</span></div>
                         </div>
-                    @endforeach
+
+                        {{-- Table Body --}}
+                        <div id="product-table-body" role="rowgroup">
+                            @foreach ($products as $prod)
+                                {{-- Each row is a group to control hover state of child elements --}}
+                                <div role="row" class="group relative grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] items-center border-b border-gray-200 last:border-b-0 hover:bg-orange-50/50 transition-colors duration-300">
+                                    
+                                    {{-- Cell 1: Product Name & ID --}}
+                                    <div class="p-4 whitespace-nowrap">
+                                        <h4 class="text-base font-bold text-gray-900 truncate">{{ $prod->unique_id }}</h4>
+                                        <p class="text-sm text-gray-500 truncate">{{ $prod->getTranslation('name', $lang) }}</p>
+                                    </div>
+
+                                    {{-- Cells 2-5: Specifications --}}
+                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->power }}</div>
+                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->poles }}</div>
+                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->frame_size }}</div>
+                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->voltage }}</div>
+                                    
+                                    {{-- Cell 6: Action Arrow (appears on hover) --}}
+                                    {{-- z-30 ensures the icon is clickable and above the stretched link overlay --}}
+                                    <div class="relative z-30 flex justify-end items-center pr-6">
+                                        <div class="text-white bg-[#0a8268] p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 128 128">
+                                                <path d="M44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z" fill="currentColor"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    {{-- Stretched link to make the entire row clickable --}}
+                                    {{-- z-20 places it above the content but below the action icon --}}
+                                    <a href="{{ route('product-detail', ['slug' => $prod->slug]) }}" class="absolute inset-0 z-20" aria-label="View details for {{ $prod->unique_id }}"></a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
 
-                {{-- Load More Button --}}
+                {{-- Load More Button (Identical to grid view) --}}
                 @if ($products->hasMorePages())
                     <div class="mt-12 flex justify-center">
                         <button id="load-more"
                             data-next-page="{{ $products->currentPage() + 1 }}"
-                            class="bg-[#0a8268] text-white px-8 py-3  shadow hover:bg-cyan-700 transition font-medium text-lg flex items-center gap-2">
+                            class="bg-[#0a8268] text-white px-8 py-3 shadow hover:bg-cyan-700 transition font-medium text-lg flex items-center gap-2">
                             <svg class="w-5 h-5 animate-spin hidden" id="loader-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
@@ -350,6 +379,7 @@
                     </div>
                 @endif
             @else
+                {{-- No Products Found State (Identical to grid view) --}}
                 <div class="text-center py-20 bg-white border border-dashed border-gray-300">
                     <svg class="mx-auto h-12 w-12 text-[#f06425] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

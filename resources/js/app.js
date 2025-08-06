@@ -418,6 +418,77 @@ window.addEventListener("load", () => {
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
 
+    // Animations for Heading and Description
+    gsap.from("#heading", {
+        opacity: 0,
+        y: -50,
+        duration: 1,
+        delay: 0.5,  // delay to create smooth staggered effect
+        ease: "power2.out"
+    });
+    gsap.from("#desc", {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        delay: 1,
+        ease: "power2.out"
+    });
 
+    // Animation for steps with a delay to make it staggered
+    gsap.from("#step1", {
+        opacity: 0,
+        x: -100,
+        duration: 1,
+        delay: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#step1",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    gsap.from("#step2", {
+        opacity: 0,
+        x: 100,
+        duration: 1,
+        delay: 2,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#step2",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    gsap.from("#step3", {
+        opacity: 0,
+        x: -100,
+        duration: 1,
+        delay: 2.5,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#step3",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    gsap.from("#step4", {
+        opacity: 0,
+        x: 100,
+        duration: 1,
+        delay: 3,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#step4",
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+});
 

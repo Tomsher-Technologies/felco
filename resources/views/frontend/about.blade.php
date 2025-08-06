@@ -31,6 +31,122 @@
 
 
 
+
+
+
+
+
+
+<section id="why-we-are-different-creative" class="py-20 md:py-24 bg-gray-50 text-gray-800 overflow-hidden">
+    <x-container>
+        <!-- Section Heading -->
+        <div class="text-center mb-16" id="section-heading">
+            <h2 class="text-3xl md:text-4xl font-light tracking-tight text-gray-900" id="heading">
+                Our Unwavering Commitment
+            </h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto" id="desc">
+                We've built our reputation on a foundation of four key promises. This is how we deliver excellence, every time.
+            </p>
+        </div>
+
+        <!-- Section Content -->
+        <div class="relative" id="section-content">
+            <div class="hidden lg:block absolute left-1/2 top-2 bottom-1 w-1 bg-primary/10 rounded-full -translate-x-1/2"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
+                <!-- Step 1 -->
+                <div class="flex justify-start lg:justify-end" id="step1">
+                    <div class="relative w-full lg:w-10/12 lg:text-right">
+                        <div class="absolute -top-4 -left-4 lg:-right-4 lg:left-auto text-8xl font-black text-gray-100 z-0">01</div>
+                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
+                            <div class="flex items-center gap-4 lg:flex-row-reverse">
+                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 20.417l5.5-5.5a1 1 0 011.414 0l5.5 5.5a12.02 12.02 0 008.618-14.475z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-normal text-gray-900">2-Year Warranty</h3>
+                                    <p class="mt-1 text-gray-600">Peace of mind is built-in with our comprehensive parts and labor coverage.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex justify-start" id="step2">
+                     <div class="relative w-full lg:w-10/12">
+                        <div class="absolute -top-4 -left-4 text-8xl font-black text-gray-100 z-0">02</div>
+                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary">
+                            <div class="flex items-center gap-4">
+                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-normal text-gray-900">On-Site Support</h3>
+                                    <p class="mt-1 text-gray-600">Expert help comes to you, ensuring fast and hassle-free resolutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex justify-start lg:justify-end" id="step3">
+                    <div class="relative w-full lg:w-10/12 lg:text-right">
+                        <div class="absolute -top-4 -left-4 lg:-right-4 lg:left-auto text-8xl font-black text-gray-100 z-0">03</div>
+                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
+                            <div class="flex items-center gap-4 lg:flex-row-reverse">
+                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-normal text-gray-900">Premium Quality</h3>
+                                    <p class="mt-1 text-gray-600">Crafted from the finest materials for superior durability and elegance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex justify-start" id="step4">
+                     <div class="relative w-full lg:w-10/12">
+                        <div class="absolute -top-4 -left-4 text-8xl font-black text-gray-100 z-0">04</div>
+                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary">
+                            <div class="flex items-center gap-4">
+                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-normal text-gray-900">Seamless Installation</h3>
+                                    <p class="mt-1 text-gray-600">Our professional team handles setup at no extra cost, perfected for your space.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </x-container>
+</section>
+
+
+
+
+
+
+
+
+
 <img src="{{ asset('assets/images/about.jpg') }}" alt="About Image"
      class="about-img-zoom w-full min-h-[300px] md:min-h-[450px] lg:min-h-[550px] max-h-[50vh] mx-auto object-cover"
      data-gsap="scroll-zoom">
@@ -53,7 +169,7 @@
  
 
 
-<section class="bg-[#e8edf1] pt-[50px] pb-[150px] relative z-10">
+<section class="bg-[#e8edf1] pt-[100px] pb-[100px] relative z-10">
     <x-container>
         <!-- Top Content -->
         <div class="flex flex-col md:flex-row items-start justify-between gap-6 mb-4">
@@ -86,7 +202,7 @@
     </x-container>
 
     <!-- Cards Section Overlapping Below -->
-    <div class="absolute left-0 right-0 -bottom-24 z-20">
+    <div class="pt-10">
         <x-container>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 @foreach (range(2, 5) as $i)
@@ -168,10 +284,12 @@
 
 
 <!-- FAQ Section with Smooth Flowbite Accordion -->
-<section class="pt-[160px] pb-[70px] bg-white  text-gray-800">
+
+
+<!-- <section class="pt-[160px] pb-[70px] bg-white  text-gray-800">
     <x-container>
         <div class="grid lg:grid-cols-2 gap-12 items-start">
-            <!-- Left Column: FAQ Title -->
+        
             <div>
                 <span class="text-orange-600 text-sm uppercase tracking-wider font-light block mb-3">
                     {{ trans('messages.faq') }}
@@ -184,7 +302,6 @@
                 </p>
             </div>
 
-            <!-- Right Column: Flowbite Accordion -->
             <div id="accordion-collapse" data-accordion="collapse" class="space-y-4">
                 @php
                     $faqs = \App\Models\Faq::where('type','about_us')->where('lang', $lang)->orderBy('sort_order','asc')->get();
@@ -221,7 +338,7 @@
             </div>
         </div>
     </x-container>
-</section>
+</section> -->
 
 
 

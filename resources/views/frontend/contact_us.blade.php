@@ -62,7 +62,7 @@
                 </div>
 
                 <!-- Contact Info -->
-                <div class="bg-gray-950 text-white p-8 shadow space-y-6">
+                <div class="bg-[#2a2a2a] text-white p-8 shadow space-y-6">
                     <div>
                         <h5 class="text-3xl  text-white font-thin mb-7">{{ $page->getTranslation('heading2', $lang) }}</h5>
                         <ul class="space-y-3">

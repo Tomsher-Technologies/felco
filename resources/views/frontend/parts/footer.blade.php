@@ -1,33 +1,33 @@
-<footer class="bg-[#2a2a2a] text-gray-200 py-12">
+<footer class="bg-[#2a2a2a] text-[#ededed] py-12">
     <x-container>
         {{-- CTA/Newsletter Section --}}
-        <div class="flex flex-col lg:flex-row justify-between items-start gap-10 mb-12 border-b border-gray-800 pb-12">
+        <div class="flex flex-col lg:flex-row justify-between items-start gap-10 mb-12 border-b border-[#333] pb-12">
             {{-- CTA/Contact --}}
             <div class="flex-1 min-w-[220px] space-y-4">
                 <h2 class="text-2xl font-light text-white">Ready to move forward?</h2>
-                <p class="text-sm text-gray-400">
+                <p class="text-sm text-[#bbbbbb]">
                     Let’s discuss how Felco Motors can power your business.  
                     <span class="block mt-1">From industrial motors to tailored solutions — talk to our experts.</span>
                 </p>
                 <a href="{{ route('contact') }}"
-                    class="inline-block bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 transition-colors duration-200 font-medium">
+                   class="inline-block bg-[#f06425] hover:bg-[#e14e0f] text-white px-6 py-2 transition-colors duration-200 font-medium">
                     Get in Touch
                 </a>
             </div>
             {{-- Newsletter --}}
             <div class="flex-1 min-w-[220px] space-y-4">
                 <h3 class="text-xl font-light text-white">Stay Updated</h3>
-                <p class="text-sm text-gray-400">Join our newsletter for product news and exclusive offers.</p>
+                <p class="text-sm text-[#bbbbbb]">Join our newsletter for product news and exclusive offers.</p>
                 <form id="newsletterForm" class="flex flex-col sm:flex-row items-center gap-2">
                     <input 
                         type="email" 
                         name="email" 
                         placeholder="Your email address"
-                        class="w-full sm:w-auto flex-1 px-4 py-2 text-gray-900 outline-none border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-400 placeholder-gray-500"
+                        class="w-full sm:w-auto flex-1 px-4 py-2 bg-[#232323] border border-[#3d3d3d] placeholder-[#8b8b8b] text-[#ededed] outline-none focus:border-[#f06425] focus:ring-1 focus:ring-[#f06425]  transition"
                         required
                     />
                     <button type="submit"
-                        class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 transition-colors duration-200 font-medium">
+                            class="bg-[#f06425] hover:bg-[#e14e0f] text-white px-4 py-2 transition-colors duration-200 font-medium ">
                         Subscribe
                     </button>
                 </form>
@@ -37,71 +37,64 @@
 
         {{-- Fun Decorative Divider --}}
         <div class="flex items-center justify-center my-8">
-            <span class="block w-10 h-0.5 bg-gray-700"></span>
-            <svg class="mx-3 w-8 h-8 text-orange-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <span class="block w-10 h-0.5 bg-[#444]"></span>
+            <svg class="mx-3 w-8 h-8 text-[#f06425]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 17l4 4 4-4M12 3v18"/>
             </svg>
-            <span class="block w-10 h-0.5 bg-gray-700"></span>
+            <span class="block w-10 h-0.5 bg-[#444]"></span>
         </div>
-
-        {{--
-            Optionally, for even more "look" 
-            you could add a custom "pattern" background using:
-            <div class="h-4 w-full bg-[radial-gradient(circle,_#fff1_1px,_rgba(0,0,0,0)_1px)] opacity-10"></div>
-            above the divider, but subtle enough not to interfere.
-        --}}
 
         {{-- Main Content --}}
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
             {{-- Logo & About --}}
             <div>
                 <img src="/assets/images/logo/logo-text.svg" alt="Felco Motors Logo" class="mb-4 max-w-[190px]" />
-                <p class="text-sm text-gray-400 mb-3">
+                <p class="text-sm text-[#bbbbbb] mb-3">
                     Felco Motors provides high-performance electric motors, controls, and complete drive systems for heavy industry and OEMs in the Middle East.
                     <span class="block mt-2">Reliability. Innovation. Trusted for over 20 years.</span>
                 </p>
                 <div class="flex items-center space-x-2 mt-6">
-                    <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-4 h-4 text-[#f06425]" fill="currentColor" viewBox="0 0 20 20">
                         <circle cx="10" cy="10" r="10" />
                     </svg>
-                    <span class="text-xs tracking-wide text-gray-400">ISO 9001:2015 Certified</span>
+                    <span class="text-xs tracking-wide text-[#bbbbbb]">ISO 9001:2015 Certified</span>
                 </div>
             </div>
             {{-- Company Links --}}
             <div>
                 <h4 class="text-lg font-light text-white mb-3">Company</h4>
-                <ul class="space-y-2 text-sm text-gray-300">
-                    <li><a href="{{ route('products') }}" class="text-gray-300  hover:text-orange-400 transition">Products</a></li>
-                    <li><a href="{{ route('industries') }}" class="text-gray-300 hover:text-orange-400 transition">Industries</a></li>
-                    <li><a href="{{ route('about_us') }}" class="text-gray-300 hover:text-orange-400 transition">About Us</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-gray-300 hover:text-orange-400 transition">Contact</a></li>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="{{ route('products') }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">Products</a></li>
+                    <li><a href="{{ route('industries') }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">Industries</a></li>
+                    <li><a href="{{ route('about_us') }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">About Us</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">Contact</a></li>
                 </ul>
             </div>
             {{-- Useful Links --}}
             <div>
                 <h4 class="text-lg font-light text-white mb-3">Useful Links</h4>
-                <ul class="space-y-2 text-sm text-gray-300">
-                    <li><a href="{{ route('faq') }}" class="text-gray-300 hover:text-orange-400 transition">FAQ</a></li>
-                    <li><a href="{{ route('privacy') }}" class="text-gray-300 hover:text-orange-400 transition">Privacy Policy</a></li>
-                    <li><a href="{{ route('terms') }}" class="text-gray-300 hover:text-orange-400 transition">Terms &amp; Conditions</a></li>
-                    <li><a href="{{ route('products.category', ['category_slug' => 'explore']) }}" class="text-gray-300 hover:text-orange-400 transition">Explore Products</a></li>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="{{ route('faq') }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">FAQ</a></li>
+                    <li><a href="{{ route('privacy') }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">Privacy Policy</a></li>
+                    <li><a href="{{ route('terms') }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">Terms &amp; Conditions</a></li>
+                    <li><a href="{{ route('products.category', ['category_slug' => 'explore']) }}" class="text-[#bbbbbb] hover:text-[#f06425] transition">Explore Products</a></li>
                 </ul>
             </div>
             {{-- Contact Info --}}
             <div>
                 <h4 class="text-lg font-light text-white mb-3">Contact</h4>
-                <ul class="space-y-2 text-sm text-gray-300">
+                <ul class="space-y-2 text-sm">
                     <li>Industrial Area, Warehouse 17, Dubai, UAE</li>
                     <li>
                         Phone:
-                        <a href="tel:+97148123456" class="hover:text-orange-400 transition">+971 4 812 3456</a>
+                        <a href="tel:+97148123456" class="hover:text-[#f06425] transition">+971 4 812 3456</a>
                     </li>
                     <li>
                         Email:
-                        <a href="mailto:info@felcomotors.com" class="hover:text-orange-400 transition">info@felcomotors.com</a>
+                        <a href="mailto:info@felcomotors.com" class="hover:text-[#f06425] transition">info@felcomotors.com</a>
                     </li>
                 </ul>
-                <div class="flex gap-4 mt-4">
+              <div class="flex gap-4 mt-4">
                     {{-- Facebook --}}
                     <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener" class="hover:text-orange-400 transition">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -121,7 +114,7 @@
                         </svg>
                     </a>
                 </div>
-                <div class="flex items-center mt-4 text-xs text-gray-500 gap-2">
+                <div class="flex items-center mt-4 text-xs text-[#8b8b8b] gap-2">
                     <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" /></svg>
                     24/7 Emergency Support Available
                 </div>
@@ -129,16 +122,16 @@
         </div>
 
         {{-- Footer Bottom --}}
-        <div class="border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400">
+        <div class="border-t border-[#333] pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-[#bbbbbb]">
             <div>
                 &copy; {{ date('Y') }} Felco Motors. Dubai, UAE. All rights reserved.
             </div>
             <div class="flex gap-3 mt-2 sm:mt-0">
-                <a href="{{ route('terms') }}" class="hover:text-orange-400 transition">Terms &amp; Conditions</a>
+                <a href="{{ route('terms') }}" class="hover:text-[#f06425] transition">Terms &amp; Conditions</a>
                 <span>&middot;</span>
-                <a href="{{ route('privacy') }}" class="hover:text-orange-400 transition">Privacy Policy</a>
+                <a href="{{ route('privacy') }}" class="hover:text-[#f06425] transition">Privacy Policy</a>
                 <span>&middot;</span>
-                <a href="https://www.tomsher.com/" target="_blank" rel="noopener" class="hover:text-orange-400 no-underline transition">Website by Tomsher</a>
+                <a href="https://www.tomsher.com/" target="_blank" rel="noopener" class="hover:text-[#f06425] no-underline transition">Website by Tomsher</a>
             </div>
         </div>
     </x-container>

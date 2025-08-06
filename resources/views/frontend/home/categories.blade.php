@@ -1,87 +1,87 @@
 <section id="Pd-Categories" class="py-16 bg-gray-100 overflow-hidden">
     <x-container>
-        @if(!empty($data['product_categories']) && $data['product_categories']->count() > 0)
-            @php
-                $first = $data['product_categories']->first();
-                $shortCode = strtoupper(Str::limit($first->getTranslation('name', $lang), 3, ''));
-            @endphp
+        @php
+            // Ensure $data['product_categories'] is a collection and handle if it's null
+            $categories = collect($data['product_categories'] ?? []);
 
-            <!-- Section Title -->
-            <div class="text-center mb-12 gsap-fade-up">
-                <h2 class="font-light tracking-tight leading-tight text-4xl text-left  drop-shadow-lg text-black">Product Categories</h2>
+            // Separate the first category for the large left card
+            $leftCategory = $categories->shift(); 
+
+            // Take the next 4 categories for the right-side grid
+            $rightCategories = $categories->take(4);
+        @endphp
+
+        {{-- Only render the section if there is at least one category to display --}}
+        @if($leftCategory)
+            <div class="mb-12 text-center lg:text-left">
+                <h2 class="font-light tracking-tight leading-tight text-4xl drop-shadow-lg text-black">Product Categories</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 min-h-[80vh] gap-6">
-                <!-- Left Card -->
-                <div class="relative group bg-white text-black overflow-hidden shadow-lg transition-all duration-500 gsap-fade-up">
-                    <!-- Animated Background Image -->
-                    <div class="absolute inset-0 z-0 bg-cover bg-center opacity-100 bg-parallax"
-                         style="background-image: url('{{ asset('assets/images/felco-website-bg.png') }}'); will-change: transform;"></div>
+            <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+                
+                {{-- Left full-height card --}}
+                <div class="lg:col-span-1 mb-6 lg:mb-0">
+                    <a href="{{ route('products.category', ['category_slug' => $leftCategory->slug]) }}" 
+                       class="group flex flex-col h-full border border-l-4 border-l-transparent rounded-lg p-6 bg-white shadow-sm 
+                              transition-all duration-500 ease-in-out 
+                              hover:shadow-xl hover:border-l-4 hover:border-l-primary">
+                        
+                        {{-- Top-aligned Title --}}
+                        <h3 class="text-2xl font-normal mb-4 text-black group-hover:text-primary transition-colors duration-500">
+                            {{ $leftCategory->getTranslation('name', $lang) }}
+                        </h3>
 
-                    <!-- Green Hover Overlay -->
-                    <div class="absolute inset-0 bg-[#0a8268] z-10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
-
-                    <a href="{{ route('products.category', ['category_slug' => $first->slug]) }}"
-                       class="flex flex-col justify-between p-6 w-full h-full z-20 relative">
-                        <div class="flex justify-end text-sm opacity-60 group-hover:opacity-90 transition">
-                            <span class="group-hover:text-white">01</span>
-                        </div>
-                        <div class="flex-grow flex items-center justify-center text-center py-10">
-                            <h1 class="text-7xl sm:text-8xl font-extrabold tracking-tight leading-none group-hover:text-white transition">{{ $shortCode }}</h1>
-                        </div>
-                        <div class="pt-6 border-t border-black/10 group-hover:border-white/20 transition">
-                            <h5 class="text-2xl font-light mb-2 group-hover:text-white transition">
-                                {{ $first->getTranslation('name', $lang) }}
-                            </h5>
-                            <p class="text-sm leading-relaxed text-gray-600 group-hover:text-gray-300 transition">
-                                {{ $first->getTranslation('home_content', $lang) }}
+                        {{-- Bottom-aligned Content (Description + Button) --}}
+                        {{-- 'mt-auto' pushes this entire block to the bottom of the flex container --}}
+                        <div class="mt-auto">
+                            <p class="text-gray-600 group-hover:text-gray-800 transition-colors duration-500 line-clamp-4 mb-4">
+                                {{ $leftCategory->getTranslation('home_content', 'en') }}
                             </p>
-                            <div class="flex justify-end pt-4 text-sm mt-3 font-medium">
-                                <span class="transition group-hover:text-white">View Products →</span>
-                            </div>
+
+                            {{-- "View More" Button Area (appears on hover) --}}
+                              <div class="group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                                        <span class="flex w-full items-center justify-between bg-gray-500 group-hover:bg-primary !text-white font-medium py-2 px-4 rounded-md shadow-sm">
+                                            <span>View More</span>
+                                            <i class="fi fi-rr-arrow-right"></i>
+                                        </span>
+                                    </div>
                         </div>
                     </a>
                 </div>
 
-                <!-- Right Cards -->
-                <div class="grid grid-cols-2 gap-6 h-full">
-                    @foreach($data['product_categories']->slice(1, 4) as $i => $cat)
-                        @php
-                            $short = strtoupper(Str::limit($cat->getTranslation('name', $lang), 3, ''));
-                            $blockIndex = str_pad($i + 2, 2, '0', STR_PAD_LEFT);
-                        @endphp
+                {{-- Right grid with 2x2 cards --}}
+                {{-- This grid only renders if there are categories available for it --}}
+                @if($rightCategories->isNotEmpty())
+                    <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        @foreach($rightCategories as $cat)
+                            <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}" 
+                               class="group flex flex-col h-full border rounded-lg p-6 bg-white shadow-sm 
+                                      transition-all duration-500 ease-in-out 
+                                      hover:shadow-lg hover:border-l-4 hover:border-l-primary border-l-4 border-l-transparent">
 
-                        <div class="relative group bg-white text-black overflow-hidden shadow-lg transition-all duration-500 gsap-fade-up">
-                            <!-- Animated Background Image -->
-                            <div class="absolute inset-0 z-0 bg-cover bg-center opacity-100 bg-parallax"
-                                 style="background-image: url('{{ asset('assets/images/felco-website-bg.png') }}'); will-change: transform;"></div>
+                                {{-- Top-aligned Title --}}
+                                <h3 class="text-2xl font-normal text-black group-hover:text-primary transition-colors duration-500">
+                                    {{ $cat->getTranslation('name', $lang) }}
+                                </h3>
 
-                            <!-- Green Hover Overlay -->
-                            <div class="absolute inset-0 bg-[#0a8268] z-10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
-
-                            <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                               class="flex flex-col justify-between p-6 w-full h-full z-20 relative">
-                                <div class="flex justify-end text-sm opacity-60 group-hover:opacity-90 transition">
-                                    <span class="group-hover:text-white">{{ $blockIndex }}</span>
-                                </div>
-                                <div class="flex-grow flex items-center justify-center text-center py-10">
-                                    <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight group-hover:text-white transition">{{ $short }}</h1>
-                                </div>
-                                <div class="pt-6 border-t border-black/10 group-hover:border-white/20 transition">
-                                    <h5 class="text-2xl font-light mb-2 group-hover:text-white transition">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h5>
-                                    <p class="text-sm leading-relaxed text-gray-600 group-hover:text-gray-300 transition">
+                                {{-- Bottom-aligned Content (Description + Button) --}}
+                                <div class="mt-auto">
+                                    <p class="text-gray-600 group-hover:text-gray-800 transition-colors duration-500 line-clamp-3 mb-4">
                                         {{ $cat->getTranslation('home_content', $lang) }}
                                     </p>
-                                    <div class="flex justify-end pt-4 text-sm mt-3 font-medium">
-                                        <span class="transition group-hover:text-white">View Products →</span>
+
+                                    {{-- "View More" Button Area (appears on hover) --}}
+                                    <div class="group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                                        <span class="flex w-full items-center justify-between bg-gray-500 group-hover:bg-primary !text-white font-medium py-2 px-4 rounded-md shadow-sm">
+                                            <span>View More</span>
+                                            <i class="fi fi-ts-arrow-right"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </a>
-                        </div>
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         @endif
     </x-container>

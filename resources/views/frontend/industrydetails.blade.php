@@ -37,7 +37,7 @@
              <h3 class="text-3xl font-light text-white animate-on-scroll" >
     Products Used
 </h3>
-<p class="mt-2 text-slate-400 animate-on-scroll" >
+<p class="mt-2 text-[#bdbdbd] animate-on-scroll" >
     Our range of electric motors, engineered for industrial demands with proven efficiency and reliability.
 </p>
 
@@ -46,7 +46,10 @@
                     {{-- Grid --}}
         <div id="industryProductGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {{-- IEC Motors Card --}}
-                        <div class="group bg-slate-800/50 border border-slate-700  p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-slate-800">
+                       
+                        
+     <div class="group bg-[#2a2a2a] border border-[#404040] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#373737]">
+
                             <div class="text-orange-500 mb-4">
                          
 
@@ -61,22 +64,30 @@
 
                             </div>
                             <h4 class="text-xl font-normal text-slate-100">IEC Motors</h4>
-                            <p class="text-slate-400 text-sm mt-1">High-efficiency IEC three-phase motors for long-lasting industrial performance.</p>
+                            <p class="text-[#bdbdbd] text-sm mt-1">High-efficiency IEC three-phase motors for long-lasting industrial performance.</p>
                         </div>
 
                         {{-- Special Motors Card --}}
-                        <div class="group bg-slate-800/50 border border-slate-700  p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-slate-800">
+                 
+                           <div class="group bg-[#2a2a2a] border border-[#404040] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#373737]">  
+
+
+
+
+
                             <div class="text-orange-500 mb-4">
                       <svg class="w-[60px] h-[60px] fill-orange-500"   viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" id="fi_2479505"><g id="dc_motor-electronics-2" data-name="dc motor-electronics"><path d="m61 29h-2v-3a1 1 0 0 0 -1-1h-2v-4h4v-2h-4v-1a3.009 3.009 0 0 0 -3-3h-31a3.009 3.009 0 0 0 -3 3v7h-3a1 1 0 0 0 -1 1v3h-4v-2a1 1 0 0 0 -1-1h-7a1 1 0 0 0 -1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1v-2h4v3a1 1 0 0 0 1 1h3v7a3.009 3.009 0 0 0 3 3h31a3.009 3.009 0 0 0 3-3v-1h4v-2h-4v-4h2a1 1 0 0 0 1-1v-3h2a1 1 0 0 0 1-1v-4a1 1 0 0 0 -1-1zm-52 7h-5v-1h5zm0-3h-5v-2h5zm0-4h-5v-1h5zm6 4h-4v-2h4zm4 4h-2v-10h2zm27 2h-21v-14h21zm0-16h-22a1 1 0 0 0 -1 1v16a1 1 0 0 0 1 1h22v6h-24a1 1 0 0 1 -1-1v-28a1 1 0 0 1 1-1h24zm8 23a1 1 0 0 1 -1 1h-5v-30h5a1 1 0 0 1 1 1zm3-9h-1v-10h1zm3-4h-1v-2h1z"></path></g></svg>
 
                             </div>
                             <h4 class="text-xl font-normal text-slate-100">Special Motors</h4>
-                            <p class="text-slate-400 text-sm mt-1">Purpose-built motors including dual-speed, inverter-duty, and brake motors.</p>
+                            <p class="text-[#bdbdbd] text-sm mt-1">Purpose-built motors including dual-speed, inverter-duty, and brake motors.</p>
                         </div>
 
                         {{-- Custom Solutions Card --}}
-                        <div class="group md:col-span-2 bg-slate-800/50 border border-slate-700  p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-slate-800 flex items-center">
-                            <div class="text-orange-500 mr-6">
+
+      <div class="group md:col-span-2 bg-[#2a2a2a] border border-[#404040] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#373737] flex items-center">
+
+                        <div class="text-orange-500 mr-6">
                       
 
                                 <svg class="w-[60px] h-[60px] fill-orange-500" id="fi_4205637"  viewBox="0 0 74 74"  xmlns="http://www.w3.org/2000/svg"><path d="m63.361 33.2a1 1 0 0 1 -.369-.071l-7.54-3a1 1 0 0 1 -.047-1.839 3.189 3.189 0 0 0 1.627-1.711 3.175 3.175 0 0 0 -1.783-4.124 3.18 3.18 0 0 0 -4.128 1.774 3.068 3.068 0 0 0 .008 2.349 1 1 0 0 1 -1.289 1.322l-7.569-3.008a1 1 0 0 1 -.56-1.3l2.332-5.865a5.2 5.2 0 0 1 -1.9-.371 5.177 5.177 0 1 1 5.457-8.593l2.338-5.873a1 1 0 0 1 1.3-.559l18.892 7.509a2.971 2.971 0 0 1 1.662 3.852l-7.5 18.871a1 1 0 0 1 -.931.637zm-5.5-4.262 4.939 1.962 7.131-17.942a.98.98 0 0 0 -.541-1.255l-17.962-7.144-2.628 6.625a1 1 0 0 1 -1.842.041 3.177 3.177 0 1 0 -1.693 4.262 1 1 0 0 1 1.31 1.294l-2.636 6.619 4.952 1.969a5.186 5.186 0 1 1 8.971 3.566z"></path><path d="m59.9 43.271a1 1 0 0 1 -.009-2h.009a1 1 0 1 1 0 2z"></path><path d="m49.529 43.271a1 1 0 0 1 -.01-2h.01a1 1 0 1 1 0 2z"></path><path d="m49.519 43.276a1 1 0 0 1 -1-.994 1 1 0 1 1 1.4.91.98.98 0 0 1 -.4.084z"></path><path d="m57.369 71.74h-51.842a3.526 3.526 0 0 1 -3.527-3.518v-51.851a3.522 3.522 0 0 1 3.527-3.508h25.911a1 1 0 0 1 1 1v10.368a1 1 0 0 1 -1.7.718 4.285 4.285 0 0 0 -3-1.205 4.328 4.328 0 0 0 0 8.656 4.285 4.285 0 0 0 3-1.2 1 1 0 0 1 1.7.718v9.358h7.49a6.339 6.339 0 1 1 11.478 0h8.471a1 1 0 0 1 1 1v25.946a3.516 3.516 0 0 1 -3.508 3.518zm-51.842-56.877a1.52 1.52 0 0 0 -1.527 1.508v51.851a1.525 1.525 0 0 0 1.527 1.518h51.842a1.515 1.515 0 0 0 1.508-1.518v-24.951h-9.348a1 1 0 0 1 -.722-1.691 4.328 4.328 0 1 0 -7.467-2.986 4.193 4.193 0 0 0 1.2 2.974 1 1 0 0 1 -.711 1.7h-10.391a1 1 0 0 1 -1-1v-8.468a6.328 6.328 0 1 1 0-11.464v-7.473z"></path><path d="m31.448 53.655a1 1 0 0 1 -1-1v-10.373a1 1 0 1 1 2-.011v10.379a1 1 0 0 1 -1 1.005z"></path><path d="m31.455 71.7a1 1 0 0 1 -1-1v-10.384a1 1 0 0 1 2 0v10.384a1 1 0 0 1 -1 1z"></path><path d="m31.448 43.271h-10.348a1 1 0 0 1 0-2h10.348a1 1 0 0 1 0 2z"></path><path d="m13.415 43.277h-10.387a1 1 0 1 1 0-2h10.387a1 1 0 0 1 0 2z"></path><path d="m17.237 52.309a6.323 6.323 0 0 1 -4.537-10.729 1 1 0 0 1 1.434 1.394 4.323 4.323 0 0 0 3.1 7.335 4.336 4.336 0 0 0 4.336-4.328 4.249 4.249 0 0 0 -1.21-3 1 1 0 1 1 1.426-1.4 6.243 6.243 0 0 1 1.784 4.405 6.339 6.339 0 0 1 -6.333 6.323z"></path><path d="m35.16 62.83a6.308 6.308 0 0 1 -4.4-1.786 1 1 0 1 1 1.388-1.439 4.324 4.324 0 1 0 .036-6.263 1 1 0 0 1 -1.73-.678v-.009a1 1 0 0 1 .306-.719 6.333 6.333 0 1 1 4.4 10.894z"></path></svg>
@@ -90,7 +101,7 @@
 
                             <div>
                                 <h4 class="text-xl font-normal text-slate-100">Custom Solutions</h4>
-                                <p class="text-slate-400 text-sm mt-1">Fully tailored motor solutions to meet your application's unique mechanical and electrical needs.</p>
+                                <p class="text-[#bdbdbd] text-sm mt-1">Fully tailored motor solutions to meet your application's unique mechanical and electrical needs.</p>
                             </div>
                         </div>
                     </div>

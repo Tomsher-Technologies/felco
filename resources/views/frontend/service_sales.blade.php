@@ -5,7 +5,7 @@
 @include('components.page-title', [
     'title' => $page->getTranslation('title', $lang),
     'description' => $page->getTranslation('content', $lang),
-    'image' => asset('assets/images/page/after-sales.jpg')
+    'image' => asset('assets/images/page/after-sales.png')
 ])
 
 <section class="py-16 bg-gray-50">

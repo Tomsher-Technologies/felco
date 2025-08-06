@@ -94,12 +94,12 @@
 <!-- Products Megamenu -->
 <div x-show="openDropdown === 'products'">
       <x-container>
-    <div class=" mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 px-6 py-8">
+    <div class=" mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 px-6 py-8">
         
         <!-- Left Side: Logo -->
-        <div class="bg-gray-50  overflow-hidden shadow-sm flex items-center justify-center">
+        <!-- <div class="bg-gray-50  overflow-hidden shadow-sm flex items-center justify-center">
             <img src="{{ uploaded_asset(get_setting('header_category_logo')) }}" alt="Category Logo" class=" object-cover w-full h-full">
-        </div>
+        </div> -->
 
         <!-- Right Side: Category Grid -->
 
@@ -166,26 +166,22 @@
 
 <div x-show="openDropdown === 'industries'" class="bg-white shadow-lg rounded-b-lg">
     <x-container>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6">
+        <div class="grid grid-cols-1 lg:grid-cols-1 gap-8 p-6">
 
             {{-- Left Column: Featured Industries --}}
-            <div class="lg:col-span-1">
+            <!-- <div class="lg:col-span-1">
                 <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">Featured Industries</h3>
                 <div class="space-y-4">
-                    {{-- Show first 2 featured items --}}
                     @foreach($industriesPages->take(2) as $pdt)
                         <a href="{{ route('industry.details', ['type' => $pdt->type]) }}"
                            class="group relative block overflow-hidden  focus:outline-none focus:ring-2 focus:ring-[#f06425]">
                            
-                            {{-- Image with hover zoom --}}
                             <img src="{{ getPageImage($pdt->type) }}"
                                  alt="{{ $pdt->getTranslation('title', $lang) ?? 'Industry image' }}"
                                  class="w-full h-32 object-cover transition-transform duration-500 group-hover:scale-105">
 
-                            {{-- Gradient overlay for text readability --}}
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
 
-                            {{-- Title --}}
                             <div class="absolute bottom-0 left-0 p-4">
                                 <h4 class="text-lg leading-normal font-normal text-white transition-colors duration-300 group-hover:text-[#f06425]">
                                     {{ $pdt->getTranslation('title', $lang) }}
@@ -194,38 +190,48 @@
                         </a>
                     @endforeach
                 </div>
-            </div>
+            </div> -->
 
             {{-- Right Column: All Industries List --}}
-            <div class="lg:col-span-2">
-                <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">All Industries</h3>
+       
+       
+<div class="lg:col-span-2">
+    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">All Industries</h3>
 
-                {{-- Multi-column list --}}
-<nav aria-label="All industries list" class="grid grid-cols-2 md:grid-cols-3 gap-2">
-    @foreach($industriesPages->slice(2) as $pdt)
-        <a href="{{ route('industry.details', ['type' => $pdt->type]) }}"
-           class="flex items-center px-4 py-3 bg-white  border border-slate-200 hover:border-[#f06425] hover:bg-orange-50 text-md font-normal text-slate-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#f06425]">
-            {{ $pdt->getTranslation('title', $lang) }}
+    {{-- Multi-column list --}}
+    <nav aria-label="All industries list" class="grid grid-cols-2 md:grid-cols-4 gap-2">
+        @foreach($industriesPages->slice(2) as $pdt)
+            <a href="{{ route('industry.details', ['type' => $pdt->type]) }}"
+               class="group relative flex items-center px-4 py-3 bg-white border border-slate-200 hover:border-[#f06425] hover:bg-orange-50 text-md font-normal text-slate-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#f06425]">
+                
+                <!-- Left border animation -->
+                <div class="absolute left-0 top-0 h-full w-1 bg-[#f06425] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 ease-in-out"></div>
+                
+                <!-- Content -->
+                <span>{{ $pdt->getTranslation('title', $lang) }}</span>
+            </a>
+        @endforeach
+    </nav>
+
+    {{-- View All Link --}}
+    <div class="mt-6 py-4 pl-5 border-t border-slate-200 bg-gradient-to-r from-orange-50 via-white to-white">
+        <a href="{{ url('/industries') }}"
+           class="group inline-flex items-center gap-2 font-normal text-[#f06425] text-base transition-all duration-300 hover:gap-3 focus:outline-none focus:ring-2 focus:ring-[#f06425]">
+            View All Industries
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
         </a>
-    @endforeach
-</nav>
-
-
-
-
-                {{-- View All Link --}}
-{{-- View All Link --}}
-<div class="mt-6 py-4 pl-5 border-t border-slate-200 bg-gradient-to-r from-orange-50 via-white to-white">
-    <a href="{{ url('/industries') }}"
-       class="group inline-flex items-center gap-2 font-normal text-[#f06425] text-base transition-all duration-300 hover:gap-3 focus:outline-none focus:ring-2 focus:ring-[#f06425] rounded">
-        View All Industries
-        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
-    </a>
+    </div>
 </div>
 
 
-                
-            </div>
+
+
+
+
+
+
+
+
 
         </div>
     </x-container>
