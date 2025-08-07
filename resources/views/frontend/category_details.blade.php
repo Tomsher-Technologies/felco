@@ -9,7 +9,7 @@
     }
     /* Suggestion for premium headings */
     @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
-    . {
+    .premium-heading {
         font-family: 'Libre Baskerville', serif;
     }
 </style>
@@ -25,22 +25,15 @@
     'theme' => 'dark',
 ])
 
-
-
-
-
-
 {{-- 2. Key Specs "Dashboard" Section (Light Theme) --}}
+@if ($category->frame_size || $category->output || $category->ip_class || $category->insulation_class || $category->efficiency)
 <section class="my-16">
     <x-container>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
             {{-- Frame Size --}}
             @if ($category->frame_size)
-            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
-                {{-- Sliding accent background --}}
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors shadow-sm">
                 <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
-
-                {{-- Content on top --}}
                 <div class="relative flex items-center gap-4 z-20">
                     <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
                         <svg class="w-[38px] h-[38px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -59,7 +52,7 @@
 
             {{-- Output --}}
             @if ($category->output)
-            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors shadow-sm">
                 <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
                 <div class="relative flex items-center gap-4 z-20">
                     <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
@@ -79,7 +72,7 @@
 
             {{-- IP Class --}}
             @if ($category->ip_class)
-            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors shadow-sm">
                 <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
                 <div class="relative flex items-center gap-4 z-20">
                     <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
@@ -99,7 +92,7 @@
 
             {{-- Insulation --}}
             @if ($category->insulation_class)
-            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors shadow-sm">
                 <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
                 <div class="relative flex items-center gap-4 z-20">
                     <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
@@ -119,7 +112,7 @@
 
             {{-- Efficiency --}}
             @if ($category->efficiency)
-            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors  shadow-sm">
+            <div class="group animate-on-scroll relative flex items-center gap-4 bg-white py-5 px-5 border border-gray-200 overflow-hidden hover:border-orange-400 transition-colors shadow-sm">
                 <div class="absolute inset-0 bg-orange-400/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out z-10 pointer-events-none"></div>
                 <div class="relative flex items-center gap-4 z-20">
                     <div class="text-orange-500 bg-orange-50 p-3 transition-transform duration-500 ease-in-out group-hover:scale-110 shadow">
@@ -139,18 +132,7 @@
         </div>
     </x-container>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
+@endif
 
 
 {{-- 4. Description Sections --}}
@@ -158,32 +140,24 @@
 <section class="py-10 md:py-16 bg-gradient-to-tr from-stone-50 via-stone-100 to-stone-50">
     <x-container class="max-w-4xl mx-auto space-y-20">
         @if($category->getTranslation('title1', $lang))
-        <div class="relative bg-white  animate-on-scroll  shadow-lg px-8 py-12 md:px-12 md:py-16 overflow-hidden">
-            {{-- Decorative vertical accent line --}}
-            <span class="absolute top-15 left-8 h-10 w-1 bg-[#0a8268] "></span>
-
-            {{-- Heading with shadow and tracking --}}
-            <h3 class="relative  animate-on-scroll text-4xl md:text-3xl  font-light text-stone-900 mb-8 tracking-wide drop-shadow-sm">
+        <div class="relative bg-white animate-on-scroll shadow-lg px-8 py-12 md:px-12 md:py-16 overflow-hidden">
+            <span class="absolute top-15 left-8 h-10 w-1 bg-[#0a8268]"></span>
+            <h3 class="relative animate-on-scroll text-4xl md:text-3xl font-light text-stone-900 mb-8 tracking-wide drop-shadow-sm">
                 {{ $category->getTranslation('title1', $lang) }}
             </h3>
-
-            {{-- Content with prose styling and subtle text shadow --}}
-            <div class="prose  animate-on-scroll prose-lg max-w-none text-stone-700 leading-relaxed drop-shadow-[0_0_1px_rgba(0,0,0,0.03)]">
+            <div class="prose animate-on-scroll prose-lg max-w-none text-stone-700 leading-relaxed drop-shadow-[0_0_1px_rgba(0,0,0,0.03)]">
                 {!! $category->getTranslation('content1', $lang) !!}
             </div>
         </div>
         @endif
 
         @if($category->getTranslation('title2', $lang))
-        <div class="relative bg-white  shadow-lg px-8 py-12 md:px-12 md:py-16 overflow-hidden mt-16">
-            {{-- Decorative vertical accent line, different color for variety --}}
-            <span class="absolute top-15 left-8 h-10 w-1 bg-orange-400 "></span>
-
-            <h3 class="relative  animate-on-scroll text-4xl md:text-3xl  font-light text-stone-900 mb-8 tracking-wide drop-shadow-sm">
+        <div class="relative bg-white shadow-lg px-8 py-12 md:px-12 md:py-16 overflow-hidden mt-16">
+            <span class="absolute top-15 left-8 h-10 w-1 bg-orange-400"></span>
+            <h3 class="relative animate-on-scroll text-4xl md:text-3xl font-light text-stone-900 mb-8 tracking-wide drop-shadow-sm">
                 {{ $category->getTranslation('title2', $lang) }}
             </h3>
-
-            <div class="prose  animate-on-scroll prose-lg max-w-none text-stone-700 leading-relaxed drop-shadow-[0_0_1px_rgba(0,0,0,0.03)]">
+            <div class="prose animate-on-scroll prose-lg max-w-none text-stone-700 leading-relaxed drop-shadow-[0_0_1px_rgba(0,0,0,0.03)]">
                 {!! $category->getTranslation('content2', $lang) !!}
             </div>
         </div>
@@ -193,221 +167,180 @@
 @endif
 
 
-
-
-
-
-
-{{-- 2. Filter Bar: Expand/Collapse Filters (Light Theme) --}}
-<section class="pt-[50px] pb-[20px] bg-white" x-data="{ open: false }">
-    <x-container>
-        @php
-            $filterOptions = [
-                'frame_size' => $frameSizes ?? [],
-                'poles'      => $poles ?? [],
-                'power'      => $powers ?? [],
-                'mounting'   => $mountings ?? [],
-                'voltage'    => $voltages ?? [],
-            ];
-        @endphp
-
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6 w-full">
-            <!-- Show/Hide Filters Toggle -->
-            <div class="w-full md:w-full">
-                <button
-                    type="button"
-                    class="mb-4 bg-orange-600 text-white px-6 py-2  shadow hover:bg-orange-700 transition font-medium flex items-center gap-2"
-                    @click="open = !open"
-                    :aria-expanded="open"
-                >
-                    <svg :class="{'rotate-180': open}" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                    <span x-text="open ? 'Hide Filters' : 'Show Filters'"></span>
-                </button>
-
-                <!-- Collapsible Filter Form -->
-                <div
-                    x-show="open"
-                    x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="opacity-0 -translate-y-2 scale-95"
-                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                    x-transition:leave="transition ease-in duration-200"
-                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                    x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
-                    class="w-full"
-                >
-                    <form id="live-filter-form"
-                        class="mt-4 w-full flex flex-wrap gap-4"
-                        method="GET"
-                        action="{{ route('products.category', $category->slug) }}"
+{{-- Conditionally display Filter and Product sections --}}
+@if ($products->isNotEmpty() || collect(request()->query())->except(['page', 'keyword'])->isNotEmpty())
+    
+    {{-- Filter Bar --}}
+    <section class="pt-[50px] pb-[20px] bg-white" x-data="{ open: false }">
+        <x-container>
+            @php
+                $filterOptions = [
+                    'frame_size' => $frameSizes ?? [],
+                    'poles'      => $poles ?? [],
+                    'power'      => $powers ?? [],
+                    'mounting'   => $mountings ?? [],
+                    'voltage'    => $voltages ?? [],
+                ];
+            @endphp
+    
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 w-full">
+                <div class="w-full md:w-full">
+                    <button
+                        type="button"
+                        class="mb-4 bg-orange-600 text-white px-6 py-2 shadow hover:bg-orange-700 transition font-medium flex items-center gap-2"
+                        @click="open = !open"
+                        :aria-expanded="open"
                     >
-                        @foreach (['frame_size', 'poles', 'power', 'mounting', 'voltage'] as $filter)
-                            <div class="flex flex-col min-w-[120px]">
-                                <label class="block text-sm font-semibold text-gray-800 mb-2 capitalize">
-                                    {{ trans("messages.$filter") }}
-                                </label>
-                                <select name="{{ $filter }}"
-                                    class="form-select w-full bg-white text-gray-900 border-gray-300  shadow-sm focus:border-orange-400 focus:ring-orange-300"
-                                >
-                                    <option value="">{{ trans("messages.$filter") }}</option>
-                                    @foreach($filterOptions[$filter] as $opt)
-                                        <option value="{{ $opt }}" @selected(request($filter) == $opt)>{{ $opt }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endforeach
-
-                        <div class="flex  justify-end gap-2 items-end  mt-6 md:mt-0">
-                            <button type="submit"
-                                class="bg-orange-600 text-white px-6 py-2 h-[40px]  shadow hover:bg-orange-700 transition w-full"
-                            >
-                                Apply
-                            </button>
-                            <a href="{{ route('products.category', $category->slug) }}"
-                                class="bg-white text-orange-700 border border-orange-400 px-6 py-2  shadow hover:bg-orange-50 transition w-full text-center"
-                            >
-                                Reset
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Search Form (Always Visible, LIGHT) -->
-            <form class="w-full md:w-auto max-w-lg ml-auto flex mt-4 md:mt-0"
-                method="GET"
-                action="{{ route('products.category', $category->slug) }}"
-                autocomplete="off">
-                <input name="keyword"
-                    type="text"
-                    value="{{ request('keyword') }}"
-                    placeholder="Search by ID or Name..."
-                    class="form-input w-full bg-white text-gray-900 border-gray-300  shadow-sm focus:border-orange-400 focus:ring-orange-300" />
-                <button type="submit"
-                    class="bg-[#0a8268] text-white px-6 py-2  shadow hover:bg-[#f06425] transition">
-                    Search
-                </button>
-            </form>
-        </div>
-    </x-container>
-</section>
-
-
-
-
-
-
-
-
-{{-- 3. Main Product Table (Light Theme) --}}
-<section class="pt-[30px] pb-[70px] bg-gray-50">
-    <x-container>
-        <main>
-            @if ($products->isNotEmpty())
-                {{-- Product Count Header --}}
-                <div class="mb-8">
-                    <h2 class="text-3xl font-light text-gray-900">
-                        Showing {{ $products->total() }} Products
-                    </h2>
-                </div>
-
-                {{-- Product Table --}}
-                <div class="bg-white border border-gray-200 shadow-sm overflow-x-auto">
-                    {{-- We use divs with ARIA roles for better styling control with Tailwind CSS --}}
-                    <div role="table" class="min-w-full">
-                        
-                        {{-- Table Header --}}
-                        <div role="rowheader" class="grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] bg-gray-100/70 text-xs font-semibold text-gray-600 uppercase tracking-wider border-b-2 border-gray-200">
-                            <div class="p-4 text-left">Product</div>
-                            <div class="p-4 text-left">Power</div>
-                            <div class="p-4 text-left">Poles</div>
-                            <div class="p-4 text-left">Frame</div>
-                            <div class="p-4 text-left">Voltage</div>
-                            <div class="p-4 text-right"><span class="sr-only">Details</span></div>
-                        </div>
-
-                        {{-- Table Body --}}
-                        <div id="product-table-body" role="rowgroup">
-                            @foreach ($products as $prod)
-                                {{-- Each row is a group to control hover state of child elements --}}
-                                <div role="row" class="group relative grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] items-center border-b border-gray-200 last:border-b-0 hover:bg-orange-50/50 transition-colors duration-300">
-                                    
-                                    {{-- Cell 1: Product Name & ID --}}
-                                    <div class="p-4 whitespace-nowrap">
-                                        <h4 class="text-base font-bold text-gray-900 truncate">{{ $prod->unique_id }}</h4>
-                                        <p class="text-sm text-gray-500 truncate">{{ $prod->getTranslation('name', $lang) }}</p>
-                                    </div>
-
-                                    {{-- Cells 2-5: Specifications --}}
-                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->power }}</div>
-                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->poles }}</div>
-                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->frame_size }}</div>
-                                    <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->voltage }}</div>
-                                    
-                                    {{-- Cell 6: Action Arrow (appears on hover) --}}
-                                    {{-- z-30 ensures the icon is clickable and above the stretched link overlay --}}
-                                    <div class="relative z-30 flex justify-end items-center pr-6">
-                                        <div class="text-white bg-[#0a8268] p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 128 128">
-                                                <path d="M44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z" fill="currentColor"></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-
-                                    {{-- Stretched link to make the entire row clickable --}}
-                                    {{-- z-20 places it above the content but below the action icon --}}
-                                    <a href="{{ route('product-detail', ['slug' => $prod->slug]) }}" class="absolute inset-0 z-20" aria-label="View details for {{ $prod->unique_id }}"></a>
+                        <svg :class="{'rotate-180': open}" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                        <span x-text="open ? 'Hide Filters' : 'Show Filters'"></span>
+                    </button>
+    
+                    <div
+                        x-show="open"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 -translate-y-2 scale-95"
+                        x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                        x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
+                        class="w-full"
+                    >
+                        <form id="live-filter-form"
+                              class="mt-4 w-full flex flex-wrap gap-4"
+                              method="GET"
+                              action="{{ route('products.category', $category->slug) }}"
+                        >
+                            @foreach (['frame_size', 'poles', 'power', 'mounting', 'voltage'] as $filter)
+                                <div class="flex flex-col min-w-[120px]">
+                                    <label class="block text-sm font-semibold text-gray-800 mb-2 capitalize">
+                                        {{ trans("messages.$filter") }}
+                                    </label>
+                                    <select name="{{ $filter }}"
+                                            class="form-select w-full bg-white text-gray-900 border-gray-300 shadow-sm focus:border-orange-400 focus:ring-orange-300"
+                                    >
+                                        <option value="">{{ trans("messages.$filter") }}</option>
+                                        @foreach($filterOptions[$filter] as $opt)
+                                            <option value="{{ $opt }}" @selected(request($filter) == $opt)>{{ $opt }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             @endforeach
+    
+                            <div class="flex justify-end gap-2 items-end mt-6 md:mt-0">
+                                <button type="submit"
+                                        class="bg-orange-600 text-white px-6 py-2 h-[40px] shadow hover:bg-orange-700 transition w-full"
+                                >
+                                    Apply
+                                </button>
+                                <a href="{{ route('products.category', $category->slug) }}"
+                                   class="bg-white text-orange-700 border border-orange-400 px-6 py-2 shadow hover:bg-orange-50 transition w-full text-center"
+                                >
+                                    Reset
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+    
+                <form class="w-full md:w-auto max-w-lg ml-auto flex mt-4 md:mt-0"
+                      method="GET"
+                      action="{{ route('products.category', $category->slug) }}"
+                      autocomplete="off">
+                    <input name="keyword"
+                           type="text"
+                           value="{{ request('keyword') }}"
+                           placeholder="Search by ID or Name..."
+                           class="form-input w-full bg-white text-gray-900 border-gray-300 shadow-sm focus:border-orange-400 focus:ring-orange-300" />
+                    <button type="submit"
+                            class="bg-[#0a8268] text-white px-6 py-2 shadow hover:bg-[#f06425] transition">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </x-container>
+    </section>
+    
+    {{-- Main Product Table --}}
+    <section class="pt-[30px] pb-[70px] bg-gray-50">
+        <x-container>
+            <main>
+                @if ($products->isNotEmpty())
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-light text-gray-900">
+                            Showing {{ $products->total() }} Products
+                        </h2>
+                    </div>
+    
+                    <div class="bg-white border border-gray-200 shadow-sm overflow-x-auto">
+                        <div role="table" class="min-w-full">
+                            <div role="rowheader" class="grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] bg-gray-100/70 text-xs font-semibold text-gray-600 uppercase tracking-wider border-b-2 border-gray-200">
+                                <div class="p-4 text-left">Product</div>
+                                <div class="p-4 text-left">Power</div>
+                                <div class="p-4 text-left">Poles</div>
+                                <div class="p-4 text-left">Frame</div>
+                                <div class="p-4 text-left">Voltage</div>
+                                <div class="p-4 text-right"><span class="sr-only">Details</span></div>
+                            </div>
+    
+                            <div id="product-table-body" role="rowgroup">
+                                @foreach ($products as $prod)
+                                    <div role="row" class="group relative grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] items-center border-b border-gray-200 last:border-b-0 hover:bg-orange-50/50 transition-colors duration-300">
+                                        <div class="p-4 whitespace-nowrap">
+                                            <h4 class="text-base font-bold text-gray-900 truncate">{{ $prod->unique_id }}</h4>
+                                            <p class="text-sm text-gray-500 truncate">{{ $prod->getTranslation('name', $lang) }}</p>
+                                        </div>
+    
+                                        <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->power }}</div>
+                                        <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->poles }}</div>
+                                        <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->frame_size }}</div>
+                                        <div class="p-4 text-sm text-gray-700 whitespace-nowrap">{{ $prod->voltage }}</div>
+                                        
+                                        <div class="relative z-30 flex justify-end items-center pr-6">
+                                            <div class="text-white bg-[#0a8268] p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 128 128">
+                                                    <path d="M44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z" fill="currentColor"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+    
+                                        <a href="{{ route('product-detail', ['slug' => $prod->slug]) }}" class="absolute inset-0 z-20" aria-label="View details for {{ $prod->unique_id }}"></a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                {{-- Load More Button (Identical to grid view) --}}
-                @if ($products->hasMorePages())
-                    <div class="mt-12 flex justify-center">
-                        <button id="load-more"
-                            data-next-page="{{ $products->currentPage() + 1 }}"
-                            class="bg-[#0a8268] text-white px-8 py-3 shadow hover:bg-cyan-700 transition font-medium text-lg flex items-center gap-2">
-                            <svg class="w-5 h-5 animate-spin hidden" id="loader-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                            </svg>
-                            <span id="load-more-label">Load More</span>
-                        </button>
-                    </div>
+    
+                    @if ($products->hasMorePages())
+                        <div class="mt-12 flex justify-center">
+                            <button id="load-more"
+                                    data-next-page="{{ $products->currentPage() + 1 }}"
+                                    class="bg-[#0a8268] text-white px-8 py-3 shadow hover:bg-cyan-700 transition font-medium text-lg flex items-center gap-2">
+                                <svg class="w-5 h-5 animate-spin hidden" id="loader-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                                </svg>
+                                <span id="load-more-label">Load More</span>
+                            </button>
+                        </div>
+                    @endif
                 @endif
-            @else
-                {{-- No Products Found State (Identical to grid view) --}}
-                <div class="text-center py-20 bg-white border border-dashed border-gray-300">
-                    <svg class="mx-auto h-12 w-12 text-[#f06425] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <h4 class="mt-4 text-xl font-light text-gray-700">No Products Found</h4>
-                    <p class="text-gray-400 mt-2">There are currently no products listed in this category.</p>
-                </div>
-            @endif
-        </main>
-    </x-container>
-</section>
+            </main>
+        </x-container>
+    </section>
 
-
-
-
-
-
-
+@endif
 
 
 {{-- 5. Related Categories --}}
 @if ($category->childs->where('is_active', 1)->isNotEmpty())
-<section class="py-16 md:py-24 bg-stone-100 border-t border-stone-200">
+<section class="py-14 md:py-14 bg-stone-100 border-t border-stone-200">
     <x-container>
         <div class="flex justify-between items-end mb-8">
-            <h2 class="text-3xl font-light text-stone-900  animate-on-scroll">Related Categories</h2>
+            <h2 class="text-3xl font-light text-stone-900 animate-on-scroll">Related Categories</h2>
         </div>
-        <div class="custom-scrollbar  animate-on-scroll -mx-4 overflow-x-auto pb-8">
+        <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
             <div class="flex gap-6 px-4">
             @foreach ($category->childs->where('is_active', 1) as $cat)
                 <a href="{{ route('products.category',['category_slug' => $cat->slug]) }}" class="group relative block w-80 md:w-96 flex-shrink-0 h-[28rem] overflow-hidden shadow-lg">
@@ -415,9 +348,7 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                     <div class="absolute inset-0 p-8 flex flex-col justify-end text-white">
                         <h3 class="text-xl font-normal leading-tight text-white">{{ $cat->getTranslation('name', $lang) }}</h3>
-                 
                     </div>
-                    {{-- Arrow Action (same as main cards) --}}
                     <div class="absolute bottom-6 right-6 z-10 text-white bg-[#0a8268] p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 128 128">
                             <path d="M44 108c-1.023 0-2.047-.391-2.828-1.172-1.563-1.563-1.563-4.094 0-5.656l37.172-37.172-37.172-37.172c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l40 40c1.563 1.563 1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z" fill="currentColor"></path>
@@ -430,6 +361,5 @@
     </x-container>
 </section>
 @endif
-
 
 @endsection

@@ -53,12 +53,12 @@
                     Felco Motors provides high-performance electric motors, controls, and complete drive systems for heavy industry and OEMs in the Middle East.
                     <span class="block mt-2">Reliability. Innovation. Trusted for over 20 years.</span>
                 </p>
-                <div class="flex items-center space-x-2 mt-6">
+                <!-- <div class="flex items-center space-x-2 mt-6">
                     <svg class="w-4 h-4 text-[#f06425]" fill="currentColor" viewBox="0 0 20 20">
                         <circle cx="10" cy="10" r="10" />
                     </svg>
                     <span class="text-xs tracking-wide text-[#bbbbbb]">ISO 9001:2015 Certified</span>
-                </div>
+                </div> -->
             </div>
             {{-- Company Links --}}
             <div>
@@ -114,10 +114,10 @@
                         </svg>
                     </a>
                 </div>
-                <div class="flex items-center mt-4 text-xs text-[#8b8b8b] gap-2">
+                <!-- <div class="flex items-center mt-4 text-xs text-[#8b8b8b] gap-2">
                     <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" /></svg>
                     24/7 Emergency Support Available
-                </div>
+                </div> -->
             </div>
         </div>
 
