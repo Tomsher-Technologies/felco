@@ -1,4 +1,4 @@
-<section id="felco-pd" class="relative py-24 overflow-hidden" style="background-color: #DDD;">
+<section id="felco-" class="relative py-24 overflow-hidden" style="background-color: #454d4e;">
 
   <x-container>
 

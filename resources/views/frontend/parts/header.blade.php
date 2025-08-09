@@ -3,7 +3,7 @@
     $currentLang = 'EN';
     $availableLangs = [
         'EN' => ['name' => 'English', 'route' => '#'],
-        'AR' => ['name' => 'العربية', 'route' => '#'],
+  
         'FR' => ['name' => 'Français', 'route' => '#'],
     ];
     // --- END MOCK DATA ---
@@ -20,6 +20,11 @@
     ];
 @endphp
 
+{{-- 
+  The sticky positioning is correctly applied here with `sticky top-0 z-50`.
+  If it's not working, check parent elements (like the <body> tag) for an `overflow: hidden` 
+  or `overflow-x: hidden` style in your CSS and remove it.
+--}}
 <nav x-data="{ openDropdown: null, mobileMenuOpen: false, langSwitcherOpen: false }" 
      @click.away="openDropdown = null; langSwitcherOpen = false" 
      class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 w-full">
@@ -85,30 +90,47 @@
                         
                         <div class="bg-white border-t border-gray-200 shadow-lg mt-2">
                             <x-container>
-                                <div x-show="openDropdown === 'products'" class="px-6 py-8">
-                                    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6">Products</h3>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                                        @foreach($details['header_categories'] as $category)
-                                            <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}" class="group relative block bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
-                                                <div class="absolute left-0 top-0 h-full w-1 bg-[#f06425] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 ease-in-out"></div>
-                                                <div class="p-5 space-y-1">
-                                                    <h4 class="text-lg font-normal leading-tight text-gray-800 group-hover:text-[#f06425] transition-colors">
-                                                        {{ $category->getTranslation('name', $lang) }}
-                                                    </h4>
-                                                    <p class="text-sm text-gray-500 line-clamp-2">
-                                                        {{ $category->getTranslation('home_content', $lang) }}
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                    <div class="mt-6 py-4 pl-5 border-t border-slate-200 bg-gradient-to-r from-orange-50 via-white to-white">
-                                        <a href="{{ url('/products') }}" class="group inline-flex items-center gap-2 font-normal text-[#f06425] text-base transition-all duration-300 hover:gap-3">
-                                            View All Products
-                                            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
-                                        </a>
-                                    </div>
-                                </div>
+                                
+                            
+                                
+<div x-show="openDropdown === 'products'" class="px-6 py-8">
+    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6">Products</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+        {{-- Loop through product categories --}}
+        @foreach($details['header_categories'] as $category)
+            <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}" class="group relative block bg-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                <div class="absolute left-0 top-0 h-full w-1 bg-[#f06425] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 ease-in-out"></div>
+                <div class="p-5 space-y-1">
+                    <h4 class="text-lg font-normal leading-tight text-gray-800 group-hover:text-[#f06425] transition-colors">
+                        {{ $category->getTranslation('name', $lang) }}
+                    </h4>
+                    <p class="text-sm text-gray-500 line-clamp-2">
+                        {{ $category->getTranslation('home_content', $lang) }}
+                    </p>
+                </div>
+            </a>
+        @endforeach
+
+        {{-- "View All Products" card with a slightly darker gradient background --}}
+        <a href="{{ url('/products') }}" class="group relative block bg-gradient-to-r from-orange-100 via-gray-50 to-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+            <div class="absolute left-0 top-0 h-full w-1 bg-[#f06425] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 ease-in-out"></div>
+            <div class="p-5 space-y-1">
+                <h4 class="text-lg font-normal leading-tight text-gray-800 group-hover:text-[#f06425] transition-colors">
+                    View All Products
+                </h4>
+                <p class="text-sm text-gray-500 line-clamp-2">
+                    Browse our complete collection and find what you need.
+                </p>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+
+
+
 
                                 <div x-show="openDropdown === 'industries'" class="px-6 py-8">
                                     <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">Industries</h3>
@@ -132,7 +154,7 @@
                                     <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6">Service & Support</h3>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                                         @foreach($services as $service)
-                                            <a href="{{ route($service['route']) }}" class="group relative block bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
+                                            <a href="{{ route($service['route']) }}" class="group relative block bg-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
                                                 <div class="absolute left-0 top-0 h-full w-1 bg-[#f06425] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 ease-in-out"></div>
                                                 <div class="p-5 space-y-1">
                                                     <h4 class="text-lg font-normal leading-tight text-gray-800 group-hover:text-[#f06425] transition-colors">
@@ -252,3 +274,5 @@
         </ul>
     </div>
 </nav>
+
+

@@ -23,7 +23,7 @@
                 {{-- Left full-height card --}}
                 <div class="lg:col-span-1 mb-8 lg:mb-0">
                     <a href="{{ route('products.category', ['category_slug' => $leftCategory->slug]) }}" 
-                       class="group relative flex flex-col h-full bg-white rounded-lg border border-slate-200 p-8 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl hover:border-slate-300 hover:-translate-y-2">
+                       class="group relative flex flex-col h-full bg-white border border-slate-200 p-8 shadow-md transition-all duration-300 ease-in-out hover:shadow-xl hover:border-slate-300 hover:-translate-y-2">
                         
                         {{-- Animated Border --}}
                         <div class="absolute top-0 left-0 h-full w-1 bg-orange-500 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out origin-top"></div>

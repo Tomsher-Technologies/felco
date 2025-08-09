@@ -98,3 +98,15 @@ background : #f06425 !important
 .swiper-pagination-bullet{
   background : #fff !important
 }
+
+
+
+/* Add this to fix position: sticky issues */
+html, body {
+    overflow-x: visible !important;
+}
+
+
+#main-nav.is-sticky {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

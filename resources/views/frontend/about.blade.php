@@ -58,7 +58,7 @@
                 <div class="flex justify-start lg:justify-end" id="step1">
                     <div class="relative w-full lg:w-10/12 lg:text-right">
                         <div class="absolute -top-4 -left-4 lg:-right-4 lg:left-auto text-8xl font-black text-gray-100 z-0">01</div>
-                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
+                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
                             <div class="flex items-center gap-4 lg:flex-row-reverse">
                                 <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -78,7 +78,7 @@
                 <div class="flex justify-start" id="step2">
                      <div class="relative w-full lg:w-10/12">
                         <div class="absolute -top-4 -left-4 text-8xl font-black text-gray-100 z-0">02</div>
-                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary">
+                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary">
                             <div class="flex items-center gap-4">
                                 <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -98,7 +98,7 @@
                 <div class="flex justify-start lg:justify-end" id="step3">
                     <div class="relative w-full lg:w-10/12 lg:text-right">
                         <div class="absolute -top-4 -left-4 lg:-right-4 lg:left-auto text-8xl font-black text-gray-100 z-0">03</div>
-                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
+                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
                             <div class="flex items-center gap-4 lg:flex-row-reverse">
                                 <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -118,7 +118,7 @@
                 <div class="flex justify-start" id="step4">
                      <div class="relative w-full lg:w-10/12">
                         <div class="absolute -top-4 -left-4 text-8xl font-black text-gray-100 z-0">04</div>
-                        <div class="relative z-10 p-6 bg-white rounded-lg shadow-lg border-l-4 border-primary">
+                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary">
                             <div class="flex items-center gap-4">
                                 <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -259,7 +259,7 @@
                 @endphp
 
                 @foreach ($faqs as $key => $faq)
-                    <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <div class="bg-white border border-gray-200  shadow-sm">
                         <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 data-bs-toggle="collapse" data-bs-target="#faq-{{ $key }}">
                             <span class="text-lg font-medium text-gray-800">{{ $faq->question }}</span>
