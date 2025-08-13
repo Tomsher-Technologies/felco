@@ -36,99 +36,65 @@
 
 
 
-
-<section id="why-we-are-different-creative" class="py-20 md:py-24 bg-gray-50 text-gray-800 overflow-hidden">
+<section id="why-we-are-different-creative" class="overflow-hidden bg-gray-50 py-20 text-gray-800 md:py-24">
     <x-container>
-        <!-- Section Heading -->
         <div class="text-center mb-16" id="section-heading">
-            <h2 class="text-3xl md:text-4xl font-light tracking-tight text-gray-900" id="heading">
+            <h2 class="text-3xl font-light tracking-tight text-gray-900 md:text-4xl" id="heading">
                 Our Unwavering Commitment
             </h2>
-            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto" id="desc">
+            <p class="mx-auto mt-4 max-w-3xl text-lg text-gray-600" id="desc">
                 We've built our reputation on a foundation of four key promises. This is how we deliver excellence, every time.
             </p>
         </div>
 
-        <!-- Section Content -->
         <div class="relative" id="section-content">
-            <div class="hidden lg:block absolute left-1/2 top-2 bottom-1 w-1 bg-primary/10 rounded-full -translate-x-1/2"></div>
+            <div class="hidden lg:block absolute top-2 bottom-1 left-1/2 w-1 -translate-x-1/2 rounded-full bg-primary/10"></div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-16">
-                <!-- Step 1 -->
+            <div class="grid grid-cols-1 gap-x-12 gap-y-16 lg:grid-cols-2">
+                
                 <div class="flex justify-start lg:justify-end" id="step1">
                     <div class="relative w-full lg:w-10/12 lg:text-right">
-                        <div class="absolute -top-4 -left-4 lg:-right-4 lg:left-auto text-8xl font-black text-gray-100 z-0">01</div>
-                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
-                            <div class="flex items-center gap-4 lg:flex-row-reverse">
-                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
-                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 20.417l5.5-5.5a1 1 0 011.414 0l5.5 5.5a12.02 12.02 0 008.618-14.475z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-normal text-gray-900">2-Year Warranty</h3>
-                                    <p class="mt-1 text-gray-600">Peace of mind is built-in with our comprehensive parts and labor coverage.</p>
-                                </div>
+                        <!-- <div class="absolute -top-4 -left-4 z-0 font-black text-gray-100 text-8xl lg:-right-4 lg:left-auto">01</div> -->
+                        <div class="relative z-10 border-l-4 border-primary bg-white p-6 shadow-lg lg:border-l-0 lg:border-r-4">
+                            <div>
+                                <h3 class="text-xl font-normal text-gray-900">2-Year Warranty</h3>
+                                <p class="mt-1 text-gray-600">Peace of mind is built-in with our comprehensive parts and labor coverage.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 2 -->
                 <div class="flex justify-start" id="step2">
-                     <div class="relative w-full lg:w-10/12">
-                        <div class="absolute -top-4 -left-4 text-8xl font-black text-gray-100 z-0">02</div>
-                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary">
-                            <div class="flex items-center gap-4">
-                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
-                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-normal text-gray-900">On-Site Support</h3>
-                                    <p class="mt-1 text-gray-600">Expert help comes to you, ensuring fast and hassle-free resolutions.</p>
-                                </div>
+                    <div class="relative w-full lg:w-10/12">
+                        <!-- <div class="absolute -top-4 -left-4 z-0 font-black text-gray-100 text-8xl">02</div> -->
+                        <div class="relative z-10 border-l-4 border-primary bg-white p-6 shadow-lg">
+                            <div>
+                                <h3 class="text-xl font-normal text-gray-900">On-Site Support</h3>
+                                <p class="mt-1 text-gray-600">Expert help comes to you, ensuring fast and hassle-free resolutions.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 3 -->
                 <div class="flex justify-start lg:justify-end" id="step3">
                     <div class="relative w-full lg:w-10/12 lg:text-right">
-                        <div class="absolute -top-4 -left-4 lg:-right-4 lg:left-auto text-8xl font-black text-gray-100 z-0">03</div>
-                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary lg:border-l-0 lg:border-r-4">
-                            <div class="flex items-center gap-4 lg:flex-row-reverse">
-                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
-                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-normal text-gray-900">Premium Quality</h3>
-                                    <p class="mt-1 text-gray-600">Crafted from the finest materials for superior durability and elegance.</p>
-                                </div>
+                        <!-- <div class="absolute -top-4 -left-4 z-0 font-black text-gray-100 text-8xl lg:-right-4 lg:left-auto">03</div> -->
+                        <div class="relative z-10 border-l-4 border-primary bg-white p-6 shadow-lg lg:border-l-0 lg:border-r-4">
+                            <div>
+                                <h3 class="text-xl font-normal text-gray-900">Premium Quality</h3>
+                                <p class="mt-1 text-gray-600">Crafted from the finest materials for superior durability and elegance.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 4 -->
                 <div class="flex justify-start" id="step4">
-                     <div class="relative w-full lg:w-10/12">
-                        <div class="absolute -top-4 -left-4 text-8xl font-black text-gray-100 z-0">04</div>
-                        <div class="relative z-10 p-6 bg-white  shadow-lg border-l-4 border-primary">
-                            <div class="flex items-center gap-4">
-                                <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary">
-                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-normal text-gray-900">Seamless Installation</h3>
-                                    <p class="mt-1 text-gray-600">Our professional team handles setup at no extra cost, perfected for your space.</p>
-                                </div>
+                    <div class="relative w-full lg:w-10/12">
+                        <!-- <div class="absolute -top-4 -left-4 z-0 font-black text-gray-100 text-8xl">04</div> -->
+                        <div class="relative z-10 border-l-4 border-primary bg-white p-6 shadow-lg">
+                            <div>
+                                <h3 class="text-xl font-normal text-gray-900">Seamless Installation</h3>
+                                <p class="mt-1 text-gray-600">Our professional team handles setup at no extra cost, perfected for your space.</p>
                             </div>
                         </div>
                     </div>
@@ -138,8 +104,6 @@
         </div>
     </x-container>
 </section>
-
-
 
 
 

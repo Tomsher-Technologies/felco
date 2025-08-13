@@ -5,6 +5,9 @@
     {{-- Hero Slider Section --}}
     @include('frontend.home.hero')
 
+    {{-- About Us Section --}}
+    @include('frontend.home.about')
+
     {{-- Product Categories Section --}}
     @include('frontend.home.categories')
 
@@ -12,9 +15,11 @@
     @include('frontend.home.industries')
 
     {{-- Special Products Section --}}
-    @include('frontend.home.special-products')
 
-    {{-- About Us Section --}}
-    @include('frontend.home.about')
+
+
+
 
 @endsection
+
+

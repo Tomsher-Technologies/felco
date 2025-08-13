@@ -25,17 +25,19 @@
   If it's not working, check parent elements (like the <body> tag) for an `overflow: hidden` 
   or `overflow-x: hidden` style in your CSS and remove it.
 --}}
-<nav x-data="{ openDropdown: null, mobileMenuOpen: false, langSwitcherOpen: false }" 
-     @click.away="openDropdown = null; langSwitcherOpen = false" 
-     class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 w-full">
+<nav id="site-header"
+     x-data="{ openDropdown: null, mobileMenuOpen: false, langSwitcherOpen: false }"
+     @click.away="openDropdown = null; langSwitcherOpen = false"
+     class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 w-full transition-all duration-300 ease-in-out">
+
 
     <x-container>
-        <div class="flex flex-wrap justify-between items-center mx-auto w-full py-5">
+        <div class="flex flex-wrap justify-between items-center mx-auto w-full">
 
             {{-- Logo --}}
             <div class="flex-shrink-0">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="{{ asset('assets/images/logo/logo-color.svg') }}" class="h-8" alt="Site Logo" />
+                    <img src="{{ asset('assets/images/logo/logo-color.svg') }}" class="h-[40px]" alt="Site Logo" />
                 </a>
             </div>
 
@@ -43,28 +45,51 @@
             <div class="hidden md:flex flex-1 justify-center">
                 <div class="relative" @mouseleave="openDropdown = null">
                     {{-- Desktop Menu Links --}}
-                    <ul class="flex flex-row space-x-8 rtl:space-x-reverse">
+                    <ul class="flex flex-row space-x-6 rtl:space-x-reverse">
                         <li>
-                            <a href="{{ route('home') }}" class="text-black hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.home') }}</a>
+                            <a href="{{ route('home') }}" class="text-black text-lg font-medium hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.home') }}</a>
                         </li>
+                     
+                     
+                     
+{{-- PRODUCTS --}}
+<li class="py-2">
+    <a href="{{ url('/products') }}" 
+       @mouseenter="openDropdown = 'products'" 
+       @click.prevent="window.location.href='{{ url('/products') }}'"
+       class="flex items-center text-lg font-medium text-black hover:text-orange-500">
+        {{ trans('messages.products') }}
+        <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+             fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="m1 1 4 4 4-4"/>
+        </svg>
+    </a>
+</li>
+
+{{-- INDUSTRIES --}}
+<li class="py-2">
+    <a href="{{ url('/industries') }}" 
+       @mouseenter="openDropdown = 'industries'" 
+       @click.prevent="window.location.href='{{ url('/industries') }}'"
+       class="flex items-center text-lg font-medium text-black hover:text-orange-500">
+        {{ trans('messages.industries') }}
+        <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+             fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="m1 1 4 4 4-4"/>
+        </svg>
+    </a>
+</li>
+
+
+
                         <li class="py-2">
-                            <button @mouseenter="openDropdown = 'products'" @click.prevent="openDropdown = (openDropdown === 'products' ? null : 'products')" class="flex items-center font-light text-black hover:text-orange-500">
-                                {{ trans('messages.products') }}
-                                <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                </svg>
-                            </button>
-                        </li>
-                        <li class="py-2">
-                            <button @mouseenter="openDropdown = 'industries'" @click.prevent="openDropdown = (openDropdown === 'industries' ? null : 'industries')" class="flex items-center font-light text-black hover:text-orange-500">
-                                {{ trans('messages.industries') }}
-                                <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                </svg>
-                            </button>
-                        </li>
-                        <li class="py-2">
-                            <button @mouseenter="openDropdown = 'service'" @click.prevent="openDropdown = (openDropdown === 'service' ? null : 'service')" class="flex items-center font-light text-black hover:text-orange-500">
+                            <button @mouseenter="openDropdown = 'service'" @click.prevent="openDropdown = (openDropdown === 'service' ? null : 'service')" class="flex items-center text-lg font-medium text-black hover:text-orange-500">
                                 {{ trans('messages.service_support') }}
                                 <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -72,10 +97,10 @@
                             </button>
                         </li>
                         <li>
-                            <a href="{{ route('about_us') }}" class="text-black hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.about_us') }}</a>
+                            <a href="{{ route('about_us') }}" class="text-black  text-lg font-medium  hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.about_us') }}</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact') }}" class="text-black hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.contact_us') }}</a>
+                            <a href="{{ route('contact') }}" class="text-black text-lg font-medium hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.contact_us') }}</a>
                         </li>
                     </ul>
                     
@@ -94,7 +119,7 @@
                             
                                 
 <div x-show="openDropdown === 'products'" class="px-6 py-8">
-    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6">Products</h3>
+    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6 ">Products</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
         {{-- Loop through product categories --}}
@@ -274,5 +299,4 @@
         </ul>
     </div>
 </nav>
-
 

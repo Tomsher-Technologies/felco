@@ -1,25 +1,25 @@
-<section class="w-full pt-16 overflow-hidden bg-gradient-to-b from-orange-50 via-white to-white">
-         <x-container>
-    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[28rem] items-stretch">
+<section class="w-full overflow-hidden bg-gradient-to-b from-orange-50  via-white to-white pt-16 pb-16">
+    <x-container>
+        <div class="mx-auto grid min-h-[28rem] grid-cols-1 items-stretch md:grid-cols-2">
 
-        <!-- Left: Dark Content -->
-        <div class="bg-black text-white flex flex-col justify-center p-10 md:p-16 relative z-10">
-            <h2 class="text-4xl md:text-5xl font-light mb-4 text-white animate-on-scroll" data-anim="fade-up">
-                {{ $title ?? 'Default Page Title' }}
-            </h2>
-            <p class="text-lg text-gray-300 max-w-xl animate-on-scroll" data-anim="fade-up">
-                {{ $description ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius consequat magna, id molestie ipsum volutpat quis.' }}
-            </p>
-        </div>
-
-        <!-- Right: Parallax Image -->
-        <div class="w-full bg-black h-full overflow-hidden relative">
-            <div class="parallax-zoom-image h-full w-full bg-center bg-cover scale-105"
-                 style="background-image: url('{{ $image ?? asset("assets/images/default-header.jpg") }}');"
-                 data-anim="zoom">
+            <div class="relative drop-shadow-md z-10 flex flex-col justify-center bg-white p-10 text-black md:border-r md:border-slate-200 md:p-16">
+                <h2 class="animate-on-scroll text-4xl font-light text-black md:text-5xl mb-4" data-anim="fade-up">
+                    {{ $title ?? 'Default Page Title' }}
+                </h2>
+                <p class="animate-on-scroll max-w-xl text-lg text-gray-600" data-anim="fade-up">
+                    {{ $description ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius consequat magna, id molestie ipsum volutpat quis.' }}
+                </p>
             </div>
-        </div>
 
-    </div>
+            <div class="relative h-full w-full overflow-hidden bg-black">
+                <div class="absolute -top-8 -right-8 z-10 h-16 w-16 rotate-45 bg-orange-50"></div>
+
+                <div class="parallax-zoom-image h-full w-full scale-105 bg-cover bg-center"
+                     style="background-image: url('{{ $image ?? asset("assets/images/default-header.jpg") }}');"
+                     data-anim="zoom">
+                </div>
+            </div>
+
+        </div>
     </x-container>
 </section>
