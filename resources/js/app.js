@@ -14,7 +14,10 @@ Alpine.start();
 // Swiper.js for Sliders
 import Swiper from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 // -------------------------------------------------------------
 // Toastr for Notifications
@@ -489,29 +492,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('#site-header');
-    if (!header) return;
-
-    ScrollTrigger.create({
-        start: 10, // start when scrolled 10px
-        onEnter: () => {
-            gsap.to(header, { 
-                paddingTop: "0.75rem",
-                paddingBottom: "0.75rem",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        },
-        onLeaveBack: () => {
-            gsap.to(header, { 
-                paddingTop: "1.5rem",
-                paddingBottom: "1.5rem",
-                boxShadow: "0px 0px 0px rgba(0,0,0,0)",
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        }
-    });
-});

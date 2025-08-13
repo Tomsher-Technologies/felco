@@ -24,12 +24,11 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <!-- Additional CSS and JS assets -->
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DNDxSBlH.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BHpbEy6Y.css') }}" />
     <link rel="stylesheet" href="{{ asset('build/assets/app-B9igcZhZ.css') }}" />
-    <script src="{{ asset('build/assets/app-Cggqv-8F.js') }}" defer></script>
+    <script src="{{ asset('build/assets/app-DB82gzYu.js') }}" defer></script>
 
     <!-- Vite Assets -->
-
 
     @yield('header')
 </head>
