@@ -29,7 +29,7 @@
     <script src="{{ asset('public/build/assets/app-Cggqv-8F.js') }}" defer></script>
 
     <!-- Vite Assets -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
 
     @yield('header')
 </head>
