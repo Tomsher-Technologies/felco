@@ -25,11 +25,11 @@ use App\Http\Controllers\Admin\PartnersController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ManualController;
 use App\Http\Controllers\Admin\BrochureController;
+use App\Http\Controllers\Admin\IndustryController;
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login', [AuthController::class, 'login']);
-    
 });
 
 Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/header', [WebsiteController::class, 'header'])->name('website.header');
         Route::get('/appearance', [WebsiteController::class, 'appearance'])->name('website.appearance');
-        
+
         Route::post('/home-slider/update-status', [HomeSliderController::class, 'updateStatus'])->name('home-slider.update-status');
         Route::get('/home-slider/delete/{id}', [HomeSliderController::class, 'destroy'])->name('home-slider.delete');
         Route::resource('home-slider', HomeSliderController::class);
@@ -72,7 +72,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/custom-pages/edit/{id}', [PageController::class, 'edit'])->name('custom-pages.edit');
         Route::get('/custom-pages/destroy/{id}', [PageController::class, 'destroy'])->name('custom-pages.destroy');
         Route::post('/page/delete_image', [PageController::class, 'delete_image'])->name('page.delete_image');
-
     });
 
 
@@ -92,6 +91,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::post('/categories/status', [CategoryController::class, 'updateStatus'])->name('categories.status');
 
+    // Industries
+    Route::get('/generate-slug', [IndustryController::class, 'generateSlug'])->name('generate-slug');
+    Route::resource('industries', IndustryController::class)->except(['destroy']);
+    Route::get('/industries/edit/{id}', [IndustryController::class, 'edit'])->name('industries.edit');
+    Route::post('/industries/status', [IndustryController::class, 'updateStatus'])->name('industries.status');
 
     // Manage Products
     Route::get('/products/all', [ProductController::class, 'all_products'])->name('products.all');
@@ -140,7 +144,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/certificates/sections/update/{id}', [CertificateController::class, 'updateSection'])->name('sections.update');
     Route::post('/certificates/sections/update-status', [CertificateController::class, 'updateSectionStatus'])->name('sections.update-status');
     Route::get('/certificates/sections/delete/{id}', [CertificateController::class, 'destroySection'])->name('sections.delete');
-    
+
     Route::get('/certificate/files/all/{certificate_id}/{section_id}', [CertificateController::class, 'allCertificateFiles'])->name('certificate-files.all');
     Route::get('/certificate/files/create/{section_id}', [CertificateController::class, 'createCertificateFile'])->name('certificate-files.create');
     Route::post('/certificate/files/store/', [CertificateController::class, 'storeCertificateFile'])->name('certificate-files.store');
@@ -149,7 +153,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/certificate/files/update-status', [CertificateController::class, 'updateCertificateFileStatus'])->name('certificate-files.update-status');
     Route::get('/certificate/files/delete/{id}', [CertificateController::class, 'destroyCertificateFile'])->name('certificate-files.delete');
 
-    // Manage Manuals 
+    // Manage Manuals
 
     Route::get('/manuals/all', [ManualController::class, 'allManuals'])->name('manuals.all');
     Route::get('/manuals/create', [ManualController::class, 'createManual'])->name('manual.create');
@@ -166,8 +170,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/manuals/sections/update/{id}', [ManualController::class, 'updateSection'])->name('manual-sections.update');
     Route::post('/manuals/sections/update-status', [ManualController::class, 'updateSectionStatus'])->name('manual-sections.update-status');
     Route::get('/manuals/sections/delete/{id}', [ManualController::class, 'destroySection'])->name('manual-sections.delete');
-    
-    
+
+
     Route::get('/manual/files/all/{manual_id}/{section_id}', [ManualController::class, 'allManualFiles'])->name('manual-files.all');
     Route::get('/manual/files/create/{section_id}', [ManualController::class, 'createManualFile'])->name('manual-files.create');
     Route::post('/manual/files/store/', [ManualController::class, 'storeManualFile'])->name('manual-files.store');
@@ -175,5 +179,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/manual/files/update/{id}', [ManualController::class, 'updateManualFile'])->name('manual-files.update');
     Route::post('/manual/files/update-status', [ManualController::class, 'updateManualFileStatus'])->name('manual-files.update-status');
     Route::get('/manual/files/delete/{id}', [ManualController::class, 'destroyManualFile'])->name('manual-files.delete');
-
 });

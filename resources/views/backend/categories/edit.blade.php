@@ -66,7 +66,7 @@
                                 </select>
                             </div>
                         </div>
-                      
+
                         @if ($lang == 'en')
                             <div class="form-group  row">
                                 <label class="col-md-3 col-form-label">{{trans('messages.status')}}</label>
@@ -113,7 +113,7 @@
                                     name="title1" value="{{ old('title1', $category->getTranslation('title1', $lang)) }}" class="form-control">
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Content 1</label>
                             <div class="col-md-9">
@@ -128,7 +128,7 @@
                                     name="title2" value="{{ old('title2', $category->getTranslation('title2', $lang)) }}" class="form-control">
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Content 2</label>
                             <div class="col-md-9">
@@ -143,7 +143,7 @@
                                     name="frame_size" value="{{ old('frame_size', $category->frame_size) }}" class="form-control">
                             </div>
                         </div>
-    
+
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="output">Output</label>
                             <div class="col-sm-9">
@@ -159,7 +159,7 @@
                                     name="ip_class" value="{{ old('ip_class', $category->ip_class) }}" class="form-control">
                             </div>
                         </div>
-    
+
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="insulation_class">Insulation Class</label>
                             <div class="col-sm-9">
@@ -175,7 +175,7 @@
                                     name="brake" value="{{ old('brake', $category->brake) }}" class="form-control">
                             </div>
                         </div>
-    
+
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="encoder">Encoder</label>
                             <div class="col-sm-9">
@@ -191,7 +191,7 @@
                                     name="voltages" value="{{ old('voltages', $category->voltages) }}" class="form-control">
                             </div>
                         </div>
-    
+
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="efficiency">Efficiency</label>
                             <div class="col-sm-9">
@@ -207,7 +207,7 @@
                                     name="approvals" value="{{ old('approvals', $category->approvals) }}" class="form-control">
                             </div>
                         </div>
-    
+
                         <h5 class="mb-0 h6">Home Page Contents</h5>
                         <hr>
 
@@ -235,7 +235,7 @@
 
                         <h5 class="mb-0 h6">{{trans('messages.seo_section')}}</h5>
                         <hr>
-    
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-from-label">{{ trans('messages.meta_title') }}</label>
                             <div class="col-sm-9">
@@ -258,7 +258,7 @@
                                     placeholder="{{ trans('messages.meta_keywords') }}">
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-from-label">{{ trans('messages.og_title') }}</label>
                             <div class="col-sm-9">
@@ -273,7 +273,7 @@
                                 <textarea name="og_description" rows="5" class="form-control">{{ old('og_description', $category->getTranslation('og_description', $lang)) }}</textarea>
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
                             <label class="col-sm-3 col-from-label">{{ trans('messages.twitter_title') }}</label>
                             <div class="col-sm-9">
@@ -288,7 +288,7 @@
                                 <textarea name="twitter_description" rows="5" class="form-control">{{ old('twitter_description', $category->getTranslation('twitter_description', $lang)) }}</textarea>
                             </div>
                         </div>
-                       
+
                         <div class="form-group mb-0 text-right">
                             <button type="submit" class="btn btn-sm btn-primary">{{ trans('messages.Save') }}</button>
                             <a href="{{ route('categories.index') }}" class="btn btn-sm btn-cancel">{{trans('messages.cancel')}}</a>
