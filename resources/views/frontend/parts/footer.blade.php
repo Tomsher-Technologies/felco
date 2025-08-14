@@ -10,7 +10,7 @@
                 <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base font-medium text-[#cccccc]">
                     <li><a href="{{ route('about_us') }}" class="transition text-white hover:text-white">About Us</a></li>
                     <li><a href="{{ route('products') }}" class="transition text-white hover:text-white">Products</a></li>
-                    <li><a href="{{ route('industries') }}" class="transition text-white hover:text-white">Industries</a></li>
+                    <li><a href="{{ route('industries_web') }}" class="transition text-white hover:text-white">Industries</a></li>
                     <li><a href="{{ route('contact') }}" class="transition  text-white hover:text-white">Contact</a></li>
                 </ul>
             </nav>
@@ -57,6 +57,6 @@
                 <a href="{{ route('privacy') }}" class="transition text-[#cccccc] hover:text-white">Privacy Policy</a>
             </div>
         </div>
-        
+
     </x-container>
 </footer>
