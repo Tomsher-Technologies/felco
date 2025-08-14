@@ -217,9 +217,31 @@
                         </div>
                     </div>
                     {{-- CTA Button --}}
-                    <a href="{{ route('contact') }}" class="inline-block text-sm px-6 py-3 leading-none border text-white bg-orange-500 hover:bg-[#0a8268] hover:text-white transition-colors duration-300">
-                        {{ trans('messages.get_in_touch') }}
-                    </a>
+<a href="{{ route('contact') }}" id="contact-button"
+   class="relative inline-flex items-center justify-center gap-2 px-4 py-2 text-white font-semibold text-sm transition-all duration-300 shadow-lg group overflow-hidden bg-orange-500 hover:bg-white hover:text-white transform hover:-translate-y-1 hover:scale-95 hover:px-5 hover:py-2">
+
+    <span id="btn-fill-gsap" class="absolute inset-0 z-0 bg-[#0a8268] transform scale-x-0 origin-left"></span>
+    
+    <span class="absolute inset-0 z-0 bg-[#f16c31] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+
+    <span id="btn-text-wrapper" class="relative z-10 flex items-center gap-2">
+        {{ trans('messages.get_in_touch') }}
+        <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none"
+             stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+    </span>
+</a>
+
+
+
+
+
+
+
+
+
+                    
                 </div>
 
                 {{-- Mobile Menu Hamburger Button --}}
