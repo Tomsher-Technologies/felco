@@ -200,7 +200,7 @@
 
                                     <div
                                         class="mt-6 py-4 pl-5 border-t border-slate-200 bg-gradient-to-r from-orange-50 via-white to-white">
-                                        <a href="{{ route('industries.index') }}"
+                                        <a href="{{ route('industries_web') }}"
                                             class="group inline-flex items-center gap-2 font-normal text-[#f06425]
                                             text-base transition-all duration-300 hover:gap-3">
                                             {{ trans('messages.view') . ' ' . trans('messages.all') . ' ' . trans('messages.industries') }}
