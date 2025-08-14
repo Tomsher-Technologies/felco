@@ -84,8 +84,8 @@
 
                         {{-- INDUSTRIES --}}
                         <li class="py-2">
-                            <a href="{{ route('industries') }}" @mouseenter="openDropdown = 'industries'"
-                                @click.prevent="window.location.href='{{ route('industries') }}'"
+                            <a href="{{ route('industries_web') }}" @mouseenter="openDropdown = 'industries'"
+                                @click.prevent="window.location.href='{{ route('industries_web') }}'"
                                 class="flex items-center text-lg font-medium text-black hover:text-orange-500">
                                 {{ trans('messages.industries') }}
                                 <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

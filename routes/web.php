@@ -29,7 +29,7 @@ Route::get('/marine', [FrontendController::class, 'marine'])->name('marine');
 Route::get('/hvac', [FrontendController::class, 'hvac'])->name('hvac');
 Route::get('/oil_gas', [FrontendController::class, 'oilGas'])->name('oil_gas');
 Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
-Route::get('/industries', [FrontendController::class, 'industries'])->name('industries');
+Route::get('/industries', [FrontendController::class, 'industries'])->name('industries_web');
 Route::get('/industrydetails/{type}', [FrontendController::class, 'industryDetails'])->name('industry.details');
 Route::get('/products', [FrontendController::class, 'products'])->name('products');
 Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
