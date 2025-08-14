@@ -280,27 +280,16 @@ class FrontendController extends Controller
 
         $lang = $request->get('lang', env('DEFAULT_LANGUAGE'));
 
-        $industry = Industry::where('slug', $slug)->firstOrFail();
+        $industry = Industry::where('slug', $slug)->with('industry_translations')->firstOrFail();
 
-        $translation = $industry->industry_translations->where('lang', $lang)->first();
-        if (!$translation) {
-            $translation = $industry->industry_translations
-                ->where('lang', env('DEFAULT_LANGUAGE'))
-                ->first();
-        }
+        $selectedCategoryIds = json_decode($industry->selected_categories, true) ?? [];
 
-        $seo = [
-            'title'               => $industry->getTranslation('name', $lang),
-            'meta_title'          => $translation->meta_title ?? $industry->getTranslation('name', $lang),
-            'meta_description'    => $translation->meta_description ?? '',
-            'keywords'            => $translation->meta_keyword ?? '',
-            'og_title'            => $translation->og_title ?? '',
-            'og_description'      => $translation->og_description ?? '',
-            'twitter_title'       => $translation->twitter_title ?? '',
-            'twitter_description' => $translation->twitter_description ?? '',
-        ];
+        $categories = Category::whereIn('id', $selectedCategoryIds)
+            ->where('is_active', 1)
+            ->with('category_translations')
+            ->get();
 
-        return view('frontend.industrydetails', compact('industry', 'translation', 'lang', 'seo', 'page'));
+        return view('frontend.industrydetails', compact('industry', 'lang', 'page', 'categories'));
     }
 
 

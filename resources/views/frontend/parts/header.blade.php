@@ -273,25 +273,46 @@
                         </div>
                     </div>
                     {{-- CTA Button --}}
-                    <a href="{{ route('contact') }}"
-                        class="inline-block text-sm px-6 py-3 leading-none border text-white bg-orange-500 hover:bg-[#0a8268] hover:text-white transition-colors duration-300">
-                        {{ trans('messages.get_in_touch') }}
-                    </a>
-                </div>
+                    <a href="{{ route('contact') }}" id="contact-button"
+                        class="relative inline-flex items-center justify-center gap-2 px-4 py-2 text-white font-semibold text-sm transition-all duration-300 shadow-lg group overflow-hidden bg-orange-500 hover:bg-white hover:text-white transform hover:-translate-y-1 hover:scale-95 hover:px-5 hover:py-2">
 
-                {{-- Mobile Menu Hamburger Button --}}
-                <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                    aria-controls="main-menu-mobile" :aria-expanded="mobileMenuOpen">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button>
+                        <span id="btn-fill-gsap"
+                            class="absolute inset-0 z-0 bg-[#0a8268] transform scale-x-0 origin-left"></span>
+                        <span
+                            class="absolute inset-0 z-0 bg-[#f16c31] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+
+                        <span id="btn-text-wrapper" class="relative z-10 flex items-center gap-2">
+                            {{ trans('messages.get_in_to    uch') }}
+                            <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    </a>
+
+
+
+
+
+
+
+
+
+                    div>
+
+                    {{-- Mobile Menu Hamburger Button --}}
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 md:hidden hover:bg-gray-100 focus:ou                    tline-none focus:ring-2 focus:ring-gray-200"
+                        aria-controls="main-menu-mobile" :aria-expanded="mobileMenuOpen">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </div>
     </x-container>
 
     {{-- Mobile Menu (Collapsible) --}}
