@@ -2,7 +2,7 @@
     <div class="aiz-sidebar left c-scrollbar">
         <div class="aiz-side-nav-logo-wrap">
             <a href="{{ route('admin.dashboard') }}" class="d-block text-left">
-                <img class="mw-100" height="100" src="{{ asset('assets/img/logow.png') }}" 
+                <img class="mw-100" height="100" src="{{ asset('assets/img/logow.png') }}"
                         alt="{{ get_setting('site_name') }}">
             </a>
         </div>
@@ -15,7 +15,7 @@
             <ul class="aiz-side-nav-list" id="search-menu">
             </ul>
             <ul class="aiz-side-nav-list" id="main-menu" data-toggle="aiz-side-menu">
-                
+
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('admin.dashboard') }}" class="aiz-side-nav-link">
                             <i class="las la-home aiz-side-nav-icon"></i>
@@ -33,7 +33,16 @@
                         </a>
                     </li>
                 @endcanany
-               
+
+                @canany(['manage_industries'])
+                    <li class="aiz-side-nav-item">
+                        <a href="{{ route('industries.index') }}" class="aiz-side-nav-link {{ areActiveRoutes(['industries.index','industries.edit']) }}">
+                            <i class="las la-home aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">{{  trans('messages.industries') }}</span>
+                        </a>
+                    </li>
+                @endcanany
+
                 <!-- Product -->
                 @canany(['manage_products'])
                     <li class="aiz-side-nav-item">
@@ -90,7 +99,7 @@
                         </a>
                     </li>
                 @endcanany
-                
+
                 @canany(['manage_manuals'])
                     <li class="aiz-side-nav-item">
                         <a href="{{ route('manuals.all') }}"
@@ -135,7 +144,7 @@
                                     <span class="aiz-side-nav-text">Header</span>
                                 </a>
                             </li>
-                        
+
                             <li class="aiz-side-nav-item">
                                 <a href="{{ route('website.footer', ['lang' => App::getLocale()]) }}"
                                     class="aiz-side-nav-link {{ areActiveRoutes(['website.footer']) }}">
@@ -148,7 +157,7 @@
                                     <span class="aiz-side-nav-text">Pages</span>
                                 </a>
                             </li>
-                        
+
                             <li class="aiz-side-nav-item">
                                 <a href="{{ route('home-slider.index') }}"
                                     class="aiz-side-nav-link {{ areActiveRoutes(['home-slider.index', 'home-slider.create', 'home-slider.edit']) }}">
@@ -204,8 +213,8 @@
                         </ul>
                     </li>
                 @endcanany
-              
-               
+
+
             </ul><!-- .aiz-side-nav -->
         </div><!-- .aiz-side-nav-wrap -->
     </div><!-- .aiz-sidebar -->

@@ -42,13 +42,13 @@ function trackRecentlyViewed($productId)
         // Get or create a guest token
         $guestToken = Cookie::get('guest_token', Str::uuid());
         Cookie::queue('guest_token', $guestToken, 60 * 24 * 7); // 7 days
-        
+
         // Save for guest user
         RecentlyViewedProduct::updateOrCreate(
             ['guest_token' => $guestToken, 'product_id' => $productId],
             ['updated_at' => now()]
         );
-    
+
         // Limit to last 10 products
         // RecentlyViewedProduct::where('guest_token', $guestToken)
         //         ->orderBy('updated_at', 'desc')
@@ -83,7 +83,7 @@ function getRecentlyViewedProducts()
     return Product::whereIn('id', $recentlyViewedIds)->get();
 }
 
-//$this->mergeGuestToUser(auth()->id(), Cookie::get('guest_token')); 
+//$this->mergeGuestToUser(auth()->id(), Cookie::get('guest_token'));
 
 function mergeGuestToUser($userId, $guestToken)
 {
@@ -228,7 +228,7 @@ if (!function_exists('home_base_price')) {
                 }
             }
         }
-        
+
         $price += $tax;
         return $formatted ? format_price(convert_price($price)) : $price;
     }
@@ -427,12 +427,12 @@ function getChildCategoryIds($parentId)
         if($category->child){
             foreach ($category->child as $child) {
                 $childIds[] = $child->id;
-    
+
                 // Recursively get child category IDs for the current child
                 $childIds = array_merge($childIds, getChildCategoryIdsRecursive($child));
             }
         }
-        
+
 
         return $childIds;
     }
@@ -451,13 +451,13 @@ function uploadImage($type, $imageUrl, $filename = null){
 
     // try {
     $ext = $imageUrl->getClientOriginalExtension();
-    
+
     if($type == 'page'){
         $path = 'pages/';
     }else{
         $path = 'others/';
     }
-    
+
     $filename = $path . $filename . '.' . $ext;
 
     $imageContents = file_get_contents($imageUrl);
@@ -465,7 +465,7 @@ function uploadImage($type, $imageUrl, $filename = null){
     // Save the original image in the storage folder
     Storage::disk('public')->put($filename, $imageContents);
     $data_url = Storage::url($filename);
-    
+
     return $data_url;
 }
 
@@ -489,17 +489,17 @@ function getProductOfferPrice($product){
 
     $data["original_price"] = $product->min_price ;
     $discountPrice = $product->min_price ;
-    
+
     $offertag =  '';
     $tax = 0;
-    
+
     $discount_applicable = false;
     if($product->discount_start_date != NULL && $product->discount_end_date != NULL){
         if(strtotime(date('d-m-Y H:i:s')) >= $product->discount_start_date && strtotime(date('d-m-Y H:i:s')) <= $product->discount_end_date) {
             $discount_applicable = true;
         }
     }
-   
+
     if ($discount_applicable) {
         if ($product->discount_type == 'percent') {
             $discountPrice -= ($discountPrice * $product->discount) / 100;
@@ -509,7 +509,7 @@ function getProductOfferPrice($product){
             $offertag = 'AED '.$product->discount.' OFF';
         }
     }
-   
+
     $data["discounted_price"] = $discountPrice;
     $data["offer_tag"]  = $offertag;
 
@@ -520,17 +520,17 @@ function getProductPrice($productStock){
 
     $data["original_price"] = $productStock->price ;
     $discountPrice = $productStock->price ;
-    
+
     $offertag =  '';
     $tax = 0;
-    
+
     $discount_applicable = false;
     if($productStock->product->discount_start_date != NULL && $productStock->product->discount_end_date != NULL){
         if(strtotime(date('d-m-Y H:i:s')) >= $productStock->product->discount_start_date && strtotime(date('d-m-Y H:i:s')) <= $productStock->product->discount_end_date) {
             $discount_applicable = true;
         }
     }
-   
+
     if ($discount_applicable) {
         if ($productStock->product->discount_type == 'percent') {
             $discountPrice -= ($discountPrice * $productStock->product->discount) / 100;
@@ -540,7 +540,7 @@ function getProductPrice($productStock){
             $offertag = 'AED '.$productStock->product->discount.' OFF';
         }
     }
-   
+
     $data["discounted_price"] = $discountPrice;
     $data["offer_tag"]  = $offertag;
 
@@ -627,13 +627,13 @@ function productWishlisted($sku, $product_slug){
             // Check if product already exist in wishlist
             $checkWhishlist =   Wishlist::where('user_id', Auth::id())
                                             ->where('product_id',$product_id)
-                                            ->where('product_stock_id',$product_stock_id)->count();  
-            return $checkWhishlist; 
+                                            ->where('product_stock_id',$product_stock_id)->count();
+            return $checkWhishlist;
         }
         return 0;
     } else{
         return 0;
-    }                            
+    }
 }
 
 function getProductSkuFromSlug($slug){

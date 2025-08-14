@@ -46,6 +46,7 @@ use Artesaos\SEOTools\Facades\JsonLdMulti;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\URL;
 use App\Http\Resources\WebHomeProductsCollection;
+use App\Models\Industry;
 use Storage;
 use Validator;
 use Mail;
@@ -70,7 +71,7 @@ class FrontendController extends Controller
         OpenGraph::setDescription($model['og_description']);
         OpenGraph::setUrl(URL::full());
         OpenGraph::addProperty('locale', 'en_US');
-        
+
         JsonLd::setTitle($model['meta_title']);
         JsonLd::setDescription($model['meta_description']);
         JsonLd::setType('Page');
@@ -96,7 +97,7 @@ class FrontendController extends Controller
         OpenGraph::setDescription($model->og_description);
         OpenGraph::setUrl(URL::full());
         OpenGraph::addProperty('locale', 'en_US');
-           
+
         JsonLd::setTitle($model->seo_title);
         JsonLd::setDescription($model->seo_description);
         JsonLd::setType('Page');
@@ -109,7 +110,7 @@ class FrontendController extends Controller
     }
     public function home()
     {
-        $page = Page::where('type','home')->first();
+        $page = Page::where('type', 'home')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -121,11 +122,11 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
 
         $data['slider'] = Cache::rememberForever('homeSlider', function () {
-            $sliders = HomeSlider::with('slider_translations')->where('status',1)->orderBy('sort_order')->get();
+            $sliders = HomeSlider::with('slider_translations')->where('status', 1)->orderBy('sort_order')->get();
             return $sliders;
         });
 
@@ -151,12 +152,12 @@ class FrontendController extends Controller
         // die;
 
 
-        return view('frontend.home',compact('page','data','lang'));
+        return view('frontend.home', compact('page', 'data', 'lang'));
     }
 
     public function about()
     {
-        $page = Page::where('type','about_us')->first();
+        $page = Page::where('type', 'about_us')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -168,14 +169,14 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.about',compact('page','lang'));
+        return view('frontend.about', compact('page', 'lang'));
     }
 
     public function marine()
     {
-        $page = Page::where('type','marine')->first();
+        $page = Page::where('type', 'marine')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -187,14 +188,14 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.marine',compact('page','lang'));
+        return view('frontend.marine', compact('page', 'lang'));
     }
 
     public function oilGas()
     {
-        $page = Page::where('type','oil_gas')->first();
+        $page = Page::where('type', 'oil_gas')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -206,14 +207,14 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.oil_gas',compact('page','lang'));
+        return view('frontend.oil_gas', compact('page', 'lang'));
     }
 
     public function hvac()
     {
-        $page = Page::where('type','hvac')->first();
+        $page = Page::where('type', 'hvac')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -225,14 +226,14 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.hvac',compact('page','lang'));
+        return view('frontend.hvac', compact('page', 'lang'));
     }
 
     public function terms()
     {
-        $page = Page::where('type','terms')->first();
+        $page = Page::where('type', 'terms')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -244,9 +245,9 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.terms',compact('page','lang'));
+        return view('frontend.terms', compact('page', 'lang'));
     }
 
     public function industries()
@@ -254,7 +255,7 @@ class FrontendController extends Controller
         $allind = Page::where('industy', 1)
             ->where('status', 1)
             ->get();
-            $page = Page::where('type','industries')->first();
+        $page = Page::where('type', 'industries')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -266,37 +267,46 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.industries',compact('page','lang','allind'));
+        return view('frontend.industries', compact('page', 'lang', 'allind'));
     }
 
-    public function industryDetails(Request $request,$type){
-        $page = Page::where('type',$type)->first();
-        $lang = getActiveLanguage();
+    public function industryDetails($slug, Request $request)
+    {
+        $page = Page::where('industy', 1)
+            ->where('status', 1)
+            ->get();
+
+        $lang = $request->get('lang', env('DEFAULT_LANGUAGE'));
+
+        $industry = Industry::where('slug', $slug)->firstOrFail();
+
+        $translation = $industry->industry_translations->where('lang', $lang)->first();
+        if (!$translation) {
+            $translation = $industry->industry_translations
+                ->where('lang', env('DEFAULT_LANGUAGE'))
+                ->first();
+        }
+
         $seo = [
-            'title'                 => $page->getTranslation('title', $lang),
-            'meta_title'            => $page->getTranslation('meta_title', $lang),
-            'meta_description'      => $page->getTranslation('meta_description', $lang),
-            'keywords'              => $page->getTranslation('keywords', $lang),
-            'og_title'              => $page->getTranslation('og_title', $lang),
-            'og_description'        => $page->getTranslation('og_description', $lang),
-            'twitter_title'         => $page->getTranslation('twitter_title', $lang),
-            'twitter_description'   => $page->getTranslation('twitter_description', $lang),
+            'title'               => $industry->getTranslation('name', $lang),
+            'meta_title'          => $translation->meta_title ?? $industry->getTranslation('name', $lang),
+            'meta_description'    => $translation->meta_description ?? '',
+            'keywords'            => $translation->meta_keyword ?? '',
+            'og_title'            => $translation->og_title ?? '',
+            'og_description'      => $translation->og_description ?? '',
+            'twitter_title'       => $translation->twitter_title ?? '',
+            'twitter_description' => $translation->twitter_description ?? '',
         ];
-        
-        
-        $this->loadSEO($seo);
-        return view('frontend.industrydetails',compact('page','lang'));
-        
-        // echo '<pre>';
-        // print_r($product);
-        // die;
+
+        return view('frontend.industrydetails', compact('industry', 'translation', 'lang', 'seo', 'page'));
     }
-    
+
+
     public function products()
     {
-        $page = Page::where('type','products')->first();
+        $page = Page::where('type', 'products')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -308,16 +318,16 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
         // ->orderBy('name','asc')
-        $categories = Category::where('parent_id',0)->where('is_active',1)->get();
-        return view('frontend.products',compact('page','lang','categories'));
+        $categories = Category::where('parent_id', 0)->where('is_active', 1)->get();
+        return view('frontend.products', compact('page', 'lang', 'categories'));
     }
 
     public function privacy()
     {
-        $page = Page::where('type','privacy_policy')->first();
+        $page = Page::where('type', 'privacy_policy')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -329,14 +339,14 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.privacy_policy',compact('page','lang'));
+        return view('frontend.privacy_policy', compact('page', 'lang'));
     }
 
     public function faq()
     {
-        $page = Page::where('type','faq')->first();
+        $page = Page::where('type', 'faq')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -348,14 +358,14 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.faq',compact('page','lang'));
+        return view('frontend.faq', compact('page', 'lang'));
     }
 
     public function service_support()
     {
-        $page = Page::where('type','service_support')->first();
+        $page = Page::where('type', 'service_support')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -367,14 +377,14 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.service_support',compact('page','lang'));
+        return view('frontend.service_support', compact('page', 'lang'));
     }
 
     public function contact()
     {
-        $page = Page::where('type','contact_us')->first();
+        $page = Page::where('type', 'contact_us')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -386,9 +396,9 @@ class FrontendController extends Controller
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
-        return view('frontend.contact_us', compact('page','lang'));
+        return view('frontend.contact_us', compact('page', 'lang'));
     }
 
     public function submitContactForm(Request $request)
@@ -405,13 +415,13 @@ class FrontendController extends Controller
         ]);
 
         $con                = new Contacts;
-        $con->name          = $request->firstName.' '.$request->lastName;
+        $con->name          = $request->firstName . ' ' . $request->lastName;
         $con->email         = $request->email;
         $con->phone         = $request->phone;
         $con->subject       = $request->subject;
         $con->message       = $request->message;
         $con->save();
-        
+
         // Send an email (optional)
         Mail::to(env('MAIL_ADMIN'))->queue(new ContactEnquiry($con));
 
@@ -423,7 +433,7 @@ class FrontendController extends Controller
 
     public function changeLanguage(Request $request)
     {
-       
+
         Session::put('locale', $request->locale);
         App::setLocale($request->locale);
     }
@@ -432,7 +442,7 @@ class FrontendController extends Controller
     {
         $request->validate([
             'email' => 'required|email|unique:subscribers,email',
-        ],[
+        ], [
             'email.required' => trans('messages.enter_email'),
             'email.email' => trans('messages.enter_valid_email'),
             'email.unique' => trans('messages.email_already_subscribed'),
@@ -448,54 +458,56 @@ class FrontendController extends Controller
 
 
 
-public function filterByCategory(Request $request, $category_slug){
-    $request->session()->put('last_url', url()->full());
+    public function filterByCategory(Request $request, $category_slug)
+    {
+        $request->session()->put('last_url', url()->full());
 
-    $lang = getActiveLanguage();
+        $lang = getActiveLanguage();
 
-    // 🛠 Alias mapping for old or alternative slugs
-    // $slugMap = [
-    //     'slip-ring-motors' => 'felco-special-motors-slip-ring-motors',
-       
-    // ];
-    // $resolvedSlug = $slugMap[$category_slug] ?? $category_slug;
+        // 🛠 Alias mapping for old or alternative slugs
+        // $slugMap = [
+        //     'slip-ring-motors' => 'felco-special-motors-slip-ring-motors',
+
+        // ];
+        // $resolvedSlug = $slugMap[$category_slug] ?? $category_slug;
 
 
-    $resolvedSlug =  $category_slug;
+        $resolvedSlug =  $category_slug;
 
-    $category = Category::where('slug', $resolvedSlug)->first();
+        $category = Category::where('slug', $resolvedSlug)->first();
 
-    if (!$category) {
-        abort(404); // Category not found
+        if (!$category) {
+            abort(404); // Category not found
+        }
+
+        $products = [];
+        $frameSizes = $poles = $powers = $mountings = $voltages = [];
+        $keyword = null;
+
+        $query = Product::where('category_id', $category->id)->where('published', 1);
+
+        if ($request->has('keyword')) {
+            $keyword = $request->keyword;
+            $query->where('unique_id', 'like', '%' . $keyword . '%');
+        }
+
+        if ($request->filled('frame_size')) $query->where('frame_size', $request->frame_size);
+        if ($request->filled('poles')) $query->where('poles', $request->poles);
+        if ($request->filled('power')) $query->where('power', $request->power);
+        if ($request->filled('mounting')) $query->where('mounting', $request->mounting);
+        if ($request->filled('voltage')) $query->where('voltage', $request->voltage);
+
+        $products = $query->paginate(15);
+
+        $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
+        $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');
+        $powers = Product::where('category_id', $category->id)->distinct()->pluck('power');
+        $mountings = Product::where('category_id', $category->id)->distinct()->pluck('mounting');
+        $voltages = Product::where('category_id', $category->id)->distinct()->pluck('voltage');
+
+        return view('frontend.category_details', compact('category', 'lang', 'products', 'frameSizes', 'poles', 'powers', 'mountings', 'voltages', 'keyword'));
     }
 
-    $products = [];
-    $frameSizes = $poles = $powers = $mountings = $voltages = [];
-    $keyword = null;
-
-    $query = Product::where('category_id', $category->id)->where('published', 1);
-
-    if($request->has('keyword')) {
-        $keyword = $request->keyword;
-        $query->where('unique_id', 'like', '%' . $keyword . '%');
-    }
-
-    if ($request->filled('frame_size')) $query->where('frame_size', $request->frame_size);
-    if ($request->filled('poles')) $query->where('poles', $request->poles);
-    if ($request->filled('power')) $query->where('power', $request->power);
-    if ($request->filled('mounting')) $query->where('mounting', $request->mounting);
-    if ($request->filled('voltage')) $query->where('voltage', $request->voltage);
-
-    $products = $query->paginate(15);
-
-    $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
-    $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');
-    $powers = Product::where('category_id', $category->id)->distinct()->pluck('power');
-    $mountings = Product::where('category_id', $category->id)->distinct()->pluck('mounting');
-    $voltages = Product::where('category_id', $category->id)->distinct()->pluck('voltage');
-
-    return view('frontend.category_details', compact('category','lang','products','frameSizes','poles','powers','mountings','voltages','keyword'));
-}
 
 
 
@@ -511,30 +523,30 @@ public function filterByCategory(Request $request, $category_slug){
 
 
 
-
-    public function productDetails(Request $request){
-        $slug = $request->has('slug') ? $request->slug :  ''; 
+    public function productDetails(Request $request)
+    {
+        $slug = $request->has('slug') ? $request->slug :  '';
         $lang = getActiveLanguage();
 
         $product  = [];
-        if($slug !=  ''){
+        if ($slug !=  '') {
             $product = Product::with(['files' => function ($query) use ($lang) {
-                                    $query->where('lang', $lang);
-                                }, 'seo'])
-                                ->where('published',1)
-                                ->where('products.slug', $slug)
-                                ->first();
-        } 
+                $query->where('lang', $lang);
+            }, 'seo'])
+                ->where('published', 1)
+                ->where('products.slug', $slug)
+                ->first();
+        }
         // echo '<pre>';
         // print_r($product);
         // die;
 
-        return view('frontend.product_details', compact('lang','product'));
+        return view('frontend.product_details', compact('lang', 'product'));
     }
 
     public function brochures()
     {
-        $page = Page::where('type','brochures')->first();
+        $page = Page::where('type', 'brochures')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -546,16 +558,16 @@ public function filterByCategory(Request $request, $category_slug){
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
         $brochures = Brochure::where('status', 1)->orderBy('sort_order', 'ASC')->get();
-        
-        return view('frontend.brochures',compact('page','lang','brochures'));
+
+        return view('frontend.brochures', compact('page', 'lang', 'brochures'));
     }
 
     public function certificates()
     {
-        $page = Page::where('type','certificates')->first();
+        $page = Page::where('type', 'certificates')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -567,16 +579,16 @@ public function filterByCategory(Request $request, $category_slug){
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
         $certificates = Certificate::where('status', 1)->orderBy('sort_order', 'ASC')->get();
-        
-        return view('frontend.certificates',compact('page','lang','certificates'));
+
+        return view('frontend.certificates', compact('page', 'lang', 'certificates'));
     }
 
     public function manuals()
     {
-        $page = Page::where('type','manuals')->first();
+        $page = Page::where('type', 'manuals')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -588,15 +600,16 @@ public function filterByCategory(Request $request, $category_slug){
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
         ];
-        
+
         $this->loadSEO($seo);
         $manuals = Manual::where('status', 1)->orderBy('sort_order', 'ASC')->get();
-       
-        return view('frontend.manuals',compact('page','lang','manuals'));
+
+        return view('frontend.manuals', compact('page', 'lang', 'manuals'));
     }
 
-    public function service_sales(){
-        $page = Page::where('type','service_sales')->first();
+    public function service_sales()
+    {
+        $page = Page::where('type', 'service_sales')->first();
         $lang = getActiveLanguage();
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
@@ -607,13 +620,14 @@ public function filterByCategory(Request $request, $category_slug){
             'og_description'        => $page->getTranslation('og_description', $lang),
             'twitter_title'         => $page->getTranslation('twitter_title', $lang),
             'twitter_description'   => $page->getTranslation('twitter_description', $lang),
-            ];
+        ];
 
         $this->loadSEO($seo);
-        $service_sales = ServiceSale::where('status', 1)->where('lang', $lang)->orderBy('sort_order',
-        'ASC')->get();
+        $service_sales = ServiceSale::where('status', 1)->where('lang', $lang)->orderBy(
+            'sort_order',
+            'ASC'
+        )->get();
 
-        return view('frontend.service_sales',compact('page','lang','service_sales'));
+        return view('frontend.service_sales', compact('page', 'lang', 'service_sales'));
     }
-
 }

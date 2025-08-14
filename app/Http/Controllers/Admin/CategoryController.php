@@ -17,7 +17,7 @@ class CategoryController extends Controller
     function __construct()
     {
         $this->middleware('auth');
-       
+
         $this->middleware('permission:manage_categories', ['only' => ['index','create','store','edit','update','destroy','updateFeatured']]);
     }
     /**
@@ -173,7 +173,7 @@ class CategoryController extends Controller
             $previous_level = $category->level;
             if ($request->parent_id != "0") {
                 $category->parent_id = $request->parent_id;
-    
+
                 $parent = Category::find($request->parent_id);
                 $category->level = $parent->level + 1;
             } else {
@@ -201,7 +201,7 @@ class CategoryController extends Controller
             $category->efficiency       = $request->efficiency ?? NULL;
             $category->approvals        = $request->approvals ?? NULL;
             $category->is_active        = ($request->status ==2) ? 0 : 1;
-            
+
             $category->allChildCategories()->update(['is_active' => $request->status]);
             $slug = '';
             if ($request->slug != null) {
@@ -214,7 +214,7 @@ class CategoryController extends Controller
             $category->save();
         }
 
-        
+
 
         $category_translation                       = CategoryTranslation::firstOrNew(['lang' => $request->lang, 'category_id' => $category->id]);
         $category_translation->name                 = $request->name;
@@ -277,7 +277,7 @@ class CategoryController extends Controller
     public function updateStatus(Request $request)
     {
         $category = Category::findOrFail($request->id);
-    
+
         $category->is_active = $request->status;
         $category->save();
         // $category->allChildCategories()->update(['is_active' => $request->status]);
