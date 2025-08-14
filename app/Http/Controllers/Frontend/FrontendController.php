@@ -151,8 +151,12 @@ class FrontendController extends Controller
         // print_r($data);
         // die;
 
+        $industries = Industry::where('is_active', 1)
+            ->with('industry_translations')
+            ->get();
 
-        return view('frontend.home', compact('page', 'data', 'lang'));
+
+        return view('frontend.home', compact('page', 'data', 'lang', 'industries'));
     }
 
     public function about()
@@ -252,11 +256,14 @@ class FrontendController extends Controller
 
     public function industries()
     {
-        $allind = Page::where('industy', 1)
-            ->where('status', 1)
-            ->get();
-        $page = Page::where('type', 'industries')->first();
         $lang = getActiveLanguage();
+
+        $industries = Industry::where('is_active', 1)
+            ->with('industry_translations')
+            ->get();
+
+        $page = Page::where('type', 'industries')->first();
+
         $seo = [
             'title'                 => $page->getTranslation('title', $lang),
             'meta_title'            => $page->getTranslation('meta_title', $lang),
@@ -269,8 +276,11 @@ class FrontendController extends Controller
         ];
 
         $this->loadSEO($seo);
-        return view('frontend.industries', compact('page', 'lang', 'allind'));
+
+        return view('frontend.industries', compact('page', 'lang', 'industries'));
     }
+
+
 
     public function industryDetails($slug, Request $request)
     {
@@ -280,7 +290,10 @@ class FrontendController extends Controller
 
         $lang = $request->get('lang', env('DEFAULT_LANGUAGE'));
 
-        $industry = Industry::where('slug', $slug)->with('industry_translations')->firstOrFail();
+        $industry = Industry::where('slug', $slug)
+            ->where('is_active', 1)
+            ->with('industry_translations')
+            ->firstOrFail();
 
         $selectedCategoryIds = json_decode($industry->selected_categories, true) ?? [];
 
@@ -288,6 +301,18 @@ class FrontendController extends Controller
             ->where('is_active', 1)
             ->with('category_translations')
             ->get();
+
+        $seo = [
+            'title'                 => $industry->getTranslation('title', $lang),
+            'meta_title'            => $industry->getTranslation('meta_title', $lang),
+            'meta_description'      => $industry->getTranslation('meta_description', $lang),
+            'keywords'              => $industry->getTranslation('keywords', $lang),
+            'og_title'              => $industry->getTranslation('og_title', $lang),
+            'og_description'        => $industry->getTranslation('og_description', $lang),
+            'twitter_title'         => $industry->getTranslation('twitter_title', $lang),
+            'twitter_description'   => $industry->getTranslation('twitter_description', $lang),
+        ];
+        $this->loadSEO($seo);
 
         return view('frontend.industrydetails', compact('industry', 'lang', 'page', 'categories'));
     }

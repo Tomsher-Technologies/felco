@@ -21,7 +21,7 @@
 
             <div id="industryProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @forelse ($categories as $category)
-                    <a href=""
+                    <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}"
                         class="group relative bg-white border border-slate-200 shadow hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col">
                         <div class="relative w-full h-60 overflow-hidden">
                             @if ($category->image)
@@ -38,11 +38,6 @@
                             <h3 class="text-xl font-normal text-slate-900 group-hover:text-orange-600 transition-colors">
                                 {{ $category->getTranslation('name', $lang) }}
                             </h3>
-                            @if ($category->getTranslation('description', $lang))
-                                <p class="mt-1 text-sm text-gray-700">
-                                    {!! $category->getTranslation('description', $lang) !!}
-                                </p>
-                            @endif
                         </div>
                         <div
                             class="absolute bottom-6 right-6 z-10 text-white bg-[#0a8268] p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-75 group-hover:scale-100 shadow-lg">
