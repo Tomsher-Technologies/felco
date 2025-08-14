@@ -84,8 +84,8 @@
 
                         {{-- INDUSTRIES --}}
                         <li class="py-2">
-                            <a href="{{ url('/industries') }}" @mouseenter="openDropdown = 'industries'"
-                                @click.prevent="window.location.href='{{ url('/industries') }}'"
+                            <a href="{{ route('industries') }}" @mouseenter="openDropdown = 'industries'"
+                                @click.prevent="window.location.href='{{ route('industries') }}'"
                                 class="flex items-center text-lg font-medium text-black hover:text-orange-500">
                                 {{ trans('messages.industries') }}
                                 <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -131,9 +131,6 @@
 
                         <div class="bg-white border-t border-gray-200 shadow-lg mt-2">
                             <x-container>
-
-
-
                                 <div x-show="openDropdown === 'products'" class="px-6 py-8">
                                     <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6 ">
                                         Products</h3>
@@ -282,23 +279,13 @@
                             class="absolute inset-0 z-0 bg-[#f16c31] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
 
                         <span id="btn-text-wrapper" class="relative z-10 flex items-center gap-2">
-                            {{ trans('messages.get_in_to    uch') }}
+                            {{ trans('messages.get_in_touch') }}
                             <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
                                 fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
                         </span>
                     </a>
-
-
-
-
-
-
-
-
-
-                    div>
 
                     {{-- Mobile Menu Hamburger Button --}}
                     <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
