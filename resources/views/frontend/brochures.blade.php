@@ -36,7 +36,7 @@
        <x-container>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
                 @foreach ($brochures as $key => $broch)
-                    <div class="bg-white shadow-md hover:shadow-2xl border border-transparent hover:border-teal-500 transition-all duration-300 transform hover:-translate-y-2 flex flex-col">
+                    <div class="bg-white shadow-md hover:shadow-2xl border border-transparent hover:border-[#f16c31] transition-all duration-300 transform hover:-translate-y-2 flex flex-col">
                         
                         <!-- Image -->
                         <div class="overflow-hidden h-[300px]">
@@ -62,7 +62,7 @@
                                             <a href="{{ asset($file->file) }}" target="_blank"
                                                class="flex items-center justify-between text-sm font-medium text-slate-700">
                                                 <span class="whitespace-pre-line text-lg font-normal">{{ $file->getTranslation('title', $lang) }}</span>
-                                                <svg class="w-5 h-5 text-teal-500 transition-opacity duration-300 group-hover:opacity-100 opacity-0"
+                                                <svg class="w-5 h-5 text-[#f16c31] transition-opacity duration-300 group-hover:opacity-100 opacity-0"
                                                      xmlns="http://www.w3.org/2000/svg"
                                                      fill="none" viewBox="0 0 24 24"
                                                      stroke-width="2" stroke="currentColor">

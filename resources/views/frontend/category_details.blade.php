@@ -77,6 +77,88 @@
 
 
 
+<section class="mt-16 bg-[#454d4e] py-16 text-slate-300 md:py-24">
+    <x-container>
+        <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-1 lg:gap-10">
+            {{-- Left Column: Sticky Image --}}
+
+            {{-- Right Column: Scroll Content --}}
+            <div id="industryScrollContent" class="space-y-16 lg:col-span-1">
+                {{-- Section Header --}}
+                <div>
+                    <div class="mb-8 border-l-2 border-orange-500 pl-4">
+                        <h3 class="animate-on-scroll text-3xl font-light text-white">
+                            Motor Features
+                        </h3>
+                    </div>
+
+                    {{-- Static Products Grid --}}
+                    <div id="industryProductGrid" class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                        {{-- Motor Features --}}
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Compliant with IEC 60034, IEC 60072, and relevant international standards</h4>
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Power range: typically from 315 kW to 20 MW</h4>
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Voltage range: 3.3 kV to 13.8 kV (custom options up to 15 kV)</h4>
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Insulation Class F or H with Class B/F temperature rise</h4>
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Protection degree: IP55 / IP56 / IP65 (based on application)</h4>
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Cooling methods: IC411, IC611, IC616, IC81W, IC01</h4>
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Bearings: sleeve or anti-friction bearings with monitoring systems</h4>
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Optional features: vibration sensors, temperature monitoring (PT100), space heaters, anti-condensation systems, and condition monitoring solutions</h4>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Voltage Configurations Section --}}
+                <div class="mt-8">
+                    <div class="mb-8 border-l-2 border-orange-500 pl-4">
+                        <h3 class="animate-on-scroll text-3xl font-light text-white">
+                            Voltage Configurations
+                        </h3>
+                    </div>
+
+                    {{-- Static Products Grid for Voltage Configurations --}}
+                    <div id="industryProductGrid" class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                        {{-- Voltage Configurations --}}
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                        <h4 class="text-xl font-normal text-slate-100">Standard: 3.3 kV / 6.6 kV / 11 kV / 13.8 kV – 50 or 60 Hz</h4>
+
+                        </div>
+
+                        <div class="group border border-[#3a4142] bg-[#313738] p-6 transition-all duration-300 hover:border-orange-500/80 hover:bg-[#3a4142]">
+                            <h4 class="text-xl font-normal text-slate-100">Customized voltages and frequencies available upon request</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </x-container>
+</section>
+
+
+
+
+
 {{-- 4. Filter & Product Table Section --}}
 @if ($products->isNotEmpty() || collect(request()->query())->except(['page'])->isNotEmpty())
 <section class="bg-white py-16 md:py-20">
@@ -87,7 +169,7 @@
                 <h2 class="text-3xl font-light text-gray-900">Filter Products</h2>
                 <form class="flex w-full overflow-hidden rounded-md md:max-w-md" method="GET" action="{{ route('products.category', $category->slug) }}" autocomplete="off">
                     <input name="keyword" type="text" value="{{ request('keyword') }}" placeholder="Search by ID or Name..." class="form-input w-full border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" />
-                    <button type="submit" class="bg-[#0a8268] px-5 py-2 text-white shadow transition hover:bg-[#f06425]">Search</button>
+                    <button type="submit" class="bg-[#f16c31] px-5 py-2 text-white shadow transition hover:bg-[#f06425]">Search</button>
                 </form>
             </div>
             
@@ -148,7 +230,7 @@
                                     <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">{{ $prod->frame_size }}</div>
                                     <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">{{ $prod->voltage }}</div>
                                     <div class="relative z-30 flex items-center justify-end pr-6">
-                                        <div class="flex h-10 w-10 scale-75 items-center justify-center rounded-full bg-[#0a8268] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                        <div class="flex h-10 w-10 scale-75 items-center justify-center  bg-[#f16c31] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                             <i class="fi fi-rr-arrow-right text-lg"></i>
                                         </div>
                                     </div>
@@ -163,7 +245,7 @@
                     <div class="mt-12 flex justify-center" id="load-more-container">
                         <button id="load-more-button"
                                 data-next-page-url="{{ $products->nextPageUrl() }}"
-                                class="flex items-center gap-3 rounded-md bg-[#0a8268] px-8 py-3 font-medium text-white shadow transition hover:bg-cyan-700">
+                                class="flex items-center gap-3  bg-[#f16c31] px-8 py-3 font-medium text-white shadow transition hover:bg-cyan-700">
                             <svg class="h-5 w-5 animate-spin hidden" id="loader-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V4a10 10 0 00-10 10h2z"></path>
@@ -176,7 +258,7 @@
                 <div class="rounded-lg border border-dashed border-gray-300 bg-white p-12 text-center">
                      <h3 class="text-xl font-medium text-gray-800">No products found</h3>
                      <p class="mt-2 text-gray-500">Try adjusting your filters or search term.</p>
-                     <a href="{{ route('products.category', $category->slug) }}" class="mt-6 inline-block rounded-md border border-orange-400 bg-white px-6 py-2 text-orange-700 shadow-sm transition hover:bg-orange-50">Reset All Filters</a>
+                     <a href="{{ route('products.category', $category->slug) }}" class="mt-6 inline-block border border-orange-400 bg-white px-6 py-2 text-orange-700 shadow-sm transition hover:bg-orange-50">Reset All Filters</a>
                 </div>
             @endif
         </main>

@@ -27,7 +27,7 @@
                             <h3 class="text-2xl md:text-3xl font-semibold text-slate-800 mb-4">
                                 {{ $sale->title }}
                             </h3>
-                            <div class="text-slate-600 text-sm leading-relaxed prose max-w-none">
+                            <div id="saleContent"  class="text-slate-600 text-sm leading-relaxed prose max-w-none">
                                 {!! nl2br(e($sale->content)) !!}
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <h3 class="text-2xl md:text-3xl font-semibold text-slate-800 mb-4">
                                 {{ $sale->title }}
                             </h3>
-                            <div class="text-slate-600 text-sm leading-relaxed prose max-w-none">
+                            <div id="saleContent"  class="text-slate-600 text-sm leading-relaxed prose max-w-none">
                                 {!! nl2br(e($sale->content)) !!}
                             </div>
                         </div>
