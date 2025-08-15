@@ -308,13 +308,13 @@
                                         $filename = end($filenameParts);
                                     @endphp
                                     <a href="{{ asset($category->brochure) }}" target="_blank"
-                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg
+                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white hover:text-white shadow-lg
                                 transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
                                         Download Brochure
                                     </a>
                                 @else
                                     <a href="{{ url('/brochures') }}"
-                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg
+                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white hover:text-white shadow-lg
                                 transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
                                         Explore Catalogues
                                     </a>
