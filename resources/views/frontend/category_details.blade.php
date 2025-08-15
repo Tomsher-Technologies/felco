@@ -298,27 +298,29 @@
                             and application guides for our entire product range.
                         </p>
                         <div class="mt-8">
-                            <a href="{{ url('/brochures') }}"
-                                class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
-                                Explore Catalogues
-                            </a>
+                            @if (!empty($category->brochure))
+                                @php
+                                    $filenameParts = explode('/', $category->brochure);
+                                    $filename = end($filenameParts);
+                                @endphp
+                                <a href="{{ asset($category->brochure) }}" target="_blank"
+                                    class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
+                                    Download Brochure
+                                </a>
+                            @else
+                                <a href="{{ url('/brochures') }}"
+                                    class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
+                                    Explore Catalogues
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
 
+
             </div>
         </x-container>
     </section>
-
-
-
-
-
-
-
-
-
-
 
     {{-- 5. Related Categories Section --}}
     @if ($category->childs->where('is_active', 1)->isNotEmpty())

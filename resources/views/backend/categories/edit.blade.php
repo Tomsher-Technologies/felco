@@ -70,6 +70,28 @@
                             </div>
                         </div>
 
+                        <div class="form-group row @if ($lang != 'en') d-none @endif">
+                            <label class="col-md-3 col-form-label" for="brochure">{{ trans('messages.brochure') }}</label>
+                            <div class="col-md-9">
+                                <input type="file" name="brochure" id="brochure" class="form-control"
+                                    accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx" />
+                                @error('brochure')
+                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                                @enderror
+
+                               @if (!empty(old('brochure')) || (!empty($category->brochure) && $category->brochure !== null))
+                                    @php
+                                        $filename = explode('/', $category->brochure);
+                                        $filename = $filename[count($filename)-1];
+                                    @endphp
+                                    <a href="{{ $category->brochure }}" target="_blank" class="mt-2 d-block">
+                                        {{  $filename }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+
+
                         @if ($lang == 'en')
                             <div class="form-group  row">
                                 <label class="col-md-3 col-form-label">{{ trans('messages.status') }}</label>

@@ -280,7 +280,7 @@ return [
     'feature' => 'Feature',
     'items' => 'Items',
     'item' => 'Item',
-    '' => '',
+    'current' => 'Current',
     '' => '',
     '' => '',
     '' => '',
