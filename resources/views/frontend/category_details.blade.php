@@ -53,7 +53,7 @@
     @endif
 
 
-    @if (!empty($features) && count($features) > 0)
+    @if (!empty($features) && count($features) > 0 && !empty($features[0]['feature_items']) && count($features[0]['feature_items']) > 0)
         <section class="mt-16 bg-[#454d4e] py-16 text-slate-300 md:py-24">
             <x-container>
                 <div class="space-y-16">
