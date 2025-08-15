@@ -57,26 +57,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="brochure">{{ trans('messages.brochure') }}</label>
-                            <div class="col-md-9">
-                                <input type="file" name="brochure" id="brochure" class="form-control"
-                                    accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx" />
-                                @error('brochure')
-                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
-                                @enderror
 
-                                @if (!empty(old('brochure')) || (!empty($category->brochure) && $category->brochure !== null))
-                                    @php
-                                        $filename = explode('/', $category->brochure);
-                                        $filename = $filename[count($filename)-1];
-                                    @endphp
-                                    <a href="{{ $category->brochure }}" target="_blank" class="mt-2 d-block">
-                                        {{  $filename }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
 
 
                         <div class="form-group  row">
@@ -92,6 +73,63 @@
                                 </select>
                             </div>
                         </div>
+
+                        <h5 class="mb-0 h6">Brochure Section Contents</h5>
+                        <hr>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-from-label" for="title2">Title</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="title 2" id="title2" name="title2"
+                                    value="{{ old('title2') }}" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Content</label>
+                            <div class="col-md-9">
+                                <textarea id="content2" name="content2" rows="3" class="form-control aiz-text-editor">{{ old('content2') }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="brochure">{{ trans('messages.brochure') }}</label>
+                            <div class="col-md-9">
+                                <input type="file" name="brochure" id="brochure" class="form-control"
+                                    accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx" />
+                                @error('brochure')
+                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                                @enderror
+
+                                @if (!empty(old('brochure')) || (!empty($category->brochure) && $category->brochure !== null))
+                                    @php
+                                        $filename = explode('/', $category->brochure);
+                                        $filename = $filename[count($filename) - 1];
+                                    @endphp
+                                    <a href="{{ $category->brochure }}" target="_blank" class="mt-2 d-block">
+                                        {{ $filename }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="signinSrEmail">
+                                {{ trans('messages.image') }} <small>({{ trans('messages.1000x1000') }})</small></label>
+                            <div class="col-md-9">
+                                <div class="input-group" data-toggle="aizuploader" data-type="image">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text bg-soft-secondary font-weight-medium">
+                                            {{ trans('messages.browse') }}</div>
+                                    </div>
+                                    <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
+                                    <input type="hidden" name="icon" class="selected-files">
+                                </div>
+                                <div class="file-preview box sm">
+                                </div>
+                            </div>
+                        </div>
+
 
                         <h5 class="mb-0 h6">Details Page Contents</h5>
                         <hr>
@@ -136,20 +174,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
-                        <label class="col-sm-3 col-from-label" for="title2">Title 2</label>
-                        <div class="col-sm-9">
-                            <input  type="text" placeholder="title 2" id="title2"
-                                name="title2" value="{{ old('title2') }}" class="form-control">
-                        </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Content 2</label>
-                        <div class="col-md-9">
-                            <textarea id="content2" name="content2" rows="3" class="form-control aiz-text-editor">{{ old('content2') }}</textarea>
-                        </div>
-                    </div> --}}
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-from-label" for="frame_size">Frame Size</label>
@@ -275,22 +300,7 @@
                         <h5 class="mb-0 h6">Home Page Contents</h5>
                         <hr>
 
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="signinSrEmail">Home Page
-                                {{ trans('messages.icon') }} <small>({{ trans('messages.32x32') }})</small></label>
-                            <div class="col-md-9">
-                                <div class="input-group" data-toggle="aizuploader" data-type="image">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text bg-soft-secondary font-weight-medium">
-                                            {{ trans('messages.browse') }}</div>
-                                    </div>
-                                    <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
-                                    <input type="hidden" name="icon" class="selected-files">
-                                </div>
-                                <div class="file-preview box sm">
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Home Page Content</label>

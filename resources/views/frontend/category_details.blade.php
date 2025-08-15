@@ -279,48 +279,56 @@
 
     @endif
 
-    <section id="catalog-cta" class="overflow-hidden bg-slate-50 py-16 md:py-24">
-        <x-container>
-            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-0">
+    @if ($category->getTranslation('title2', $lang))
+        <section id="catalog-cta" class="overflow-hidden bg-slate-50 py-16 md:py-24">
+            <x-container>
+                <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-0">
 
-                <div class="animate-on-scroll" data-anim="clip-reveal">
-                    <img src="{{ asset('assets/images/catelog-sec-img.jpg') }}" alt="Engineering catalog and motor parts"
-                        class="object-cover shadow-2xl">
-                </div>
+                    <div class="animate-on-scroll" data-anim="clip-reveal">
+                        <img src="{{ uploaded_asset($category->icon) }}"
+                            alt="{{ $category->getTranslation('name', $lang) }} brochure image"
+                            class="object-cover shadow-2xl">
+                    </div>
 
-                <div class="relative z-10 lg:-ml-20">
-                    <div class="animate-on-scroll rounded-lg bg-white p-10 shadow-2xl md:p-12" data-anim="fade-up">
-                        <h2 class="text-4xl font-light text-gray-800 md:text-5xl">
-                            Dive Into the Details
-                        </h2>
-                        <p class="mt-4 text-lg text-gray-600">
-                            Our comprehensive catalogues and brochures provide in-depth technical data, performance charts,
-                            and application guides for our entire product range.
-                        </p>
-                        <div class="mt-8">
-                            @if (!empty($category->brochure))
-                                @php
-                                    $filenameParts = explode('/', $category->brochure);
-                                    $filename = end($filenameParts);
-                                @endphp
-                                <a href="{{ asset($category->brochure) }}" target="_blank"
-                                    class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
-                                    Download Brochure
-                                </a>
-                            @else
-                                <a href="{{ url('/brochures') }}"
-                                    class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
-                                    Explore Catalogues
-                                </a>
-                            @endif
+                    <div class="relative z-10 lg:-ml-20">
+                        <div class="animate-on-scroll rounded-lg bg-white p-10 shadow-2xl md:p-12" data-anim="fade-up">
+
+                            <h2 class="text-4xl font-light text-gray-800 md:text-5xl mb-4">
+                                {{ $category->getTranslation('title2', $lang) ?: 'Dive Into the Details' }}
+                            </h2>
+
+                            <p class="mt-4 text-lg text-gray-600 leading-relaxed whitespace-pre-line">
+                                {!! $category->getTranslation('content2', $lang) !!}
+                            </p>
+
+                            <div class="mt-8">
+                                @if (!empty($category->brochure))
+                                    @php
+                                        $filenameParts = explode('/', $category->brochure);
+                                        $filename = end($filenameParts);
+                                    @endphp
+                                    <a href="{{ asset($category->brochure) }}" target="_blank"
+                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg
+                                transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
+                                        Download Brochure
+                                    </a>
+                                @else
+                                    <a href="{{ url('/brochures') }}"
+                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white shadow-lg
+                                transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
+                                        Explore Catalogues
+                                    </a>
+                                @endif
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
+            </x-container>
+        </section>
+    @endif
 
-
-            </div>
-        </x-container>
-    </section>
 
     {{-- 5. Related Categories Section --}}
     @if ($category->childs->where('is_active', 1)->isNotEmpty())
