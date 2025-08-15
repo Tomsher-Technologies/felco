@@ -151,12 +151,15 @@ class FrontendController extends Controller
         // print_r($data);
         // die;
 
-        $industries = Industry::where('is_active', 1)
-            ->with('industry_translations')
-            ->get();
+        $data['special_industries'] = Cache::remember('special_industries', 3600, function () {
+            $industry_ids = get_setting('special_industries');
+            if ($industry_ids) {
+                $industries =  Industry::where('is_active', 1)->whereIn('id', json_decode($industry_ids))->with('industry_translations')->get();
+                return $industries;
+            }
+        });
 
-
-        return view('frontend.home', compact('page', 'data', 'lang', 'industries'));
+        return view('frontend.home', compact('page', 'data', 'lang'));
     }
 
     public function about()

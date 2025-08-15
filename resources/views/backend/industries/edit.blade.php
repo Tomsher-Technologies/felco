@@ -57,6 +57,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">{{ trans('messages.description') }}</label>
+                            <div class="col-md-9">
+                                <textarea id="description" name="description" rows="3" class="form-control">{{ old('description', $industry->getTranslation('description', $lang)) }}</textarea>
+                            </div>
+                        </div>
+
+
                         {{-- Industry image --}}
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-md-3 col-form-label">{{ trans('messages.image') }}</label>

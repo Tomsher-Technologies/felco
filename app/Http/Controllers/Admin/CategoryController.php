@@ -103,6 +103,8 @@ class CategoryController extends Controller
 
         $category_translation                       = CategoryTranslation::firstOrNew(['lang' => env('DEFAULT_LANGUAGE'), 'category_id' => $category->id]);
         $category_translation->name                 = $request->name;
+        $category_translation->features             = $request->features ? json_encode($request->features) : NULL;
+
         $category_translation->description          = $request->description ?? NULL;
         $category_translation->title1               = $request->title1 ?? NULL;
         $category_translation->content1             = $request->content1 ?? NULL;
@@ -219,6 +221,7 @@ class CategoryController extends Controller
         $category_translation                       = CategoryTranslation::firstOrNew(['lang' => $request->lang, 'category_id' => $category->id]);
         $category_translation->name                 = $request->name;
         $category_translation->description          = $request->description ?? NULL;
+        $category_translation->features             = $request->features ? json_encode($request->features) : NULL;
         $category_translation->title1               = $request->title1 ?? NULL;
         $category_translation->content1             = $request->content1 ?? NULL;
         $category_translation->title2               = $request->title2 ?? NULL;

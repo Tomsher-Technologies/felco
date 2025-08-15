@@ -37,6 +37,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label">{{ trans('messages.description') }}</label>
+                            <div class="col-md-9">
+                                <textarea id="description" name="description" rows="3" class="form-control ">{{ old('description') }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label" for="signinSrEmail">{{ trans('messages.image') }}
                             </label>
                             <div class="col-md-9">

@@ -22,7 +22,7 @@ class BusinessSettingsController extends Controller
 
     public function update(Request $request)
     {
-       
+
         if(!empty($request->types)){
             foreach ($request->types as $key => $type) {
                 if($type == 'site_name'){
@@ -40,8 +40,8 @@ class BusinessSettingsController extends Controller
                     }else{
                         $business_settings = BusinessSetting::where('type', $type)->first();
                     }
-    
-                   
+
+
                     if($business_settings!=null){
                         if(gettype($request[$type]) == 'array'){
                             $business_settings->value = json_encode($request[$type]);
@@ -69,7 +69,7 @@ class BusinessSettingsController extends Controller
         }
 
         $id = $request->has('page_id') ? $request->page_id : null;
-         
+
         if($id != null){
             $page = Page::findOrFail($id);
             if ($page) {
@@ -125,7 +125,7 @@ class BusinessSettingsController extends Controller
                 if($request->has('heading9')){
                     $page_translation->heading9             = $request->heading9;
                 }
-                    
+
                 if($request->has('meta_title')){
                     $page_translation->meta_title           = $request->meta_title;
                 }
@@ -151,9 +151,9 @@ class BusinessSettingsController extends Controller
                 if($request->has('image1')){
                     $page_translation->image1               = $request->image1;
                 }
-               
+
                 $page_translation->save();
-    
+
             }
 
             $photos = [];
@@ -186,7 +186,7 @@ class BusinessSettingsController extends Controller
         return back();
     }
 
-    
+
 
     public function shipping_configuration(Request $request){
         return view('backend.setup_configurations.shipping_configuration.index');

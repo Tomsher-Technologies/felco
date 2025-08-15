@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="aiz-titlebar text-left mt-2 mb-3">
-        <h5 class="mb-0 h6">{{ trans('messages.category') .' '. trans('messages.information')}}</h5>
+        <h5 class="mb-0 h6">{{ trans('messages.category') . ' ' . trans('messages.information') }}</h5>
     </div>
 
     <div class="row">
@@ -28,18 +28,19 @@
                         @csrf
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ trans('messages.name') }} <i
-                                    class="las la-language text-danger" title="{{ trans('messages.translatable') }}"></i></label>
+                                    class="las la-language text-danger"
+                                    title="{{ trans('messages.translatable') }}"></i></label>
                             <div class="col-md-9">
-                                <input  type="text" name="name"
-                                    value="{{ $category->getTranslation('name', $lang) }}" class="form-control"
-                                    id="name" placeholder="{{ trans('messages.name') }}" onkeyup="makeSlug(this)">
+                                <input type="text" name="name" value="{{ $category->getTranslation('name', $lang) }}"
+                                    class="form-control" id="name" placeholder="{{ trans('messages.name') }}"
+                                    onkeyup="makeSlug(this)">
                             </div>
                         </div>
 
                         <div class="form-group row  @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="name">{{ trans('messages.slug') }}</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="{{ trans('messages.slug') }}" id="slug"
+                                <input type="text" placeholder="{{ trans('messages.slug') }}" id="slug"
                                     name="slug" value="{{ old('slug', $category->slug) }}" class="form-control">
                                 @error('slug')
                                     <div class="alert alert-danger mt-1">{{ $message }}</div>
@@ -48,12 +49,14 @@
                         </div>
 
                         <div class="form-group row  @if ($lang != 'en') d-none @endif">
-                            <label class="col-md-3 col-form-label">{{ trans('messages.parent') .' '. trans('messages.category') }}</label>
+                            <label
+                                class="col-md-3 col-form-label">{{ trans('messages.parent') . ' ' . trans('messages.category') }}</label>
                             <div class="col-md-9">
-                                <select  class="select2 form-control aiz-selectpicker" name="parent_id"
-                                    data-toggle="select2" data-placeholder="Choose ..."data-live-search="true"
+                                <select class="select2 form-control aiz-selectpicker" name="parent_id" data-toggle="select2"
+                                    data-placeholder="Choose ..."data-live-search="true"
                                     data-selected="{{ $category->parent_id }}">
-                                    <option value="0">{{ trans('messages.no') .' '. trans('messages.parent') }}</option>
+                                    <option value="0">{{ trans('messages.no') . ' ' . trans('messages.parent') }}
+                                    </option>
                                     @foreach ($categories as $acategory)
                                         <option value="{{ $acategory->id }}">{{ $acategory->getTranslation('name') }}
                                         </option>
@@ -69,12 +72,14 @@
 
                         @if ($lang == 'en')
                             <div class="form-group  row">
-                                <label class="col-md-3 col-form-label">{{trans('messages.status')}}</label>
+                                <label class="col-md-3 col-form-label">{{ trans('messages.status') }}</label>
                                 <div class="col-md-9">
                                     <select class="select2 form-control" name="status">
-                                        <option {{ old('status', $category->is_active) == 1 ? 'selected' : '' }} value="1">{{trans('messages.enabled')}}
+                                        <option {{ old('status', $category->is_active) == 1 ? 'selected' : '' }}
+                                            value="1">{{ trans('messages.enabled') }}
                                         </option>
-                                        <option {{ old('status', $category->is_active) == 0 ? 'selected' : '' }} value="2">{{trans('messages.disabled')}}
+                                        <option {{ old('status', $category->is_active) == 0 ? 'selected' : '' }}
+                                            value="2">{{ trans('messages.disabled') }}
                                         </option>
                                     </select>
                                 </div>
@@ -84,22 +89,17 @@
                         <h5 class="mb-0 h6">Details Page Contents</h5>
                         <hr>
 
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Short Description</label>
-                            <div class="col-md-9">
-                                <textarea id="description" name="description" rows="3" class="form-control">{{ old('description', $category->getTranslation('description', $lang)) }}</textarea>
-                            </div>
-                        </div>
-
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-md-3 col-form-label" for="signinSrEmail">Image </label>
                             <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text bg-soft-secondary font-weight-medium">{{ trans('messages.browse')}}</div>
+                                        <div class="input-group-text bg-soft-secondary font-weight-medium">
+                                            {{ trans('messages.browse') }}</div>
                                     </div>
                                     <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
-                                    <input type="hidden" name="image" class="selected-files" value="{{ $category->image }}">
+                                    <input type="hidden" name="image" class="selected-files"
+                                        value="{{ $category->image }}">
                                 </div>
                                 <div class="file-preview box sm">
                                 </div>
@@ -107,21 +107,30 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-from-label" for="title1">Title 1</label>
-                            <div class="col-sm-9">
-                                <input  type="text" placeholder="title 1" id="title1"
-                                    name="title1" value="{{ old('title1', $category->getTranslation('title1', $lang)) }}" class="form-control">
+                            <label class="col-md-3 col-form-label">Short Description</label>
+                            <div class="col-md-9">
+                                <textarea id="description" name="description" rows="3" class="form-control">{{ old('description', $category->getTranslation('description', $lang)) }}</textarea>
                             </div>
                         </div>
 
+
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Content 1</label>
+                            <label class="col-md-3 col-form-label">Long Description</label>
                             <div class="col-md-9">
                                 <textarea id="content1" name="content1" rows="3" class="form-control aiz-text-editor">{{ old('content1', $category->getTranslation('content1', $lang)) }}</textarea>
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
+                            <label class="col-sm-3 col-from-label" for="title1">Title 1</label>
+                            <div class="col-sm-9">
+                                <input  type="text" placeholder="title 1" id="title1"
+                                    name="title1" value="{{ old('title1', $category->getTranslation('title1', $lang)) }}" class="form-control">
+                            </div>
+                        </div> --}}
+
+
+                        {{-- <div class="form-group row">
                             <label class="col-sm-3 col-from-label" for="title2">Title 2</label>
                             <div class="col-sm-9">
                                 <input  type="text" placeholder="title 2" id="title2"
@@ -134,92 +143,216 @@
                             <div class="col-md-9">
                                 <textarea id="content2" name="content2" rows="3" class="form-control aiz-text-editor">{{ old('content2', $category->getTranslation('content2', $lang)) }}</textarea>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="frame_size">Frame Size</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Frame Size" id="frame_size"
-                                    name="frame_size" value="{{ old('frame_size', $category->frame_size) }}" class="form-control">
+                                <input type="text" placeholder="Frame Size" id="frame_size" name="frame_size"
+                                    value="{{ old('frame_size', $category->frame_size) }}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="output">Output</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Output" id="output"
-                                    name="output" value="{{ old('output', $category->output) }}" class="form-control">
+                                <input type="text" placeholder="Output" id="output" name="output"
+                                    value="{{ old('output', $category->output) }}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="ip_class">IP Class</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="IP Class" id="ip_class"
-                                    name="ip_class" value="{{ old('ip_class', $category->ip_class) }}" class="form-control">
+                                <input type="text" placeholder="IP Class" id="ip_class" name="ip_class"
+                                    value="{{ old('ip_class', $category->ip_class) }}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="insulation_class">Insulation Class</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Insulation Class" id="insulation_class"
-                                    name="insulation_class" value="{{ old('insulation_class', $category->insulation_class) }}" class="form-control">
+                                <input type="text" placeholder="Insulation Class" id="insulation_class"
+                                    name="insulation_class"
+                                    value="{{ old('insulation_class', $category->insulation_class) }}"
+                                    class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="brake">Brake</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Brake" id="brake"
-                                    name="brake" value="{{ old('brake', $category->brake) }}" class="form-control">
+                                <input type="text" placeholder="Brake" id="brake" name="brake"
+                                    value="{{ old('brake', $category->brake) }}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="encoder">Encoder</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Encoder" id="encoder"
-                                    name="encoder" value="{{ old('encoder', $category->encoder) }}" class="form-control">
+                                <input type="text" placeholder="Encoder" id="encoder" name="encoder"
+                                    value="{{ old('encoder', $category->encoder) }}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="voltages">Voltages</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Voltages" id="voltages"
-                                    name="voltages" value="{{ old('voltages', $category->voltages) }}" class="form-control">
+                                <input type="text" placeholder="Voltages" id="voltages" name="voltages"
+                                    value="{{ old('voltages', $category->voltages) }}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="efficiency">Efficiency</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Efficiency" id="efficiency"
-                                    name="efficiency" value="{{ old('efficiency', $category->efficiency) }}" class="form-control">
+                                <input type="text" placeholder="Efficiency" id="efficiency" name="efficiency"
+                                    value="{{ old('efficiency', $category->efficiency) }}" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
                             <label class="col-sm-3 col-from-label" for="approvals">Approvals</label>
                             <div class="col-sm-9">
-                                <input  type="text" placeholder="Approvals" id="approvals"
-                                    name="approvals" value="{{ old('approvals', $category->approvals) }}" class="form-control">
+                                <input type="text" placeholder="Approvals" id="approvals" name="approvals"
+                                    value="{{ old('approvals', $category->approvals) }}" class="form-control">
                             </div>
                         </div>
+
+
+                        @php
+                            $featuresData = json_decode(
+                                old('features', $category->getTranslation('features', $lang)),
+                                true,
+                            );
+                        @endphp
+
+                        <div class="form-group row repeater">
+                            <label class="col-md-3 col-form-label">{{ trans('messages.features') }}</label>
+                            <div class="card-body col-md-9">
+
+                                <div data-repeater-list="features">
+                                    @if (!empty($featuresData))
+                                        @foreach ($featuresData as $feature)
+                                            <div data-repeater-item>
+
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-md-3 col-form-label">{{ trans('messages.heading') }}</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" name="heading"
+                                                            value="{{ $feature['heading'] ?? '' }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label
+                                                        class="col-md-3 col-form-label">{{ trans('messages.feature') . ' ' . trans('messages.items') }}</label>
+                                                    <div class="col-md-8">
+                                                        <div class="inner-repeater">
+                                                            <div data-repeater-list="feature_items">
+                                                                @if (!empty($feature['feature_items']))
+                                                                    @foreach ($feature['feature_items'] as $item)
+                                                                        <div data-repeater-item
+                                                                            class="mb-2 d-flex align-items-center">
+                                                                            <input type="text" name="feature"
+                                                                                class="form-control"
+                                                                                placeholder="Enter sub-feature"
+                                                                                value="{{ $item['feature'] ?? '' }}">
+                                                                            <input data-repeater-delete type="button"
+                                                                                class="btn btn-danger btn-sm ml-2"
+                                                                                value="{{ trans('messages.delete') }}" />
+                                                                        </div>
+                                                                    @endforeach
+                                                                @else
+                                                                    <div data-repeater-item
+                                                                        class="mb-2 d-flex align-items-center">
+                                                                        <input type="text" name="feature"
+                                                                            class="form-control"
+                                                                            placeholder="Enter sub-feature">
+                                                                        <input data-repeater-delete type="button"
+                                                                            class="btn btn-danger btn-sm ml-2"
+                                                                            value="{{ trans('messages.delete') }}" />
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                            <input data-repeater-create type="button"
+                                                                class="btn btn-success btn-sm mt-2"
+                                                                value="{{ trans('messages.add') . ' ' . trans('messages.item') }}" />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group text-right">
+                                                    <input data-repeater-delete type="button"
+                                                        class="btn btn-danger action-btn ml-1"
+                                                        value="{{ trans('messages.delete') . ' ' . trans('messages.feature') }}" />
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div data-repeater-item>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-md-3 col-form-label">{{ trans('messages.heading') }}</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="heading">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-md-3 col-form-label">{{ trans('messages.feature_items') }}</label>
+                                                <div class="col-md-8">
+                                                    <div class="inner-repeater">
+                                                        <div data-repeater-list="feature_items">
+                                                            <div data-repeater-item class="mb-2 d-flex align-items-center">
+                                                                <input type="text" name="feature" class="form-control"
+                                                                    placeholder="Enter sub-feature">
+                                                                <input data-repeater-delete type="button"
+                                                                    class="btn btn-danger btn-sm ml-2"
+                                                                    value="{{ trans('messages.delete') }}" />
+                                                            </div>
+                                                        </div>
+                                                        <input data-repeater-create type="button"
+                                                            class="btn btn-success btn-sm mt-2"
+                                                            value="{{ trans('messages.add') . ' ' . trans('messages.item') }}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group text-right">
+                                                <input data-repeater-delete type="button"
+                                                    class="btn btn-danger action-btn ml-1"
+                                                    value="{{ trans('messages.delete') . ' ' . trans('messages.feature') }}" />
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <input data-repeater-create type="button" class="btn btn-success action-btn mt-2"
+                                    value="{{ trans('messages.add') }}" />
+                            </div>
+                        </div>
+
+
 
                         <h5 class="mb-0 h6">Home Page Contents</h5>
                         <hr>
 
                         <div class="form-group row @if ($lang != 'en') d-none @endif">
-                            <label class="col-md-3 col-form-label" for="signinSrEmail">Home Page {{trans('messages.icon')}} <small>({{ trans('messages.32x32') }})</small></label>
+                            <label class="col-md-3 col-form-label" for="signinSrEmail">Home Page
+                                {{ trans('messages.icon') }} <small>({{ trans('messages.32x32') }})</small></label>
                             <div class="col-md-9">
                                 <div class="input-group" data-toggle="aizuploader" data-type="image">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text bg-soft-secondary font-weight-medium">{{ trans('messages.browse')}}</div>
+                                        <div class="input-group-text bg-soft-secondary font-weight-medium">
+                                            {{ trans('messages.browse') }}</div>
                                     </div>
                                     <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
-                                    <input type="hidden" name="icon" class="selected-files" value="{{ $category->icon }}">
+                                    <input type="hidden" name="icon" class="selected-files"
+                                        value="{{ $category->icon }}">
                                 </div>
                                 <div class="file-preview box sm">
                                 </div>
@@ -233,7 +366,7 @@
                             </div>
                         </div>
 
-                        <h5 class="mb-0 h6">{{trans('messages.seo_section')}}</h5>
+                        <h5 class="mb-0 h6">{{ trans('messages.seo_section') }}</h5>
                         <hr>
 
                         <div class="form-group row">
@@ -254,7 +387,7 @@
                             <label class="col-sm-3 col-from-label">{{ trans('messages.meta_keywords') }}</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="meta_keywords"
-                                    value="{{ old('meta_keywords',$category->getTranslation('meta_keyword', $lang)) }}"
+                                    value="{{ old('meta_keywords', $category->getTranslation('meta_keyword', $lang)) }}"
                                     placeholder="{{ trans('messages.meta_keywords') }}">
                             </div>
                         </div>
@@ -263,7 +396,7 @@
                             <label class="col-sm-3 col-from-label">{{ trans('messages.og_title') }}</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="og_title"
-                                    value="{{ old('og_title',$category->getTranslation('og_title', $lang)) }}"
+                                    value="{{ old('og_title', $category->getTranslation('og_title', $lang)) }}"
                                     placeholder="{{ trans('messages.og_title') }}">
                             </div>
                         </div>
@@ -291,7 +424,8 @@
 
                         <div class="form-group mb-0 text-right">
                             <button type="submit" class="btn btn-sm btn-primary">{{ trans('messages.Save') }}</button>
-                            <a href="{{ route('categories.index') }}" class="btn btn-sm btn-cancel">{{trans('messages.cancel')}}</a>
+                            <a href="{{ route('categories.index') }}"
+                                class="btn btn-sm btn-cancel">{{ trans('messages.cancel') }}</a>
                         </div>
                     </form>
                 </div>
@@ -300,22 +434,43 @@
     </div>
 @endsection
 @section('script')
-<script>
-    function makeSlug(e) {
-        var title = e.value;
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"
+        integrity="sha512-foIijUdV0fR0Zew7vmw98E6mOWd9gkGWQBWaoA1EOFAx+pY+N8FmmtIYAVj64R98KeD2wzZh1aHK0JSpKmRH8w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $('.repeater').repeater({
+            initEmpty: false,
+            show: function() {
+                $(this).slideDown();
+
             },
-            url: "{{ route('generate-slug') }}",
-            type: 'GET',
-            data: {
-                title: title
+            hide: function(deleteElement) {
+                if (confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+                }
             },
-            success: function(response) {
-                $('#slug').val(response);
-            }
+            repeaters: [{
+                selector: '.inner-repeater'
+            }]
         });
-    }
-</script>
+    </script>
+    <script>
+        function makeSlug(e) {
+            var title = e.value;
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('generate-slug') }}",
+                type: 'GET',
+                data: {
+                    title: title
+                },
+                success: function(response) {
+                    $('#slug').val(response);
+                }
+            });
+        }
+    </script>
 @endsection
