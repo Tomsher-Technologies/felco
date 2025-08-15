@@ -124,7 +124,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ trans('messages.content') }}</label>
                             <div class="col-md-9">
-                                <textarea id="content1" name="content1" rows="3" class="form-control aiz-text-editor">{{ old('content1', $industry->getTranslation('content1', $lang)) }}</textarea>
+                                <textarea id="content1" name="content1" rows="3" class="form-control ">{{ old('content1', $industry->getTranslation('content1', $lang)) }}</textarea>
                             </div>
                         </div>
 
@@ -201,7 +201,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ trans('messages.content') }}</label>
                             <div class="col-md-9">
-                                <textarea id="content2" name="content2" rows="3" class="form-control aiz-text-editor">{{ old('content2', $industry->getTranslation('content2', $lang)) }}</textarea>
+                                <textarea id="content2" name="content2" rows="3" class="form-control ">{{ old('content2', $industry->getTranslation('content2', $lang)) }}</textarea>
                             </div>
                         </div>
 

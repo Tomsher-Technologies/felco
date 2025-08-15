@@ -69,11 +69,11 @@
                     {{-- Section Header --}}
                     <div id="applicationHeader" class="mb-12 border-l-2 border-orange-500 pl-4">
                         <h3 class="animate-on-scroll text-3xl font-light text-slate-900">
-                            {{ $translation->title2 ?? __('Applications') }}
+                            {{ $industry->getTranslation('title2', $lang) }}
                         </h3>
-                        @if (!empty($translation->content2))
+                        @if (!empty($industry->getTranslation('content2', $lang)))
                             <p class="animate-on-scroll mt-2 text-slate-600">
-                                {!! $translation->content2 !!}
+                                {!! $industry->getTranslation('content2', $lang) !!}
                             </p>
                         @endif
                     </div>
