@@ -14,6 +14,7 @@ use App\Models\Subscriber;
 use App\Models\ServiceSale;
 use App\Models\Product;
 use App\Models\Contacts;
+use App\Models\Industry;
 use Storage;
 use File;
 
@@ -23,11 +24,11 @@ class PageController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(Request $request)
 	{
 		$pages = \App\Models\Page::where('status',1)->orderBy('slug', 'asc')->get();
-       
+
         return view('backend.website_settings.pages.index', compact('pages'));
 	}
 
@@ -37,7 +38,7 @@ class PageController extends Controller
         return view('backend.subscribers', compact('subscribers'));
     }
 
-    
+
     public function subscribersDestroy($id)
     {
         Subscriber::destroy($id);
@@ -52,7 +53,7 @@ class PageController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $page = new Page;
         $page->title = $request->title;
         if (Page::where('slug', preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug)))->first() == null) {
@@ -86,13 +87,15 @@ class PageController extends Controller
         if($page != null){
             $page_id = $page->id;
           if ($id == 'home') {
-            
+
             $categories = Category::where('parent_id', 0)->where('is_active',1)->with('childrenCategories')->get();
 
             $products = Product::select('id', 'name')->where('published',1)->get();
-            
-            return view('backend.website_settings.pages.home_page_edit', compact('page', 'categories', 'products','lang','page_id'));
-            
+
+            $industries = Industry::where('is_active', 1)->with('industry_translations')->get();
+
+            return view('backend.website_settings.pages.home_page_edit', compact('page', 'categories', 'industries','lang','page_id'));
+
           }else if ($id == 'service_support') {
             return view('backend.website_settings.pages.service_support', compact('page','lang','page_id'));
           }else if ($id == 'contact_us') {
@@ -101,7 +104,8 @@ class PageController extends Controller
             return view('backend.website_settings.pages.about_us', compact('page','lang','page_id'));
           }else if ($id == 'faq') {
             return view('backend.website_settings.pages.faq', compact('page','lang','page_id'));
-          }else if ($id == 'marine' || $id == 'oil_gas' || $id == 'hvac') {
+         // }else if ($id == 'marine' || $id == 'oil_gas' || $id == 'hvac') {
+          }else if ($page->industy == 1) {
             return view('backend.website_settings.pages.industries', compact('page','lang','page_id'));
           }else if ($id == 'service_sales') {
             return view('backend.website_settings.pages.service_sales', compact('page','lang','page_id'));
@@ -112,12 +116,12 @@ class PageController extends Controller
         abort(404);
     }
 
-    
+
     public function update(Request $request, $id)
     {
-        
+
         $page = Page::findOrFail($id);
-     
+
         if ($page) {
             $page->image3              = $request->has('image3') ? $request->image3 : NULL;
             $page->image4              = $request->has('image4') ? $request->image4 : NULL;
@@ -127,7 +131,7 @@ class PageController extends Controller
                 $page->image = $photo;
                 $page->save();
             }
-            
+
             $page_translation                       = PageTranslation::firstOrNew(['lang' => $request->lang, 'page_id' => $page->id]);
             $page_translation->title                = $request->title;
             $page_translation->content              = $request->has('content') ? $request->content : NULL;
@@ -186,7 +190,7 @@ class PageController extends Controller
                     }
                 }
             }
-            
+
             flash(trans('messages.page').' '.trans('messages.updated_msg'))->success();
             return redirect()->route('website.pages');
         }

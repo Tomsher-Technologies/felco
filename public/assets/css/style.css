@@ -160,18 +160,18 @@ a:hover {
 }
 
 .section-padding {
-  padding: 110px 0;
+  padding: 70px 0;
 }
 
 @media (max-width: 991px) {
   .section-padding {
-    padding: 90px 0;
+    padding: 50px 0;
   }
 }
 
 @media (max-width: 767px) {
   .section-padding {
-    padding: 80px 0;
+    padding: 40px 0;
   }
 }
 
@@ -281,6 +281,37 @@ img {
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1400px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1200px; /* reduced from 1320px */
+  }
+}
+
+
+
+
+
+
+
+
+
 
 .rotating {
   -webkit-animation: rotating 5s alternate infinite;
@@ -2365,9 +2396,22 @@ img {
   left: 25px;
 }
 
-.hero-slider .swiper-button-prev:before {
-  font-family: "themify";
-  content: "\e629";
+
+
+/* Swiper Prev Arrow (Left) */
+.hero-slider .swiper-button-prev::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f104"; /* fa-chevron-left */
+  font-weight: 900;
+  font-size: 20px;
+  color: #fff;
+}
+
+/* Swiper Next Arrow (Right) */
+.hero-slider .swiper-button-next::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f105"; /* fa-chevron-right */
+  font-weight: 900;
   font-size: 20px;
   color: #fff;
 }
@@ -2376,12 +2420,17 @@ img {
   right: 25px;
 }
 
-.hero-slider .swiper-button-next:before {
-  font-family: "themify";
-  content: "\e628";
+
+/* Swiper Next Arrow (Right) */
+.hero-slider .swiper-button-next::before {
+  font-family: "Font Awesome 6 Free";
+  content: "\f105"; /* fa-chevron-right */
+  font-weight: 900;
   font-size: 20px;
   color: #fff;
 }
+
+
 
 .hero-slider .swiper-pagination-bullet {
   width: 10px;
@@ -4413,18 +4462,18 @@ img {
 #2.1	features-section-s2
 --------------------------------------------------------------*/
 .features-section-s2 {
-  margin: 110px 0;
+  margin: 70px 0;
 }
 
 @media (max-width: 991px) {
   .features-section-s2 {
-    margin: 90px 0;
+    margin: 50px 0;
   }
 }
 
 @media (max-width: 767px) {
   .features-section-s2 {
-    margin: 80px 0;
+    margin: 40px 0;
   }
 }
 
@@ -4432,7 +4481,8 @@ img {
 #2.2	about-us-section-s2
 --------------------------------------------------------------*/
 .about-us-section-s2 {
-  padding-bottom: 93px;
+      padding-bottom: 50px;
+    padding-top: 50px;
 }
 
 @media (max-width: 991px) {

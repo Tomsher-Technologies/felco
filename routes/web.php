@@ -29,7 +29,8 @@ Route::get('/marine', [FrontendController::class, 'marine'])->name('marine');
 Route::get('/hvac', [FrontendController::class, 'hvac'])->name('hvac');
 Route::get('/oil_gas', [FrontendController::class, 'oilGas'])->name('oil_gas');
 Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
-Route::get('/industries', [FrontendController::class, 'industries'])->name('industries');
+Route::get('/industries', [FrontendController::class, 'industries'])->name('industries_web');
+Route::get('/industrydetails/{type}', [FrontendController::class, 'industryDetails'])->name('industry.details');
 Route::get('/products', [FrontendController::class, 'products'])->name('products');
 Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
@@ -40,6 +41,8 @@ Route::get('/service-support', [FrontendController::class, 'service_support'])->
 Route::post('/language_change', [FrontendController::class, 'changeLanguage'])->name('language.change');
 
 Route::get('/category/{category_slug}', [FrontendController::class, 'filterByCategory'])->name('products.category');
+
+
 Route::get('/product-detail', [FrontendController::class, 'productDetails'])->name('product-detail');
 Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('newsletter.subscribe');
 

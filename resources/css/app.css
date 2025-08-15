@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+
+@import 'animate.css';
+@import 'swiper/css';
+@import "@flaticon/flaticon-uicons/css/all/all.css";
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base Layer Customizations ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-gray-800 bg-white antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-gray-900;
+  }
+  a {
+    @apply text-primary hover:text-primary/80 transition;
+  }
+  button {
+    @apply transition focus:outline-none focus:ring-2 focus:ring-primary/50;
+  }
+}
+
+/* ---------- Swiper Height Fixes ---------- */
+/* Ensure full height for Swiper and its slides */
+#felco-hero,
+#felco-hero .swiper,
+#felco-hero .swiper-wrapper,
+#felco-hero .swiper-slide {
+  height: 100% !important;
+  min-height: 0;
+}
+
+/* Tailwind base or custom CSS */
+.gsap-fade-up {
+  will-change: transform, opacity;
+}
+
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+
+.faq-content p{
+  color: black !important;
+}
+
+
+    .custom-list {
+        position: relative;
+    }
+
+    .custom-list br + *::before {
+        content: "• ";
+        color: #f06425; /* optional accent color */
+        font-weight: bold;
+        margin-right: 0.25rem;
+    }
+
+    .custom-list br {
+        display: block;
+        margin-top: 0.5rem;
+        content: "";
+    }
+
+    .custom-list {
+        white-space: pre-line;
+    }
+
+
+
+.swiper-button-prev, .swiper-button-next{
+
+      color: #ffffff;
+   
+}
+
+
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after,.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after{
+  font-size: 20px !important;
+}
+
+.swiper-pagination-bullet-active{
+background : #f06425 !important
+}
+
+.swiper-pagination-bullet{
+  background : #fff !important
+}
+
+
+
+/* Add this to fix position: sticky issues */
+html, body {
+    overflow-x: visible !important;
+}
+
+
+#main-nav.is-sticky {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Base state for the header */
+#site-header {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+/* Active sticky state */
+#site-header.active-sticky {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+
+
+    /* Style for Sale Content Section */
+    #saleContent {
+        font-size: 14px; /* Adjust text size */
+        line-height: 1.5; /* Adjust line height for readability */
+        color: #4a4a4a; /* Set text color */
+        overflow: hidden; /* Hide the overflowing text */
+        text-overflow: ellipsis; /* Show ellipsis when the text overflows */
+        word-wrap: break-word; /* Ensure long words break appropriately */
+        white-space: normal; /* Allow text wrapping */
+        max-width: 100%; /* Ensure content stays within container */
+        padding: 10px 0; /* Add top and bottom padding for spacing */
+        background-color: #f9f9f9; /* Light background color */
+        border-radius: 8px; /* Rounded corners for the content box */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    /* Custom multi-line truncation with ellipsis */
+    #saleContent.multi-line-ellipsis {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limit to 3 lines, adjust as needed */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        #saleContent {
+            font-size: 13px; /* Slightly smaller font on mobile */
+            line-height: 1.4; /* Adjust line height for better readability on mobile */
+        }
+    }
+
+    /* Hover Effect (Optional) */
+    #saleContent:hover {
+        background-color: #e9e9e9; /* Light hover effect */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+        transition: all 0.3s ease; /* Smooth transition */
+    }

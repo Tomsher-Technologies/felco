@@ -1,86 +1,62 @@
-    <footer class="fl-footer">
-        @php
-            $pageData = getPageData('home');
-            $lang = getActiveLanguage();
-        @endphp
-        <div class="container">
-            <div class="fl-footer-top">
-                <div class="fl-cta-section">
-                    <h2>{{ get_setting('footer_title', null, $lang) }}</h2>
-                    <a href="{{ route('contact') }}" class="theme-btn fl-get-in-touch-icon">{{ trans('messages.get_in_touch') }}</a>
-                </div>
-                <div class="fl-newsletter-section">
-                    <h3>{{ get_setting('newsletter_title', null, $lang) }}</h3>
-                    <p>{{ get_setting('newsletter_sub_title', null, $lang) }}</p>
-                    {{-- <form class="fl-newsletter-form" aria-label="Newsletter Subscription">
-                        <input type="email" placeholder="{{ trans('messages.email') }}" required aria-label="Email Address" />
-                        <button type="submit">{{ trans('messages.subscribe') }}</button>
-                    </form> --}}
-                    <form class="fl-newsletter-form"  id="newsletterForm">
-                        <input type="email" placeholder="{{trans('messages.email')}}"  name="email" class="blog-newsletter__input" />
-                        <button type="submit" class="blog-newsletter__submit">{{ trans('messages.subscribe') }}</button>
-                    </form>
-                    <div id="newsletterMessage"></div>
-                </div>
+<footer class="bg-[#707777] py-16 text-[#ededed]">
+    <x-container>
+
+        {{-- 1. Centered Logo & Main Navigation --}}
+        <div class="mb-12 flex flex-col items-center text-center">
+            <a href="{{ route('home') }}" aria-label="Home">
+                <img src="{{ asset('assets/images/logo/logo-text.svg') }}" alt="Felco Motors Logo" class="mb-8 h-auto w-full max-w-[220px]" />
+            </a>
+            <nav aria-label="Footer navigation">
+                <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base font-medium text-[#cccccc]">
+                    <li><a href="{{ route('about_us') }}" class="transition text-white hover:text-white">About Us</a></li>
+                    <li><a href="{{ route('products') }}" class="transition text-white hover:text-white">Products</a></li>
+                    <li><a href="{{ route('industries_web') }}" class="transition text-white hover:text-white">Industries</a></li>
+                    <li><a href="{{ route('contact') }}" class="transition  text-white hover:text-white">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        {{-- 2. Action Section (Newsletter & Socials) --}}
+        <div class="grid grid-cols-1 items-center gap-10 border-y border-[#505757] py-12 text-center lg:grid-cols-2 lg:text-left">
+            {{-- Newsletter --}}
+            <div>
+                <h4 class="text-xl font-light text-white">Stay Updated</h4>
+                <p class="mt-1 text-sm text-[#cccccc]">Join our newsletter for the latest product news.</p>
+                <form id="newsletterForm" class="mt-4 flex items-center">
+                    <input type="email" name="email" placeholder="Your email address" required class="w-full flex-grow border-0 bg-[#5a6161] px-4 py-2.5 text-[#ededed] placeholder-[#b0b7b7] transition focus:outline-none focus:ring-2 focus:ring-[#f06425]" />
+                    <button type="submit" class="shrink-0 bg-[#f06425] p-3 font-medium text-white transition-colors duration-200 hover:bg-[#e14e0f]">
+                        <i class="fi fi-rr-paper-plane text-base"></i>
+                    </button>
+                </form>
+                <div id="newsletterMessage" class="mt-2 text-sm"></div>
             </div>
 
-     
-
-            <div class="fl-footer-content">
-            
-                <div class="fl-footer-description">
-                    <div class="fl-logo mt-0 mb-3">
-                        <img src="{{ asset('assets/images/logo/logo-white.png') }}" alt="Felco Motors Logo" />
-                    </div>
-
-                    <p> {!! get_setting('footer_description', null, $lang) !!}</p>
-                    
-                  </div>
-
-                <div class="fl-footer-links">
-                    <h4>{{ trans('messages.company') }}</h4>
-                    <ul>
-                        <li><a href="{{ route('products') }}">{{ trans('messages.products') }}</a></li>
-                        <li><a href="{{ route('industries') }}">{{ trans('messages.industries') }}</a></li>
-                        <li><a href="{{ route('about_us') }}">{{ trans('messages.about_us') }}</a></li>
-                        <li><a href="{{ route('contact') }}">{{ trans('messages.contact_us') }}</a></li>
-                    </ul>
-                </div>
-
-                <div class="fl-footer-links">
-                    <h4>{{ trans('messages.useful_links') }}</h4>
-                    <ul>
-                        <li><a href="{{ route('faq') }}">{{ trans('messages.faq') }}</a></li>
-                        <li><a href="{{ route('privacy') }}">{{ trans('messages.privacy_policy') }}</a></li>
-                        <li><a href="{{ route('terms') }}">{{ trans('messages.terms_conditions') }}</a></li>
-                    </ul>
-                </div>
-
-                <div class="fl-footer-links">
-                    <h4>{{ trans('messages.contact_us') }}</h4>
-                    <ul>
-                        <li>{{ get_setting('footer_address') }}</li>
-                        <li>{{ trans('messages.phone') }}: <a href="tel:{{ get_setting('footer_phone') }}">{{ get_setting('footer_phone') }}</a></li>
-                        <li>{{ trans('messages.email') }}: <a href="mailto:{{ get_setting('footer_email') }}">{{ get_setting('footer_email') }}</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="fl-footer-bottom">
-                <p> © {{ date('Y') }} {!! get_setting('frontend_copyright_text', null, $lang) !!} | {{ trans('messages.designed_by') }} <a href="https://www.tomsher.com/" target="_blank">{{ trans('messages.tomsher') }}</a></p>
-                <div class="social_link m-0 p-0">
-                    <ul>
-                        <li>
-                            <a href="{{ get_setting('facebook_link') }}" target="_blank"><i class="bi bi-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="{{ get_setting('instagram_link') }}" target="_blank"><i class="bi bi-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="{{ get_setting('linkedin_link') }}" target="_blank"><i class="bi bi-linkedin"></i></a>
-                        </li>
-                    </ul>
+            {{-- Socials --}}
+            <div class="lg:text-right">
+                <h4 class="text-xl font-light text-white">Follow Us</h4>
+                <p class="mt-1 mb-4 text-sm text-[#cccccc]">Connect with us on social media.</p>
+                <div class="flex items-center justify-center gap-5 text-[#ededed] lg:justify-end">
+                    <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener" class="transition text-white hover:text-[#ddd]">
+                        <x-icons.facebook class="h-6 w-6" />
+                    </a>
+                    <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener" class="transition text-white hover:text-[#ddd]">
+                        <x-icons.instagram class="h-6 w-6" />
+                    </a>
+                    <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener" class="transition text-white hover:text-[#ddd]">
+                        <x-icons.linkedin class="h-6 w-6" />
+                    </a>
                 </div>
             </div>
         </div>
-    </footer>
+
+        {{-- 3. Footer Bottom --}}
+        <div class="flex flex-col items-center gap-4 pt-8 pb-8 text-center text-xs text-[#cccccc] sm:flex-row sm:justify-between">
+            <p>&copy; 2025 Felco Motors. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-1">
+                <a href="{{ route('terms') }}" class="transition text-[#cccccc] hover:text-white">Terms & Conditions</a>
+                <a href="{{ route('privacy') }}" class="transition text-[#cccccc] hover:text-white">Privacy Policy</a>
+            </div>
+        </div>
+
+    </x-container>
+</footer>
