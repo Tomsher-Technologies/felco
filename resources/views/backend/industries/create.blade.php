@@ -90,7 +90,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ trans('messages.content') }}</label>
                             <div class="col-md-9">
-                                <textarea id="content1" name="content1" rows="3" class="form-control aiz-text-editor">{{ old('content1') }}</textarea>
+                                <textarea id="content1" name="content1" rows="3" class="form-control ">{{ old('content1') }}</textarea>
                             </div>
                         </div>
 
@@ -149,7 +149,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ trans('messages.content') }}</label>
                             <div class="col-md-9">
-                                <textarea id="content2" name="content2" rows="3" class="form-control aiz-text-editor">{{ old('content2') }}</textarea>
+                                <textarea id="content2" name="content2" rows="3" class="form-control ">{{ old('content2') }}</textarea>
                             </div>
                         </div>
 
