@@ -9,13 +9,13 @@ class Category extends Model
 {
     protected $with = ['category_translations'];
 
-    protected $fillable = ['parent_id', 'name', 'level', 'slug', 'image', 'icon', 'frame_size', 'output', 'ip_class', 'insulation_class', 'brake', 'encoder', 'voltages', 'efficiency', 'approvals', 'is_active'];
+    protected $fillable = ['parent_id', 'name', 'level', 'slug', 'image', 'icon', 'brochure', 'frame_size', 'output', 'ip_class', 'insulation_class', 'brake', 'encoder', 'voltages', 'efficiency', 'approvals', 'is_active'];
 
     public function getTranslation($field = '', $lang = false)
     {
         $lang = $lang == false ? App::getLocale() : $lang;
         $category_translation = $this->category_translations->where('lang', $lang)->first();
-        
+
         if ($category_translation == null && $lang != 'en') {
             $category_translation = $this->category_translations->where('lang', 'en')->first();
         }
@@ -91,7 +91,7 @@ class Category extends Model
      {
          // Update status of the current category
          $this->update(['is_active' => $status]);
- 
+
          // Recursively update statuses of child categories
          foreach ($this->categories as $child) {
              $child->updateChildStatuses($status);

@@ -10,6 +10,7 @@ use App\Models\CategoryTranslation;
 use App\Utility\CategoryUtility;
 use Illuminate\Support\Str;
 use Cache;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -18,7 +19,7 @@ class CategoryController extends Controller
     {
         $this->middleware('auth');
 
-        $this->middleware('permission:manage_categories', ['only' => ['index','create','store','edit','update','destroy','updateFeatured']]);
+        $this->middleware('permission:manage_categories', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'updateFeatured']]);
     }
     /**
      * Display a listing of the resource.
@@ -41,7 +42,7 @@ class CategoryController extends Controller
             });
         }
         $categories = $categories->paginate(30);
-        return view('backend.categories.index', compact('categories', 'sort_search','catgeory'));
+        return view('backend.categories.index', compact('categories', 'sort_search', 'catgeory'));
     }
 
     /**
@@ -69,6 +70,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required',
+            'brochure' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,xls,xlsx|max:20480',
         ]);
 
         $category                   = new Category;
@@ -77,6 +79,16 @@ class CategoryController extends Controller
         if ($request->parent_id != "0") {
             $parent                 = Category::find($request->parent_id);
             $category->level        = $parent->level + 1;
+        }
+
+        if ($request->hasFile('brochure')) {
+            $filename = 'brochure_files/' . time() . '_' . $request->file('brochure')->getClientOriginalName();
+            $fileContents = file_get_contents($request->file('brochure')->getPathname());
+            $stored = Storage::disk('public')->put($filename, $fileContents);
+
+            if ($stored) {
+                $category->brochure = Storage::url($filename);
+            }
         }
 
         $category->image            = $request->image ?? NULL;
@@ -90,7 +102,7 @@ class CategoryController extends Controller
         $category->voltages         = $request->voltages ?? NULL;
         $category->efficiency       = $request->efficiency ?? NULL;
         $category->approvals        = $request->approvals ?? NULL;
-        $category->is_active        = ($request->status ==2) ? 0 : 1;
+        $category->is_active        = ($request->status == 2) ? 0 : 1;
 
         $slug               = $request->slug ? Str::slug($request->slug, '-') : Str::slug($request->name, '-');
         $slug               = Str::lower($slug);
@@ -103,6 +115,8 @@ class CategoryController extends Controller
 
         $category_translation                       = CategoryTranslation::firstOrNew(['lang' => env('DEFAULT_LANGUAGE'), 'category_id' => $category->id]);
         $category_translation->name                 = $request->name;
+        $category_translation->features             = $request->features ? json_encode($request->features) : NULL;
+
         $category_translation->description          = $request->description ?? NULL;
         $category_translation->title1               = $request->title1 ?? NULL;
         $category_translation->content1             = $request->content1 ?? NULL;
@@ -118,7 +132,7 @@ class CategoryController extends Controller
         $category_translation->twitter_description  = $request->twitter_description;
         $category_translation->save();
 
-        flash(trans('messages.category').' '.trans('messages.created_msg'))->success();
+        flash(trans('messages.category') . ' ' . trans('messages.created_msg'))->success();
         return redirect()->route('categories.index');
     }
 
@@ -166,6 +180,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required',
+            'brochure' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,xls,xlsx|max:20480',
         ]);
 
         if ($request->lang == env("DEFAULT_LANGUAGE")) {
@@ -188,7 +203,19 @@ class CategoryController extends Controller
                 CategoryUtility::move_level_up($category->id);
             }
 
-            $category->is_active        = ($request->status ==2) ? 0 : 1;
+            if ($request->hasFile('brochure')) {
+                $filename = 'brochure_files/' . time() . '_' . $request->file('brochure')->getClientOriginalName();
+
+                $fileContents = file_get_contents($request->file('brochure')->getPathname());
+
+                $stored = Storage::disk('public')->put($filename, $fileContents);
+
+                if ($stored) {
+                    $category->brochure = Storage::url($filename);
+                }
+            }
+
+            $category->is_active        = ($request->status == 2) ? 0 : 1;
             $category->image            = $request->image ?? NULL;
             $category->icon             = $request->icon ?? NULL;
             $category->frame_size       = $request->frame_size ?? NULL;
@@ -200,7 +227,7 @@ class CategoryController extends Controller
             $category->voltages         = $request->voltages ?? NULL;
             $category->efficiency       = $request->efficiency ?? NULL;
             $category->approvals        = $request->approvals ?? NULL;
-            $category->is_active        = ($request->status ==2) ? 0 : 1;
+            $category->is_active        = ($request->status == 2) ? 0 : 1;
 
             $category->allChildCategories()->update(['is_active' => $request->status]);
             $slug = '';
@@ -219,6 +246,7 @@ class CategoryController extends Controller
         $category_translation                       = CategoryTranslation::firstOrNew(['lang' => $request->lang, 'category_id' => $category->id]);
         $category_translation->name                 = $request->name;
         $category_translation->description          = $request->description ?? NULL;
+        $category_translation->features             = $request->features ? json_encode($request->features) : NULL;
         $category_translation->title1               = $request->title1 ?? NULL;
         $category_translation->content1             = $request->content1 ?? NULL;
         $category_translation->title2               = $request->title2 ?? NULL;
@@ -233,7 +261,7 @@ class CategoryController extends Controller
         $category_translation->twitter_description  = $request->twitter_description;
         $category_translation->save();
 
-        flash(trans('messages.category').' '.trans('messages.updated_msg'))->success();
+        flash(trans('messages.category') . ' ' . trans('messages.updated_msg'))->success();
         return back();
     }
 
@@ -286,7 +314,8 @@ class CategoryController extends Controller
         return 1;
     }
 
-    public function generateSlug(Request $request){
+    public function generateSlug(Request $request)
+    {
         $slug = Str::slug($request->title);
         echo  $slug;
     }
