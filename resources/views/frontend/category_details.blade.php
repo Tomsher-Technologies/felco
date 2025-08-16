@@ -301,25 +301,23 @@
                                 {!! $category->getTranslation('content2', $lang) !!}
                             </p>
 
-                            <div class="mt-8">
-                                @if (!empty($category->brochure))
-                                    @php
-                                        $filenameParts = explode('/', $category->brochure);
-                                        $filename = end($filenameParts);
-                                    @endphp
-                                    <a href="{{ asset($category->brochure) }}" target="_blank"
-                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white hover:text-white shadow-lg
-                                transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
-                                        Download Brochure
-                                    </a>
-                                @else
-                                    <a href="{{ url('/brochures') }}"
-                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white hover:text-white shadow-lg
-                                transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
-                                        Explore Catalogues
-                                    </a>
-                                @endif
-                            </div>
+                        <div class="mt-8">
+    @if (!empty($category->brochure))
+        <x-button 
+            href="{{ asset($category->brochure) }}" 
+            target="_blank" 
+            text="Download Brochure"
+            class="px-8 py-3 text-base font-medium"
+        />
+    @else
+        <x-button 
+            href="{{ url('/brochures') }}" 
+            text="Explore Catalogues"
+            class="px-8 py-3 text-base font-medium"
+        />
+    @endif
+</div>
+
 
                         </div>
                     </div>
