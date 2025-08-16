@@ -5,6 +5,11 @@
         <h5 class="mb-0 h6">{{ trans('messages.category') . ' ' . trans('messages.information') }}</h5>
     </div>
 
+    @php
+    $featuresData = json_decode(old('features', $category->getTranslation('features', $lang)), true);
+    $initEmpty = empty($featuresData) || !is_array($featuresData) ? 'true' : 'false';
+@endphp
+
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="card">
@@ -476,22 +481,21 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-        $('.repeater').repeater({
-            initEmpty: false,
-            show: function() {
-                $(this).slideDown();
-
-            },
-            hide: function(deleteElement) {
-                if (confirm('Are you sure you want to delete this element?')) {
-                    $(this).slideUp(deleteElement);
-                }
-            },
-            repeaters: [{
-                selector: '.inner-repeater'
-            }]
-        });
-    </script>
+    $('.repeater').repeater({
+        initEmpty: {{ $initEmpty }},
+        show: function() {
+            $(this).slideDown();
+        },
+        hide: function(deleteElement) {
+            if (confirm('Are you sure you want to delete this element?')) {
+                $(this).slideUp(deleteElement);
+            }
+        },
+        repeaters: [{
+            selector: '.inner-repeater'
+        }]
+    });
+</script>
     <script>
         function makeSlug(e) {
             var title = e.value;
