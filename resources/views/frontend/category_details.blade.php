@@ -329,35 +329,65 @@
 
 
     {{-- 5. Related Categories Section --}}
-    @if ($category->childs->where('is_active', 1)->isNotEmpty())
-        <section class="border-t border-stone-200 bg-stone-100 py-16">
-            <x-container>
-                <div class="mb-8 flex items-end justify-between">
-                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">Related Categories</h2>
+    @if ($category->childs->isNotEmpty())
+    <section class="border-t border-stone-200 bg-stone-100 py-16">
+        <x-container>
+            <div class="mb-8 flex items-end justify-between">
+                <h2 class="animate-on-scroll text-3xl font-light text-stone-900">Related Categories</h2>
+            </div>
+            <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
+                <div class="flex gap-6 px-4">
+                    @foreach ($category->childs as $cat)
+                        <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
+                            class="group relative block h-[28rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
+                            <img src="{{ uploaded_asset($cat->image) }}"
+                                alt="{{ $cat->getTranslation('name', $lang) }}"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                                <h3 class="text-xl font-normal leading-tight text-white">
+                                    {{ $cat->getTranslation('name', $lang) }}
+                                </h3>
+                            </div>
+                            <div class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                <i class="fi fi-rr-arrow-right text-xl"></i>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
-                <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
-                    <div class="flex gap-6 px-4">
-                        @foreach ($category->childs->where('is_active', 1) as $cat)
-                            <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                                class="group relative block h-[28rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
-                                <img src="{{ uploaded_asset($cat->image) }}"
-                                    alt="{{ $cat->getTranslation('name', $lang) }}"
-                                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                                    <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}</h3>
-                                </div>
-                                <div
-                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center  bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-                                    <i class="fi fi-rr-arrow-right text-xl"></i>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
+            </div>
+        </x-container>
+    </section>
+@elseif ($siblingCategories->isNotEmpty())
+    <section class="border-t border-stone-200 bg-stone-100 py-16">
+        <x-container>
+            <div class="mb-8 flex items-end justify-between">
+                <h2 class="animate-on-scroll text-3xl font-light text-stone-900">All Categories</h2>
+            </div>
+            <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
+                <div class="flex gap-6 px-4">
+                    @foreach ($siblingCategories as $cat)
+                        <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
+                            class="group relative block h-[28rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
+                            <img src="{{ uploaded_asset($cat->image) }}"
+                                alt="{{ $cat->getTranslation('name', $lang) }}"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                                <h3 class="text-xl font-normal leading-tight text-white">
+                                    {{ $cat->getTranslation('name', $lang) }}
+                                </h3>
+                            </div>
+                            <div class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                <i class="fi fi-rr-arrow-right text-xl"></i>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
-            </x-container>
-        </section>
-    @endif
+            </div>
+        </x-container>
+    </section>
+@endif
+
 
 @endsection
