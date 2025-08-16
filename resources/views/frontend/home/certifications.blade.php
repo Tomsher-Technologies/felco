@@ -6,10 +6,12 @@
         </div>
 
         @if (!empty($certificationImages) && count($certificationImages))
-            <div class="grid grid-cols-5 gap-6">
-                @foreach ($certificationImages as $img)
-                    <x-certification-logo src="{{ uploaded_asset($img) }}" alt="Certification 1" />
-                @endforeach
+            <div class="flex justify-center">
+                <div class="grid grid-cols-5 gap-3 max-w-5xl w-full">
+                    @foreach ($certificationImages as $img)
+                        <x-certification-logo src="{{ uploaded_asset($img) }}" alt="Certification 1" />
+                    @endforeach
+                </div>
             </div>
         @endif
     </x-container>

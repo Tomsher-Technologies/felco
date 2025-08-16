@@ -12,9 +12,9 @@
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             @if ($data['special_industries'] && $data['special_industries']->count() > 0)
                 @foreach ($data['special_industries'] as $index => $industry)
-                    <div class="industry-card group relative">
+                    <div class="industry-card group relative flex flex-col h-full">
                         <a href="{{ route('industry.details', ['type' => $industry->slug]) }}"
-                            class="group relative flex h-full flex-col overflow-hidden rounded border-l-4 border-transparent bg-white p-6 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-l-orange-400 hover:shadow-xl md:p-8">
+                            class="group relative flex h-full flex-col overflow-hidden bg-white p-6 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-l-orange-400 hover:shadow-xl md:p-8">
 
                             <div class="absolute -top-8 -right-8 h-16 w-16 bg-[#efefef] rotate-45 z-10"></div>
 
@@ -22,18 +22,18 @@
                                 class="absolute inset-0 -translate-x-full transform bg-gradient-to-r from-orange-100 via-gray-50 to-white transition-transform duration-500 group-hover:translate-x-0">
                             </div>
 
-                            <div class="relative z-20 flex h-full flex-col justify-between">
+                            <div class="relative z-20 flex flex-col justify-between h-full">
                                 <div>
-                                    <h3 class="mb-3 text-xl font-normal text-slate-800 md:text-2xl">
+                                    <h3 class="mb-3 text-xl font-normal text-slate-800 md:text-2xl group-hover:text-white">
                                         {{ $industry->getTranslation('name', $lang) }}
                                     </h3>
-                                    <p class="line-clamp-4 mt-3 text-base text-gray-600">
+                                    <p class="line-clamp-4 mt-3 text-base text-gray-600 group-hover:text-white">
                                         {{ Str::limit(strip_tags($industry->getTranslation('description', $lang)), 120) }}
                                     </p>
                                 </div>
 
                                 <div class="mt-8">
-                                    <span class="inline-flex items-center text-sm font-medium text-orange-600">
+                                    <span class="inline-flex items-center text-sm font-medium text-orange-600 group-hover:text-white">
                                         Learn More
                                         <i
                                             class="fi fi-rr-arrow-right ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"></i>
@@ -47,6 +47,11 @@
                                 <img src="{{ uploaded_asset($industry->image) }}" alt="Industry Image"
                                     class="object-cover w-full h-full" />
                             </div>
+
+                            {{-- Black overlay on hover --}}
+                            <div
+                                class="absolute inset-0 bg-black opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+
                         </a>
                     </div>
                 @endforeach

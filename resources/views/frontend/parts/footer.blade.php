@@ -50,13 +50,16 @@
         </div>
 
         {{-- 3. Footer Bottom --}}
-        <div class="flex flex-col items-center gap-4 pt-8 pb-8 text-center text-xs text-[#cccccc] sm:flex-row sm:justify-between">
-            <p>&copy; 2025 Felco Motors. All rights reserved.</p>
-            <div class="flex flex-wrap justify-center gap-x-4 gap-y-1">
-                <a href="{{ route('terms') }}" class="transition text-[#cccccc] hover:text-white">Terms & Conditions</a>
-                <a href="{{ route('privacy') }}" class="transition text-[#cccccc] hover:text-white">Privacy Policy</a>
-            </div>
-        </div>
+<div class="flex flex-col items-center gap-4 pt-8 !pb-8 mb-8 text-center text-xs text-[#cccccc] sm:flex-row sm:justify-between">
+    <p>&copy; {{ now()->year }} Felco Motors. All rights reserved.</p>
+    <div class="sm:text-right w-full sm:w-auto">
+        Designed by 
+        <a href="https://www.tomsher.com" target="_blank" rel="noopener" class="hover:text-white text-[#cccccc] no-underline">tomsher</a>
+    </div>
+</div>
+
+
+
 
     </x-container>
 </footer>

@@ -16,7 +16,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($categories as $cat)
                     <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                       class="group relative bg-white border border-slate-200 shadow hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col">
+                       class="group relative bg-white border !border-slate-50/10 shadow hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col">
 
                         {{-- Image --}}
                         <div class="relative w-full h-60 overflow-hidden">
