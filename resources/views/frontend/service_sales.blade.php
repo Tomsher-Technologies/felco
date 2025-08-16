@@ -23,14 +23,39 @@
                         </div>
 
                         <!-- Right Content -->
-                        <div>
+                        <!-- <div>
                             <h3 class="text-2xl md:text-3xl font-semibold text-slate-800 mb-4">
                                 {{ $sale->title }}
                             </h3>
                             <div id="saleContent"  class="text-slate-600 text-sm leading-relaxed prose max-w-none">
                                 {!! nl2br(e($sale->content)) !!}
                             </div>
-                        </div>
+                        </div> -->
+
+
+                        <div>
+    <h3 class="text-2xl md:text-3xl font-semibold text-slate-800 mb-4">
+        Support & Services
+    </h3>
+    <div class="text-slate-600 text-sm leading-relaxed max-w-none">
+        <ul class="list-disc pl-5 space-y-2 mb-4">
+            <li>Technical consultation and application engineering</li>
+            <li>On-site commissioning and start-up support</li>
+            <li>Preventive maintenance programs tailored to customer needs</li>
+            <li>Spare parts availability and fast response for critical components</li>
+            <li>Motor rewinding and refurbishment services</li>
+            <li>Condition monitoring and diagnostics (vibration, temperature, insulation)</li>
+            <li>Training programs for customer maintenance personnel</li>
+        </ul>
+        <div class="bg-orange-50 border-l-4 border-orange-400 p-4 text-slate-700 rounded">
+            Felco ensures that every motor installation is backed by dependable support, helping customers reduce downtime, optimize energy efficiency, and extend equipment lifespan.
+        </div>
+    </div>
+</div>
+
+
+
+
 
                     @else
                         <!-- Left Content -->
