@@ -53,12 +53,16 @@
                              <div class="g-recaptcha" data-sitekey="{{ env('NOCAPTCHA_SITEKEY') }}"></div>
                              @error('g-recaptcha-response')<p class="text-red-500 text-sm">This field is required</p>@enderror
                          </div>
+<div class="text-right">
+    <x-button 
+        type="submit" 
+  
+        :text="trans('messages.submit')"
+    />
+</div>
 
-                         <div class="text-right">
-                             <button type="submit" class="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-[#f06425] transition">
-                                 {{ trans('messages.submit') }}
-                             </button>
-                         </div>
+
+
                      </form>
                  </div>
 

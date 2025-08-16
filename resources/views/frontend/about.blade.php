@@ -152,16 +152,19 @@
 
         
             </div>
-            <div>
-                <a href="#contact"
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-black text-white font-medium text-sm shadow transition">
-                    Schedule a call
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor"
-                         stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                    </svg>
-                </a>
-            </div>
+<div>
+    <x-button 
+        href="#contact"
+        text="Schedule a call"
+        class="px-6 py-3 font-medium text-sm shadow"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
+             stroke-width="2" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+    </x-button>
+</div>
+
         </div>
     </x-container>
 
