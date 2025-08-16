@@ -5,10 +5,14 @@ import './bootstrap';
 
 
 // -------------------------------------------------------------
-// Alpine.js for UI Interactions
+// Alpine.js for UI Interactions + Collapse Plugin
 import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
+
 window.Alpine = Alpine;
+Alpine.plugin(collapse);
 Alpine.start();
+
 
 // -------------------------------------------------------------
 // Swiper.js for Sliders
@@ -19,12 +23,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
+
 // -------------------------------------------------------------
 // Toastr for Notifications
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 
+
 import { Dropdown, initDropdowns } from 'flowbite';
+
 
 // Initialize all dropdowns
 initDropdowns();
@@ -37,6 +44,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import ScrollSmoother from 'gsap/ScrollSmoother';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 window.gsap = gsap;
+
 
 // -------------------------------------------------------------
 // DOM Ready Events
@@ -60,6 +68,7 @@ window.addEventListener('load', () => {
       prevEl: '.swiper-button-prev',
     },
   });
+
 
   // ---------------------------------------------------------
   // Industry Slider (Creative Layout)
@@ -87,15 +96,6 @@ window.addEventListener('load', () => {
   });
 
 
-
-
-
-
-
-
-
-
-
   // ---------------------------------------------------------
   // GSAP ScrollSmoother Init
   const wrapper = document.querySelector('#smooth-wrapper');
@@ -108,6 +108,7 @@ window.addEventListener('load', () => {
       effects: true,
     });
   }
+
 
   // ---------------------------------------------------------
   // GSAP: Fade-Up Scroll Animation
@@ -127,25 +128,25 @@ window.addEventListener('load', () => {
     });
   });
 
+
   // ---------------------------------------------------------
   // GSAP: Background Color Transition (clean)
-  // ---------------------------------------------------------
-  // GSAP: Background Color Transition (white → black on scroll)
-  gsap.fromTo("#felco-pd",
-    { backgroundColor: "#ffffff" },
-    {
-      backgroundColor: "#000000",
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#felco-pd",
-        start: "top bottom",   // Trigger starts when the section hits the bottom of viewport
-        end: "top center",     // Ends earlier for faster transition
-        scrub: true,           // Enables smooth scroll-linked animation (reversible)
-      },
-    }
-  );
-
-
+  const felcoPd = document.querySelector('#felco-pd');
+  if (felcoPd) {
+    gsap.fromTo(felcoPd,
+      { backgroundColor: "#ffffff" },
+      {
+        backgroundColor: "#000000",
+        ease: "none",
+        scrollTrigger: {
+          trigger: felcoPd,
+          start: "top bottom",
+          end: "top center",
+          scrub: true,
+        },
+      }
+    );
+  }
 
 
   // ---------------------------------------------------------
@@ -169,181 +170,178 @@ window.addEventListener('load', () => {
   });
 });
 
+
 // -------------------------------------------------------------
-// Additional GSAP Animations (non-merged logic)
+// Additional GSAP Animations (grouped inside DOMContentLoaded)
 document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger);
 
   // Animate background image width from 0% to 100%
-  gsap.fromTo("[data-gsap='bg-width']",
-    { width: "0%" },
-    {
-      width: "100%",
-      ease: "power2.out",
+  const aboutUsBanner = document.querySelector("#aboutUsBanner");
+  if (aboutUsBanner) {
+    gsap.fromTo("[data-gsap='bg-width']",
+      { width: "0%" },
+      {
+        width: "100%",
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: aboutUsBanner,
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+        }
+      }
+    );
+
+    gsap.to("[data-gsap='bg-width']", {
+      filter: "blur(2px)",
+      opacity: 0.85,
       scrollTrigger: {
-        trigger: "#aboutUsBanner",
-        start: "top bottom",
-        end: "top top",
+        trigger: aboutUsBanner,
+        start: "top 60%",
+        end: "bottom top",
         scrub: true,
       }
-    }
-  );
-
-  // Optional: blur + fade effect on scroll
-  gsap.to("[data-gsap='bg-width']", {
-    filter: "blur(2px)",
-    opacity: 0.85,
-    scrollTrigger: {
-      trigger: "#aboutUsBanner",
-      start: "top 60%",
-      end: "bottom top",
-      scrub: true,
-    }
-  });
-
-  // Animate full content block inside banner
-  gsap.from("[data-gsap='hero-content']", {
-    y: 50,
-    opacity: 0,
-    duration: 1.4,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: "#aboutUsBanner",
-      start: "top 80%",
-      toggleActions: "play none none reverse"
-    }
-  });
-});
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  gsap.from(".parallax-zoom-image", {
-    scale: 1.2,
-    opacity: 0,
-    duration: 1.6,
-    ease: "power3.out"
-  });
-});
-
-
-
-
-
-
-gsap.from(".about-img-zoom", {
-  scrollTrigger: {
-    trigger: ".about-img-zoom",
-    start: "top 100%",   // when the top of the image hits 80% of the viewport
-    end: "bottom 50%",
-    scrub: true,        // makes it smoothly animate on scroll
-  },
-  scale: 0,
-  opacity: 0,
-  transformOrigin: "center center",
-  ease: "power2.out"
-});
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animate Sticky Image
-    gsap.from("#industryStickyImage", {
-        opacity: 0,
-        scale: 0.95,
-        y: 50,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#industryStickyImage",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-        }
     });
 
-    // Animate Header
-    gsap.from("#industrySectionHeader", {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#industrySectionHeader",
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-        }
+    gsap.from("[data-gsap='hero-content']", {
+      y: 50,
+      opacity: 0,
+      duration: 1.4,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: aboutUsBanner,
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
     });
+  }
 
-    // Animate Product Grid
-    gsap.from("#industryProductGrid", {
-        opacity: 0,
-        y: 60,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#industryProductGrid",
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-        }
+
+  // Parallax zoom image fade-in
+  gsap.utils.toArray(".parallax-zoom-image").forEach(el => {
+    gsap.from(el, {
+      scale: 1.2,
+      opacity: 0,
+      duration: 1.6,
+      ease: "power3.out"
+    });
+  });
+
+
+  // Animate about image zoom
+  const aboutImgZoom = document.querySelector(".about-img-zoom");
+  if (aboutImgZoom) {
+    gsap.from(aboutImgZoom, {
+      scrollTrigger: {
+        trigger: aboutImgZoom,
+        start: "top 100%",
+        end: "bottom 50%",
+        scrub: true,
+      },
+      scale: 0,
+      opacity: 0,
+      transformOrigin: "center center",
+      ease: "power2.out"
+    });
+  }
+
+
+  // Industry Section Animations
+  const industryStickyImage = document.querySelector("#industryStickyImage");
+  if (industryStickyImage) {
+    gsap.from(industryStickyImage, {
+      opacity: 0,
+      scale: 0.95,
+      y: 50,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: industryStickyImage,
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  }
+
+  const industrySectionHeader = document.querySelector("#industrySectionHeader");
+  if (industrySectionHeader) {
+    gsap.from(industrySectionHeader, {
+      opacity: 0,
+      y: 40,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: industrySectionHeader,
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  }
+
+  const industryProductGrid = document.querySelector("#industryProductGrid");
+  if (industryProductGrid) {
+    gsap.from(industryProductGrid, {
+      opacity: 0,
+      y: 60,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: industryProductGrid,
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+      }
     });
 
     gsap.from("#industryProductGrid > div", {
-    opacity: 0,
-    y: 40,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: "power2.out",
-    scrollTrigger: {
-        trigger: "#industryProductGrid",
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: industryProductGrid,
         start: "top 90%",
         toggleActions: "play none none reverse"
-    }
-});
-});
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animate Applications Header
-    gsap.from("#applicationHeader", {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#applicationHeader",
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-        }
+      }
     });
+  }
 
-    // Animate Application Cards
+
+  // Application Section Animations
+  const applicationHeader = document.querySelector("#applicationHeader");
+  if (applicationHeader) {
+    gsap.from(applicationHeader, {
+      opacity: 0,
+      y: 40,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: applicationHeader,
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  }
+
+  const applicationGrid = document.querySelector("#applicationGrid");
+  if (applicationGrid) {
     gsap.from(".application-card", {
-        opacity: 0,
-        y: 40,
-        duration: 0.6,
-        ease: "power2.out",
-        stagger: 0.15,
-        scrollTrigger: {
-            trigger: "#applicationGrid",
-            start: "top 90%",
-            toggleActions: "play none none reverse"
-        }
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: "power2.out",
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: applicationGrid,
+        start: "top 90%",
+        toggleActions: "play none none reverse"
+      }
     });
-});
+  }
 
 
-
-
-
-window.addEventListener("load", () => {
-  gsap.registerPlugin(ScrollTrigger);
-
+  // Animate common animation-on-scroll elements by data attribute
   gsap.utils.toArray(".animate-on-scroll").forEach((el, index) => {
     const animType = el.dataset.anim || "fade-up";
 
@@ -417,78 +415,50 @@ window.addEventListener("load", () => {
 });
 
 
+// Additional GSAP Animations for header and steps
+document.addEventListener("DOMContentLoaded", () => {
+  gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animations for Heading and Description
-    gsap.from("#heading", {
-        opacity: 0,
-        y: -50,
-        duration: 1,
-        delay: 0.5,  // delay to create smooth staggered effect
-        ease: "power2.out"
+  // Animate Heading and Description
+  const heading = document.querySelector("#heading");
+  if(heading) {
+    gsap.from(heading, {
+      opacity: 0,
+      y: -50,
+      duration: 1,
+      delay: 0.5,
+      ease: "power2.out"
     });
-    gsap.from("#desc", {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 1,
-        ease: "power2.out"
-    });
+  }
 
-    // Animation for steps with a delay to make it staggered
-    gsap.from("#step1", {
+  const desc = document.querySelector("#desc");
+  if(desc) {
+    gsap.from(desc, {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      delay: 1,
+      ease: "power2.out"
+    });
+  }
+
+
+  // Animate Steps
+  for (let i = 1; i <= 4; i++) {
+    const step = document.querySelector(`#step${i}`);
+    if(step) {
+      gsap.from(step, {
         opacity: 0,
-        x: -100,
+        x: (i % 2 === 1) ? -100 : 100,
         duration: 1,
-        delay: 1.5,
+        delay: 0.5 + i * 0.5,
         ease: "power2.out",
         scrollTrigger: {
-            trigger: "#step1",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
+          trigger: step,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
         }
-    });
-
-    gsap.from("#step2", {
-        opacity: 0,
-        x: 100,
-        duration: 1,
-        delay: 2,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#step2",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-        }
-    });
-
-    gsap.from("#step3", {
-        opacity: 0,
-        x: -100,
-        duration: 1,
-        delay: 2.5,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#step3",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-        }
-    });
-
-    gsap.from("#step4", {
-        opacity: 0,
-        x: 100,
-        duration: 1,
-        delay: 3,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#step4",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-        }
-    });
-
+      });
+    }
+  }
 });
-

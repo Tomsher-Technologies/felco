@@ -2,7 +2,6 @@
     <div class="absolute inset-0 bg-cover bg-left opacity-40" style="background-image: url('{{ asset('assets/images/bg-about-2.png') }}');" id="parallax-background"></div>
 
     <x-container>
-        {{-- A two-column grid to creatively separate the heading from the descriptive text. --}}
         <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
 
             <div class="wow animate__animated animate__fadeInLeft">
@@ -19,19 +18,18 @@
                     {{ $page->getTranslation('content5', $lang) }}
                 </p>
                 
-                {{-- Button structure updated with unique IDs for animation targets --}}
-<x-button 
-    href="{{ route('about_us') }}" 
-    id="learn-more-button" 
-    text="{{ trans('messages.learn_more') }}" 
-/>
-
-
+                {{-- Reusable button component --}}
+                <x-button 
+                    href="{{ route('about_us') }}" 
+                    id="learn-more-button" 
+                    text="{{ trans('messages.learn_more') }}" 
+                />
             </div>
 
         </div>
     </x-container>
 </section>
+
 
 {{-- GSAP Animation Script --}}
 <script>
@@ -83,36 +81,36 @@
                 }
             });
 
-            // Hover animation for the button (expand fill layer and change text color)
+            // Button Hover Animation with GSAP
             const triggerButton = document.querySelector("#learn-more-button");
             const fillLayer = document.querySelector("#btn-fill-gsap");
             const textWrapper = document.querySelector("#btn-text-wrapper");
 
-            // Button Hover Animation with GSAP
-            gsap.to(fillLayer, {
-                scaleX: 1,
-                ease: "none",
-                duration: 0.3,
-                scrollTrigger: {
-                    trigger: triggerButton,
-                    start: "top 90%",
-                    end: "bottom 70%",
-                    scrub: 0.5,
-                }
-            });
+            if (triggerButton && fillLayer && textWrapper) {
+                gsap.to(fillLayer, {
+                    scaleX: 1,
+                    ease: "none",
+                    duration: 0.3,
+                    scrollTrigger: {
+                        trigger: triggerButton,
+                        start: "top 90%",
+                        end: "bottom 70%",
+                        scrub: 0.5,
+                    }
+                });
 
-            gsap.to(textWrapper, {
-                color: "#ffffff",
-                ease: "none",
-                duration: 0.3,
-                scrollTrigger: {
-                    trigger: triggerButton,
-                    start: "top 90%",
-                    end: "bottom 70%",
-                    scrub: 0.5,
-                }
-            });
-
+                gsap.to(textWrapper, {
+                    color: "#ffffff",
+                    ease: "none",
+                    duration: 0.3,
+                    scrollTrigger: {
+                        trigger: triggerButton,
+                        start: "top 90%",
+                        end: "bottom 70%",
+                        scrub: 0.5,
+                    }
+                });
+            }
         } else {
             console.error("GSAP and/or ScrollTrigger is not loaded. The animation cannot run.");
         }
