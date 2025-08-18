@@ -6,7 +6,6 @@
 
         'FR' => ['name' => 'Français', 'route' => '#'],
     ];
-    // --- END MOCK DATA ---
 
     $lang = getActiveLanguage();
     $details = getCategoryHeader();
@@ -23,11 +22,6 @@
             'route' => 'certificates',
             'title' => trans('messages.certificates'),
             'content' => get_setting('certificate_content', null, $lang),
-        ],
-        [
-            'route' => 'manuals',
-            'title' => trans('messages.manuals'),
-            'content' => get_setting('manuals_content', null, $lang),
         ],
         [
             'route' => 'service_sales',
@@ -262,19 +256,19 @@
                             class="origin-top-right absolute right-0 mt-2 w-40 shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                             x-cloak>
                             <div class="py-1">
-                                @foreach ($availableLangs as $code => $langData)
-                                    <a href="{{ $langData['route'] }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">{{ $langData['name'] }}</a>
-                                @endforeach
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 lang-link"
+                                    data-locale="en">English</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 lang-link"
+                                    data-locale="nl">Dutch</a>
                             </div>
                         </div>
+
                     </div>
-                    {{-- CTA Button --}}
-  <x-button 
-    href="{{ route('contact') }}" 
-    id="contact-button" 
-    text="{{ trans('messages.get_in_touch') }}" 
-/>
+
+                    <x-button href="{{ route('contact') }}" id="contact-button"
+                        text="{{ trans('messages.get_in_touch') }}" />
 
 
                     {{-- Mobile Menu Hamburger Button --}}

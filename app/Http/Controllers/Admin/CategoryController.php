@@ -92,6 +92,7 @@ class CategoryController extends Controller
         }
 
         $category->image            = $request->image ?? NULL;
+        $category->image_2            = $request->image_2 ?? NULL;
         $category->icon             = $request->icon ?? NULL;
         $category->frame_size       = $request->frame_size ?? NULL;
         $category->output           = $request->output ?? NULL;
@@ -217,6 +218,7 @@ class CategoryController extends Controller
 
             $category->is_active        = ($request->status == 2) ? 0 : 1;
             $category->image            = $request->image ?? NULL;
+            $category->image_2          = $request->image_2 ?? NULL;
             $category->icon             = $request->icon ?? NULL;
             $category->frame_size       = $request->frame_size ?? NULL;
             $category->output           = $request->output ?? NULL;
