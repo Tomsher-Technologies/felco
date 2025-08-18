@@ -240,7 +240,7 @@
                             <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
                                 class="group relative block h-[30rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
 
-                                <img src="{{ uploaded_asset($cat->image) }}"
+                                <img src="{{ uploaded_asset($cat->image_2) }}"
                                     alt="{{ $cat->getTranslation('name', $lang) }}"
                                     class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
 
@@ -315,7 +315,7 @@
                             <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
                                 class="group relative block h-[30rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
 
-                                <img src="{{ uploaded_asset($cat->image) }}"
+                                <img src="{{ uploaded_asset($cat->image_2) }}"
                                     alt="{{ $cat->getTranslation('name', $lang) }}"
                                     class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
 
