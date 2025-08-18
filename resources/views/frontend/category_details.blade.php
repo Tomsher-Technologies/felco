@@ -53,11 +53,7 @@
     @endif
 
 
-    @if (
-        !empty($features) &&
-            count($features) > 0 &&
-            !empty($features[0]['feature_items']) &&
-            count($features[0]['feature_items']) > 0)
+    @if (!empty($features) && count($features) > 0 && !empty($features[0]['feature_items']) && count($features[0]['feature_items']) > 0)
         <section class="mt-16 bg-[#454d4e] py-16 text-slate-300 md:py-24">
             <x-container>
                 <div class="space-y-16">
@@ -226,40 +222,61 @@
             </x-container>
         </section>
 
-    @endif
+        @push('scripts')
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const loadMoreContainer = document.getElementById('load-more-container');
+                    if (!loadMoreContainer) return;
 
-    @if ($category->childs->isNotEmpty())
-        <section class="border-t border-stone-200 bg-stone-100 py-16">
-            <x-container>
-                <div class="mb-8 flex items-end justify-between">
-                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">Related Categories</h2>
-                </div>
-                <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
-                    <div class="flex gap-6 px-4">
-                        @foreach ($category->childs as $cat)
-                            <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                                class="group relative block h-[28rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
+                    const loadMoreButton = document.getElementById('load-more-button');
+                    const productTableBody = document.getElementById('product-table-body');
+                    const productCountSpan = document.getElementById('product-count');
+                    const loaderIcon = document.getElementById('loader-icon');
+                    const buttonLabel = document.getElementById('load-more-label');
+                    const totalCount = document.querySelector('[data-total-products]').dataset.totalProducts;
 
-                                <img src="{{ uploaded_asset($cat->image_2) }}"
-                                    alt="{{ $cat->getTranslation('name', $lang) }}"
-                                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
-                                    
-                                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
-                                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                                    <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h3>
-                                </div>
-                                <div
-                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-                                    <i class="fi fi-rr-arrow-right text-xl"></i>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-            </x-container>
-        </section>
+                    loadMoreButton.addEventListener('click', async function() {
+                        let nextPageUrl = this.dataset.nextPageUrl;
+
+                        // Show loader and disable button
+                        loaderIcon.classList.remove('hidden');
+                        buttonLabel.textContent = 'Loading...';
+                        this.disabled = true;
+
+                        try {
+                            // Loop to fetch all remaining pages
+                            while (nextPageUrl) {
+                                const response = await fetch(nextPageUrl);
+                                const html = await response.text();
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+
+                                const newProductsHtml = doc.getElementById('product-table-body').innerHTML;
+                                productTableBody.insertAdjacentHTML('beforeend', newProductsHtml);
+
+                                const newLoadMoreButton = doc.getElementById('load-more-button');
+                                if (newLoadMoreButton) {
+                                    nextPageUrl = newLoadMoreButton.dataset.nextPageUrl;
+                                } else {
+                                    nextPageUrl = null; // Exit loop if no more pages
+                                }
+                            }
+
+                            // All products loaded, update count and remove the button
+                            productCountSpan.textContent = totalCount;
+                            loadMoreContainer.remove();
+
+                        } catch (error) {
+                            console.error('Error loading all products:', error);
+                            buttonLabel.textContent = 'Failed to load';
+                            loaderIcon.classList.add('hidden');
+                            this.disabled = false;
+                        }
+                    });
+                });
+            </script>
+        @endpush
+
     @endif
 
     @if ($category->getTranslation('title2', $lang))
@@ -284,15 +301,22 @@
                                 {!! $category->getTranslation('content2', $lang) !!}
                             </p>
 
-                            <div class="mt-8">
-                                @if (!empty($category->brochure))
-                                    <x-button href="{{ asset($category->brochure) }}" target="_blank"
-                                        text="Download Brochure" class="px-8 py-3 text-base font-medium" />
-                                @else
-                                    <x-button href="{{ url('/brochures') }}" text="Explore Catalogues"
-                                        class="px-8 py-3 text-base font-medium" />
-                                @endif
-                            </div>
+                        <div class="mt-8">
+    @if (!empty($category->brochure))
+        <x-button 
+            href="{{ asset($category->brochure) }}" 
+            target="_blank" 
+            text="Download Brochure"
+            class="px-8 py-3 text-base font-medium"
+        />
+    @else
+        <x-button 
+            href="{{ url('/brochures') }}" 
+            text="Explore Catalogues"
+            class="px-8 py-3 text-base font-medium"
+        />
+    @endif
+</div>
 
 
                         </div>
@@ -303,30 +327,29 @@
         </section>
     @endif
 
-    @if ($category->childs->isEmpty() && $siblingCategories->isNotEmpty())
+
+    {{-- 5. Related Categories Section --}}
+    @if ($category->childs->where('is_active', 1)->isNotEmpty())
         <section class="border-t border-stone-200 bg-stone-100 py-16">
             <x-container>
                 <div class="mb-8 flex items-end justify-between">
-                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">All Categories</h2>
+                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">Related Categories</h2>
                 </div>
                 <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
                     <div class="flex gap-6 px-4">
-                        @foreach ($siblingCategories as $cat)
+                        @foreach ($category->childs->where('is_active', 1) as $cat)
                             <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                                class="group relative block h-[28rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
+                                class="group relative block h-[38rem] w-80 flex-shrink-0 overflow-hidden shadow-lg md:w-96">
                                 <img src="{{ uploaded_asset($cat->image) }}"
                                     alt="{{ $cat->getTranslation('name', $lang) }}"
                                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
-
-                                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
-                                
+                                <!-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> -->
                                 <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
                                     <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h3>
+                                        {{ $cat->getTranslation('name', $lang) }}</h3>
                                 </div>
                                 <div
-                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center  bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                     <i class="fi fi-rr-arrow-right text-xl"></i>
                                 </div>
                             </a>
@@ -337,53 +360,4 @@
         </section>
     @endif
 
-@endsection
-
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadMoreContainer = document.getElementById('load-more-container');
-            if (!loadMoreContainer) return;
-
-            const loadMoreButton = document.getElementById('load-more-button');
-            const productTableBody = document.getElementById('product-table-body');
-            const productCountSpan = document.getElementById('product-count');
-            const loaderIcon = document.getElementById('loader-icon');
-            const buttonLabel = document.getElementById('load-more-label');
-            const totalCount = document.querySelector('[data-total-products]').dataset.totalProducts;
-
-            loadMoreButton.addEventListener('click', async function() {
-                let nextPageUrl = this.dataset.nextPageUrl;
-
-                // Show loader and disable button
-                loaderIcon.classList.remove('hidden');
-                buttonLabel.textContent = 'Loading...';
-                this.disabled = true;
-
-                // Loop to fetch all remaining pages
-                while (nextPageUrl) {
-                    const response = await fetch(nextPageUrl);
-                    const html = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-
-                    const newProductsHtml = doc.getElementById('product-table-body').innerHTML;
-                    productTableBody.insertAdjacentHTML('beforeend', newProductsHtml);
-
-                    const newLoadMoreButton = doc.getElementById('load-more-button');
-                    if (newLoadMoreButton) {
-                        nextPageUrl = newLoadMoreButton.dataset.nextPageUrl;
-                    } else {
-                        nextPageUrl = null; // Exit loop if no more pages
-                    }
-                }
-
-                // All products loaded, update count and remove the button
-                productCountSpan.textContent = totalCount;
-                loadMoreContainer.remove();
-
-
-            });
-        });
-    </script>
 @endsection
