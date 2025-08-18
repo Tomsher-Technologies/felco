@@ -8,7 +8,7 @@
                 <span class="text-sm uppercase tracking-widest text-emerald-600 font-semibold block mb-4">
                     {{ $page->getTranslation('heading6', $lang) }}
                 </span>
-                <h2 class="text-4xl md:text-5xl font-thin leading-tight text-gray-800">
+                <h2 class="text-4xl md:text-5xl font-normal leading-tight text-gray-800">
                     {{ $page->getTranslation('heading7', $lang) }}
                 </h2>
             </div>
