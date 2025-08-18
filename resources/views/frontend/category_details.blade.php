@@ -239,10 +239,12 @@
                         @foreach ($category->childs as $cat)
                             <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
                                 class="group relative block h-[28rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
+
                                 <img src="{{ uploaded_asset($cat->image_2) }}"
                                     alt="{{ $cat->getTranslation('name', $lang) }}"
                                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                    
+                                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
                                 <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
                                     <h3 class="text-xl font-normal leading-tight text-white">
                                         {{ $cat->getTranslation('name', $lang) }}
@@ -315,7 +317,9 @@
                                 <img src="{{ uploaded_asset($cat->image) }}"
                                     alt="{{ $cat->getTranslation('name', $lang) }}"
                                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+
+                                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
+                                
                                 <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
                                     <h3 class="text-xl font-normal leading-tight text-white">
                                         {{ $cat->getTranslation('name', $lang) }}
