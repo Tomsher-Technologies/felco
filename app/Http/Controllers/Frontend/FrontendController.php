@@ -524,7 +524,7 @@ class FrontendController extends Controller
         if ($request->filled('mounting')) $query->where('mounting', $request->mounting);
         if ($request->filled('voltage')) $query->where('voltage', $request->voltage);
 
-        $products = $query->paginate(15);
+        $products = $query->paginate(10);
 
         $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
         $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');

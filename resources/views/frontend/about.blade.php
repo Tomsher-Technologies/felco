@@ -30,12 +30,6 @@
 </section>
 
 
-
-
-
-
-
-
 <section id="why-we-are-different-creative" class="overflow-hidden bg-gray-50 py-20 text-gray-800 md:py-24">
     <x-container>
         <div class="text-center mb-16" id="section-heading">
@@ -105,13 +99,7 @@
     </x-container>
 </section>
 
-
-
-
-
-
-
-<img src="{{ asset('assets/images/about.jpg') }}" alt="About Image"
+<img src="{{ asset($page->image) }}" alt="About Image"
      class="about-img-zoom w-full min-h-[300px] md:min-h-[450px] lg:min-h-[550px] max-h-[50vh] mx-auto object-cover"
      data-gsap="scroll-zoom">
 
