@@ -101,7 +101,7 @@
                                 placeholder="Search by ID or Name..."
                                 class="form-input w-full border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" />
                             <button type="submit"
-                                class="bg-[#f16c31] px-5 py-2 text-white shadow transition hover:bg-[#f06425]">Search</button>
+                                class="relative inline-flex items-center justify-center gap-2 px-4 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Search</button>
                         </form>
                     </div>
 
@@ -136,9 +136,9 @@
                             @endforeach
                             <div class="flex items-end gap-2 pt-6">
                                 <button type="submit"
-                                    class="rounded-md bg-orange-600 px-6 py-2 text-white shadow transition hover:bg-orange-700">Apply</button>
+                                    class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Apply</button>
                                 <a href="{{ route('products.category', $category->slug) }}"
-                                    class="rounded-md border border-gray-300 bg-white px-6 py-2 text-center text-gray-700 shadow-sm transition hover:bg-gray-50">Reset</a>
+                                    class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Reset</a>
                             </div>
                         </form>
                     </div>
@@ -201,7 +201,7 @@
                         @if ($products->hasMorePages())
                             <div class="mt-12 flex justify-center" id="load-more-container">
                                 <button id="load-more-button" data-next-page-url="{{ $products->nextPageUrl() }}"
-                                    class="flex items-center gap-3  bg-[#f16c31] px-8 py-3 font-medium text-white shadow transition hover:bg-cyan-700">
+                                    class="relative inline-flex items-center justify-center gap-2 px-8 py-3 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">
                                     <svg class="h-5 w-5 animate-spin hidden" id="loader-icon"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10"
