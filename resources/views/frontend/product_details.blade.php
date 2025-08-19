@@ -53,9 +53,9 @@
                 <h1 class="text-4xl md:text-5xl font-light text-slate-900 leading-tight tracking-tight">
                     {{ $product->getTranslation('name', $lang) }}
                 </h1>
-                <p class="mt-2 text-lg text-orange-600 font-mono">
+                {{-- <p class="mt-2 text-lg text-orange-600 font-mono">
                     {{ trans('messages.product') . ' ' . trans('messages.id') }}: {{ $product->unique_id }}
-                </p>
+                </p> --}}
             </div>
             <div class="flex-shrink-0">
                 <a href="{{ Session::has('last_url') ? Session::get('last_url') : route('products') }}"
