@@ -122,7 +122,7 @@
                 </div>
 
                 {{-- Card 2: Downloads & Resources (UPDATED) --}}
-                @php
+                {{-- @php
                     // Determine which files to show: real files or mock files if none exist.
                     $is_sample_downloads = !(isset($product->files) && $product->files->count() > 0);
 
@@ -190,7 +190,7 @@
                             </a>
                         @endforeach
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </x-container>
