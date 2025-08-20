@@ -50,9 +50,11 @@
                             <h3 class="text-2xl font-light text-slate-800 mb-2">
                                 {{ $broch->getTranslation('title', $lang) }}
                             </h3>
-            <p class="text-slate-600 text-sm mb-4 flex-grow whitespace-pre-line">
-    {{ $broch->getTranslation('description', $lang) ?: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec velit nec nulla dapibus lacinia.' }}
-</p>
+                            @if($broch->getTranslation('description', $lang))
+                                <p class="text-slate-600 text-sm mb-4 flex-grow whitespace-pre-line">
+                                    {{ $broch->getTranslation('description', $lang)}}
+                                </p>
+                            @endif
 
                             @if (!empty($broch->files[0]))
                                 <div class="space-y-3 mt-auto pt-4 border-t border-slate-100">

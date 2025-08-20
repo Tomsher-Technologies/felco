@@ -169,3 +169,13 @@ html, body {
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
         transition: all 0.3s ease; /* Smooth transition */
     }
+
+
+
+    #page-tit-p p{
+      color: #4b5563 !important;
+          font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+
+
+    }

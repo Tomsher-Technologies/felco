@@ -5,6 +5,11 @@
         <h5 class="mb-0 h6">{{ trans('messages.category') . ' ' . trans('messages.information') }}</h5>
     </div>
 
+    @php
+    $featuresData = json_decode(old('features', $category->getTranslation('features', $lang)), true);
+    $initEmpty = empty($featuresData) || !is_array($featuresData) ? 'true' : 'false';
+@endphp
+
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="card">
@@ -166,6 +171,23 @@
                                     <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
                                     <input type="hidden" name="image" class="selected-files"
                                         value="{{ $category->image }}">
+                                </div>
+                                <div class="file-preview box sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row @if ($lang != 'en') d-none @endif">
+                            <label class="col-md-3 col-form-label" for="signinSrEmail">Image 2</label>
+                            <div class="col-md-9">
+                                <div class="input-group" data-toggle="aizuploader" data-type="image">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text bg-soft-secondary font-weight-medium">
+                                            {{ trans('messages.browse') }}</div>
+                                    </div>
+                                    <div class="form-control file-amount">{{ trans('messages.choose_file') }}</div>
+                                    <input type="hidden" name="image_2" class="selected-files"
+                                        value="{{ $category->image_2 }}">
                                 </div>
                                 <div class="file-preview box sm">
                                 </div>
@@ -476,22 +498,21 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-        $('.repeater').repeater({
-            initEmpty: false,
-            show: function() {
-                $(this).slideDown();
-
-            },
-            hide: function(deleteElement) {
-                if (confirm('Are you sure you want to delete this element?')) {
-                    $(this).slideUp(deleteElement);
-                }
-            },
-            repeaters: [{
-                selector: '.inner-repeater'
-            }]
-        });
-    </script>
+    $('.repeater').repeater({
+        initEmpty: {{ $initEmpty }},
+        show: function() {
+            $(this).slideDown();
+        },
+        hide: function(deleteElement) {
+            if (confirm('Are you sure you want to delete this element?')) {
+                $(this).slideUp(deleteElement);
+            }
+        },
+        repeaters: [{
+            selector: '.inner-repeater'
+        }]
+    });
+</script>
     <script>
         function makeSlug(e) {
             var title = e.value;

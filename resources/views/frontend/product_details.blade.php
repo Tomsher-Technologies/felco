@@ -30,7 +30,7 @@
             public function __construct() {
                 // To test the "show design if no data" feature, we can start with an empty collection.
                 // The logic below will then populate it with samples.
-                $this->files = collect([]); 
+                $this->files = collect([]);
             }
 
             public function getTranslation($field, $lang) {
@@ -53,9 +53,9 @@
                 <h1 class="text-4xl md:text-5xl font-light text-slate-900 leading-tight tracking-tight">
                     {{ $product->getTranslation('name', $lang) }}
                 </h1>
-                <p class="mt-2 text-lg text-orange-600 font-mono">
-                    {{ trans('messages.product_id') }}: {{ $product->unique_id }}
-                </p>
+                {{-- <p class="mt-2 text-lg text-orange-600 font-mono">
+                    {{ trans('messages.product') . ' ' . trans('messages.id') }}: {{ $product->unique_id }}
+                </p> --}}
             </div>
             <div class="flex-shrink-0">
                 <a href="{{ Session::has('last_url') ? Session::get('last_url') : route('products') }}"
@@ -84,7 +84,7 @@
                 {{-- Card 1: Technical Specifications --}}
                 <div class="bg-gradient-to-br from-orange-50 via-white to-white border border-slate-200 shadow-lg p-8">
                     <h3 class="text-2xl font-normal text-slate-900 mb-6">Technical Specifications</h3>
-                    
+
                     <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
                         <div class="py-2 border-b border-slate-200">
                             <dt class="text-sm font-medium text-slate-500">{{ trans('messages.frame_size') }}</dt>

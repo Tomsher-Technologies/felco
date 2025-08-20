@@ -493,6 +493,16 @@ class FrontendController extends Controller
 
         $category = Category::where('slug', $resolvedSlug)->first();
 
+        $parentId = $category->parent_id;
+
+        $siblingCategories = collect();
+
+        if ($parentId !== null) {
+            $siblingCategories = Category::where('parent_id', $parentId)
+                ->where('is_active', 1)
+                ->get();
+        }
+
         if (!$category) {
             abort(404); // Category not found
         }
@@ -514,7 +524,7 @@ class FrontendController extends Controller
         if ($request->filled('mounting')) $query->where('mounting', $request->mounting);
         if ($request->filled('voltage')) $query->where('voltage', $request->voltage);
 
-        $products = $query->paginate(15);
+        $products = $query->paginate(10);
 
         $frameSizes = Product::where('category_id', $category->id)->distinct()->pluck('frame_size');
         $poles = Product::where('category_id', $category->id)->distinct()->pluck('poles');
@@ -522,22 +532,8 @@ class FrontendController extends Controller
         $mountings = Product::where('category_id', $category->id)->distinct()->pluck('mounting');
         $voltages = Product::where('category_id', $category->id)->distinct()->pluck('voltage');
 
-        return view('frontend.category_details', compact('category', 'lang', 'products', 'frameSizes', 'poles', 'powers', 'mountings', 'voltages', 'keyword'));
+        return view('frontend.category_details', compact('category', 'lang', 'products', 'frameSizes', 'poles', 'powers', 'mountings', 'voltages', 'keyword', 'siblingCategories'));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function productDetails(Request $request)

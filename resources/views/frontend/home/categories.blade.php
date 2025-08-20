@@ -39,7 +39,7 @@
                 @if($rightCategories->isNotEmpty())
                     @foreach($rightCategories as $cat)
                         <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                           class="group relative flex flex-col h-full bg-white rounded  border-transparent border-l-4 p-5 sm:p-6 transition-all duration-300 ease-in-out hover:shadow-xl hover:border-l-orange-400 hover:-translate-y-2 overflow-hidden lg:min-h-[200px]">
+                           class="group relative flex flex-col h-full bg-white rounded  border-transparent border-l-4 p-5 sm:p-6 transition-all duration-300 ease-in-out hover:shadow-xl hover:border-l-orange-400 hover:-translate-y-2 overflow-hidden lg:min-h-[150px]">
 
                             {{-- ADDED: Corner effect applied to all cards --}}
                             <div class="absolute -top-8 -right-8 h-16 w-16 bg-slate-200 rotate-45 z-10 transition-colors duration-300 group-hover:bg-slate-200"></div>

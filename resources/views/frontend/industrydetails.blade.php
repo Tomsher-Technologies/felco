@@ -22,7 +22,7 @@
             <div id="industryProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @forelse ($categories as $category)
                     <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}"
-                        class="group relative bg-white border border-slate-200 shadow hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col">
+                        class="group relative bg-white border !border-slate-50/10 shadow hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col">
                         <div class="relative w-full h-60 overflow-hidden">
                             @if ($category->image)
                                 <img src="{{ uploaded_asset($category->image) }}"
@@ -69,11 +69,11 @@
                     {{-- Section Header --}}
                     <div id="applicationHeader" class="mb-12 border-l-2 border-orange-500 pl-4">
                         <h3 class="animate-on-scroll text-3xl font-light text-slate-900">
-                            {{ $translation->title2 ?? __('Applications') }}
+                            {{ $industry->getTranslation('title2', $lang) }}
                         </h3>
-                        @if (!empty($translation->content2))
+                        @if (!empty($industry->getTranslation('content2', $lang)))
                             <p class="animate-on-scroll mt-2 text-slate-600">
-                                {!! $translation->content2 !!}
+                                {!! $industry->getTranslation('content2', $lang) !!}
                             </p>
                         @endif
                     </div>

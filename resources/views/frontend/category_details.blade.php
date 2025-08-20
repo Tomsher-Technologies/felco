@@ -53,7 +53,11 @@
     @endif
 
 
-    @if (!empty($features))
+    @if (
+        !empty($features) &&
+            count($features) > 0 &&
+            !empty($features[0]['feature_items']) &&
+            count($features[0]['feature_items']) > 0)
         <section class="mt-16 bg-[#454d4e] py-16 text-slate-300 md:py-24">
             <x-container>
                 <div class="space-y-16">
@@ -97,7 +101,7 @@
                                 placeholder="Search by ID or Name..."
                                 class="form-input w-full border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" />
                             <button type="submit"
-                                class="bg-[#f16c31] px-5 py-2 text-white shadow transition hover:bg-[#f06425]">Search</button>
+                                class="relative inline-flex items-center justify-center gap-2 px-4 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Search</button>
                         </form>
                     </div>
 
@@ -132,9 +136,9 @@
                             @endforeach
                             <div class="flex items-end gap-2 pt-6">
                                 <button type="submit"
-                                    class="rounded-md bg-orange-600 px-6 py-2 text-white shadow transition hover:bg-orange-700">Apply</button>
+                                    class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Apply</button>
                                 <a href="{{ route('products.category', $category->slug) }}"
-                                    class="rounded-md border border-gray-300 bg-white px-6 py-2 text-center text-gray-700 shadow-sm transition hover:bg-gray-50">Reset</a>
+                                    class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Reset</a>
                             </div>
                         </form>
                     </div>
@@ -197,7 +201,7 @@
                         @if ($products->hasMorePages())
                             <div class="mt-12 flex justify-center" id="load-more-container">
                                 <button id="load-more-button" data-next-page-url="{{ $products->nextPageUrl() }}"
-                                    class="flex items-center gap-3  bg-[#f16c31] px-8 py-3 font-medium text-white shadow transition hover:bg-cyan-700">
+                                    class="relative inline-flex items-center justify-center gap-2 px-8 py-3 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">
                                     <svg class="h-5 w-5 animate-spin hidden" id="loader-icon"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10"
@@ -222,61 +226,40 @@
             </x-container>
         </section>
 
-        @push('scripts')
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const loadMoreContainer = document.getElementById('load-more-container');
-                    if (!loadMoreContainer) return;
+    @endif
 
-                    const loadMoreButton = document.getElementById('load-more-button');
-                    const productTableBody = document.getElementById('product-table-body');
-                    const productCountSpan = document.getElementById('product-count');
-                    const loaderIcon = document.getElementById('loader-icon');
-                    const buttonLabel = document.getElementById('load-more-label');
-                    const totalCount = document.querySelector('[data-total-products]').dataset.totalProducts;
+    @if ($category->childs->isNotEmpty())
+        <section class="border-t border-stone-200 bg-stone-100 py-16">
+            <x-container>
+                <div class="mb-8 flex items-end justify-between">
+                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">Related Categories</h2>
+                </div>
+                <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
+                    <div class="flex gap-6 px-4">
+                        @foreach ($category->childs as $cat)
+                            <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
+                                class="group relative block h-[30rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
 
-                    loadMoreButton.addEventListener('click', async function() {
-                        let nextPageUrl = this.dataset.nextPageUrl;
+                                <img src="{{ $cat->image_2 ? uploaded_asset($cat->image_2) : uploaded_asset($cat->image) }}"
+                                    alt="{{ $cat->getTranslation('name', $lang) }}"
+                                    class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
 
-                        // Show loader and disable button
-                        loaderIcon.classList.remove('hidden');
-                        buttonLabel.textContent = 'Loading...';
-                        this.disabled = true;
-
-                        try {
-                            // Loop to fetch all remaining pages
-                            while (nextPageUrl) {
-                                const response = await fetch(nextPageUrl);
-                                const html = await response.text();
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-
-                                const newProductsHtml = doc.getElementById('product-table-body').innerHTML;
-                                productTableBody.insertAdjacentHTML('beforeend', newProductsHtml);
-
-                                const newLoadMoreButton = doc.getElementById('load-more-button');
-                                if (newLoadMoreButton) {
-                                    nextPageUrl = newLoadMoreButton.dataset.nextPageUrl;
-                                } else {
-                                    nextPageUrl = null; // Exit loop if no more pages
-                                }
-                            }
-
-                            // All products loaded, update count and remove the button
-                            productCountSpan.textContent = totalCount;
-                            loadMoreContainer.remove();
-
-                        } catch (error) {
-                            console.error('Error loading all products:', error);
-                            buttonLabel.textContent = 'Failed to load';
-                            loaderIcon.classList.add('hidden');
-                            this.disabled = false;
-                        }
-                    });
-                });
-            </script>
-        @endpush
-
+                                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
+                                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                                    <h3 class="text-xl font-normal leading-tight text-white">
+                                        {{ $cat->getTranslation('name', $lang) }}
+                                    </h3>
+                                </div>
+                                <div
+                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                    <i class="fi fi-rr-arrow-right text-xl"></i>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </x-container>
+        </section>
     @endif
 
     @if ($category->getTranslation('title2', $lang))
@@ -303,23 +286,14 @@
 
                             <div class="mt-8">
                                 @if (!empty($category->brochure))
-                                    @php
-                                        $filenameParts = explode('/', $category->brochure);
-                                        $filename = end($filenameParts);
-                                    @endphp
-                                    <a href="{{ asset($category->brochure) }}" target="_blank"
-                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white hover:text-white shadow-lg
-                                transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
-                                        Download Brochure
-                                    </a>
+                                    <x-button href="{{ asset($category->brochure) }}" target="_blank"
+                                        text="Download Brochure" class="px-8 py-3 text-base font-medium" />
                                 @else
-                                    <a href="{{ url('/brochures') }}"
-                                        class="inline-block bg-[#f06425] px-8 py-3 text-base font-medium text-white hover:text-white shadow-lg
-                                transition-transform duration-300 hover:scale-105 hover:bg-[#e14e0f]">
-                                        Explore Catalogues
-                                    </a>
+                                    <x-button href="{{ url('/brochures') }}" text="Explore Catalogues"
+                                        class="px-8 py-3 text-base font-medium" />
                                 @endif
                             </div>
+
 
                         </div>
                     </div>
@@ -329,29 +303,32 @@
         </section>
     @endif
 
-
-    {{-- 5. Related Categories Section --}}
-    @if ($category->childs->where('is_active', 1)->isNotEmpty())
+    @if ($category->childs->isEmpty() && $siblingCategories->isNotEmpty())
         <section class="border-t border-stone-200 bg-stone-100 py-16">
             <x-container>
                 <div class="mb-8 flex items-end justify-between">
-                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">Related Categories</h2>
+                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">All Categories</h2>
                 </div>
                 <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
                     <div class="flex gap-6 px-4">
-                        @foreach ($category->childs->where('is_active', 1) as $cat)
+                        @foreach ($siblingCategories as $cat)
                             <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                                class="group relative block h-[28rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
-                                <img src="{{ uploaded_asset($cat->image) }}"
+                                class="group relative block h-[30rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
+
+                                <img src="{{ $cat->image_2 ? uploaded_asset($cat->image_2) : uploaded_asset($cat->image) }}"
                                     alt="{{ $cat->getTranslation('name', $lang) }}"
-                                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                    class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
+
+
+                                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
+
                                 <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
                                     <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}</h3>
+                                        {{ $cat->getTranslation('name', $lang) }}
+                                    </h3>
                                 </div>
                                 <div
-                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center  bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                     <i class="fi fi-rr-arrow-right text-xl"></i>
                                 </div>
                             </a>
@@ -362,4 +339,55 @@
         </section>
     @endif
 
+    
+
+@endsection
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadMoreContainer = document.getElementById('load-more-container');
+            if (!loadMoreContainer) return;
+
+            const loadMoreButton = document.getElementById('load-more-button');
+            const productTableBody = document.getElementById('product-table-body');
+            const productCountSpan = document.getElementById('product-count');
+            const loaderIcon = document.getElementById('loader-icon');
+            const buttonLabel = document.getElementById('load-more-label');
+            const totalCount = document.querySelector('[data-total-products]').dataset.totalProducts;
+
+            loadMoreButton.addEventListener('click', async function() {
+                let nextPageUrl = this.dataset.nextPageUrl;
+
+                // Show loader and disable button
+                loaderIcon.classList.remove('hidden');
+                buttonLabel.textContent = 'Loading...';
+                this.disabled = true;
+
+                // Loop to fetch all remaining pages
+                while (nextPageUrl) {
+                    const response = await fetch(nextPageUrl);
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    const newProductsHtml = doc.getElementById('product-table-body').innerHTML;
+                    productTableBody.insertAdjacentHTML('beforeend', newProductsHtml);
+
+                    const newLoadMoreButton = doc.getElementById('load-more-button');
+                    if (newLoadMoreButton) {
+                        nextPageUrl = newLoadMoreButton.dataset.nextPageUrl;
+                    } else {
+                        nextPageUrl = null; // Exit loop if no more pages
+                    }
+                }
+
+                // All products loaded, update count and remove the button
+                productCountSpan.textContent = totalCount;
+                loadMoreContainer.remove();
+
+
+            });
+        });
+    </script>
 @endsection
