@@ -4,7 +4,8 @@
     $availableLangs = [
         'EN' => ['name' => 'English', 'route' => '#'],
 
-        'FR' => ['name' => 'Français', 'route' => '#'],
+        'NL' => ['name' => 'Dutch', 'route' => '#'], // Updated from French to Dutch
+
     ];
 
     $lang = getActiveLanguage();
@@ -40,7 +41,9 @@
     class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 w-full transition-all duration-300 ease-in-out">
 
 
-    <x-container>
+
+
+<x-container>
         <div class="flex flex-wrap justify-between items-center mx-auto w-full">
 
             {{-- Logo --}}
@@ -59,8 +62,6 @@
                             <a href="{{ route('home') }}"
                                 class="text-black text-lg font-medium hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.home') }}</a>
                         </li>
-
-
 
                         {{-- PRODUCTS --}}
                         <li class="py-2">
@@ -90,8 +91,7 @@
                             </a>
                         </li>
 
-
-
+                        {{-- SERVICE & SUPPORT --}}
                         <li class="py-2">
                             <button @mouseenter="openDropdown = 'service'"
                                 @click.prevent="openDropdown = (openDropdown === 'service' ? null : 'service')"
@@ -106,7 +106,7 @@
                         </li>
                         <li>
                             <a href="{{ route('about_us') }}"
-                                class="text-black  text-lg font-medium  hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.about_us') }}</a>
+                                class="text-black text-lg font-medium hover:text-orange-500 font-light py-2 inline-block">{{ trans('messages.about_us') }}</a>
                         </li>
                         <li>
                             <a href="{{ route('contact') }}"
@@ -125,12 +125,11 @@
 
                         <div class="bg-white border-t border-gray-200 shadow-lg mt-2">
                             <x-container>
+                                {{-- Products Megamenu --}}
                                 <div x-show="openDropdown === 'products'" class="px-6 py-8">
-                                    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6 ">
+                                    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6">
                                         Products</h3>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
-                                        {{-- Loop through product categories --}}
                                         @foreach ($details['header_categories'] as $category)
                                             <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}"
                                                 class="group relative block bg-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
@@ -148,8 +147,6 @@
                                                 </div>
                                             </a>
                                         @endforeach
-
-                                        {{-- "View All Products" card with a slightly darker gradient background --}}
                                         <a href="{{ url('/products') }}"
                                             class="group relative block bg-gradient-to-r from-orange-100 via-gray-50 to-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300">
                                             <div
@@ -165,38 +162,28 @@
                                                 </p>
                                             </div>
                                         </a>
-
                                     </div>
                                 </div>
 
-                                <div x-show="openDropdown === 'industries'" x-cloak class="px-6 py-8"
-                                    @mouseenter="openDropdown = 'industries'" @mouseleave="openDropdown = null">
-
+                                {{-- Industries Megamenu --}}
+                                <div x-show="openDropdown === 'industries'" class="px-6 py-8">
                                     <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-4">
                                         {{ trans('messages.industries') }}
                                     </h3>
-
                                     <nav aria-label="All industries list" class="grid grid-cols-2 md:grid-cols-4 gap-2">
                                         @foreach ($industries as $pdt)
                                             <a href="{{ route('industry.details', ['type' => $pdt->slug]) }}"
-                                                class="group relative flex items-center px-4 py-3 bg-white border border-slate-200
-                                                hover:border-[#f06425] hover:bg-orange-50 text-md font-normal text-slate-800
-                                                transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#f06425]">
+                                                class="group relative flex items-center px-4 py-3 bg-white border border-slate-200 hover:border-[#f06425] hover:bg-orange-50 text-md font-normal text-slate-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#f06425]">
                                                 <div
-                                                    class="absolute left-0 top-0 h-full w-1 bg-[#f06425] scale-y-0
-                                                    group-hover:scale-y-100 transition-transform origin-top duration-300 ease-in-out">
+                                                    class="absolute left-0 top-0 h-full w-1 bg-[#f06425] scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300 ease-in-out">
                                                 </div>
-
                                                 <span>{{ $pdt->getTranslation('name', $lang) }}</span>
                                             </a>
                                         @endforeach
                                     </nav>
-
-                                    <div
-                                        class="mt-6 py-4 pl-5 border-t border-slate-200 bg-gradient-to-r from-orange-50 via-white to-white">
+                                    <div class="mt-6 py-4 pl-5 border-t border-slate-200 bg-gradient-to-r from-orange-50 via-white to-white">
                                         <a href="{{ route('industries_web') }}"
-                                            class="group inline-flex items-center gap-2 font-normal text-[#f06425]
-                                            text-base transition-all duration-300 hover:gap-3">
+                                            class="group inline-flex items-center gap-2 font-normal text-[#f06425] text-base transition-all duration-300 hover:gap-3">
                                             {{ trans('messages.view') . ' ' . trans('messages.all') . ' ' . trans('messages.industries') }}
                                             <svg class="w-4 h-4 transition-transform group-hover:translate-x-1"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -208,6 +195,7 @@
                                     </div>
                                 </div>
 
+                                {{-- Service Megamenu --}}
                                 <div x-show="openDropdown === 'service'" class="px-6 py-8">
                                     <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-6">
                                         Service & Support</h3>
@@ -242,7 +230,7 @@
                 <div class="hidden md:flex items-center space-x-4">
                     {{-- Language Switcher --}}
                     <div class="relative">
-                        <button @click="langSwitcherOpen = !langSwitcherOpen" type="button"
+              <button @click="langSwitcherOpen = !langSwitcherOpen" type="button"
                             class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:outline-none">
                             {{ $currentLang }}
                             <svg class="w-4 h-4 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -264,32 +252,50 @@
                                     data-locale="nl">Dutch</a>
                             </div>
                         </div>
-
                     </div>
 
                     <x-button href="{{ route('contact') }}" id="contact-button"
                         text="{{ trans('messages.get_in_touch') }}" />
-
-
-                    {{-- Mobile Menu Hamburger Button --}}
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
-                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 md:hidden hover:bg-gray-100 focus:ou                    tline-none focus:ring-2 focus:ring-gray-200"
-                        aria-controls="main-menu-mobile" :aria-expanded="mobileMenuOpen">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 17 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-                        </svg>
-                    </button>
                 </div>
+                
+                {{-- Mobile Menu Hamburger Button --}}
+         {{-- Mobile Menu Hamburger/Close Button --}}
+                <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    aria-controls="main-menu-mobile" :aria-expanded="mobileMenuOpen">
+                    <span class="sr-only">Open main menu</span>
+                    
+                    {{-- Hamburger Icon --}}
+                    <svg x-show="!mobileMenuOpen" class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    
+                    {{-- Close Icon --}}
+                    <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                
             </div>
+
+
+
+            
+        </div>
     </x-container>
 
+
+
+
+
+
+
+
     {{-- Mobile Menu (Collapsible) --}}
-    <div id="main-menu-mobile" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }"
+ <div id="main-menu-mobile" :class="{ 'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }"
         class="w-full md:hidden" x-cloak>
-        <ul class="flex flex-col mt-4 font-medium space-y-2 p-4">
+        <ul class="flex flex-col mt-4 font-medium space-y-2 p-4 bg-white border-t border-gray-200">
             <li><a href="{{ route('home') }}"
                     class="block py-2 px-3 text-gray-700 hover:bg-gray-100">{{ trans('messages.home') }}</a></li>
             <li>
@@ -322,9 +328,9 @@
                     </svg>
                 </button>
                 <div x-show="openDropdown === 'industries'" x-collapse.duration.300ms class="pl-4 mt-2 space-y-2">
-                    @foreach ($industriesPages as $pdt)
-                        <a href="{{ route('industry.details', ['type' => $pdt->type]) }}"
-                            class="block py-1 text-sm text-gray-600 hover:text-orange-500">{{ $pdt->getTranslation('title', $lang) }}</a>
+                    @foreach ($industries as $pdt)
+                        <a href="{{ route('industry.details', ['type' => $pdt->slug]) }}"
+                            class="block py-1 text-sm text-gray-600 hover:text-orange-500">{{ $pdt->getTranslation('name', $lang) }}</a>
                     @endforeach
                 </div>
             </li>
@@ -385,4 +391,12 @@
             </li>
         </ul>
     </div>
+
+
+
+
+
+
+
+
 </nav>
