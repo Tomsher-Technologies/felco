@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
-    <x-page-title :title="$page->getTranslation('title', $lang)" :description="$page->getTranslation('content1', $lang)" :image="asset('assets/images/page/234324.jpg')" />
+    <x-page-title :title="$page->getTranslation('title', $lang)" :description="$page->getTranslation('content1', $lang)" :image="asset('assets/images/page/contact-us-image.jpg')" />
 
     <section class="bg-white py-20">
 

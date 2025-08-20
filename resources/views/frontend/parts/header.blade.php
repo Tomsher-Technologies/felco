@@ -3,9 +3,7 @@
     $currentLang = 'EN';
     $availableLangs = [
         'EN' => ['name' => 'English', 'route' => '#'],
-
-        'NL' => ['name' => 'Dutch', 'route' => '#'], // Updated from French to Dutch
-
+        // 'NL' => ['name' => 'Dutch', 'route' => '#'], // Updated from French to Dutch
     ];
 
     $lang = getActiveLanguage();
