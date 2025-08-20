@@ -62,6 +62,8 @@ class StaffController extends Controller
             $user->user_type = "staff";
             $user->password = Hash::make($request->password);
             if($user->save()){
+                $roles = Role::find($request->role_id);
+                $user->assignRole($roles->id);
                 $staff = new Staff;
                 $staff->user_id = $user->id;
                 $staff->role_id = $request->role_id;
@@ -118,13 +120,15 @@ class StaffController extends Controller
             $user->password = Hash::make($request->password);
         }
         if($user->save()){
+            $roles = Role::find($request->role_id);
+            $user->syncRoles([$roles->id]);
             $staff->role_id = $request->role_id;
             if($staff->save()){
                 flash(trans('messages.staff_update_msg'))->success();
                 return redirect()->route('staffs.index');
             }
         }
-
+        
         flash(trans('messages.something_went_wrong'))->error();
         return back();
     }
