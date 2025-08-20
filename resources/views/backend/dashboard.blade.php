@@ -1,8 +1,7 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    
-    @if (Auth::user()->user_type == 'admin' || (Auth::user()->user_type == 'staff' && in_array('1', json_decode(Auth::user()->staff->role->permissions))))
+    @if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
         <div class="row gutters-10">
             <div class="col-lg-12">
                 <div class="row gutters-10">
@@ -10,8 +9,8 @@
                         <div class="bg-grad-2 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
-                                    <span class=" d-block">{{  trans('messages.total') }}</span>
-                                    {{  trans('messages.products') }}
+                                    <span class=" d-block">{{ trans('messages.total') }}</span>
+                                    {{ trans('messages.products') }}
                                 </div>
                                 <div class="h3 fw-700 mb-3">
                                     {{ \App\Models\Product::count() }}
@@ -44,8 +43,8 @@
                         <div class="bg-grad-1 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
-                                    <span class=" d-block">{{  trans('messages.total') }}</span>
-                                    {{  trans('messages.product_category') }}
+                                    <span class=" d-block">{{ trans('messages.total') }}</span>
+                                    {{ trans('messages.product_category') }}
                                 </div>
                                 <div class="h3 fw-700 mb-3">{{ \App\Models\Category::count() }}</div>
                             </div>
@@ -60,8 +59,8 @@
                         <div class="bg-grad-4 text-white rounded-lg mb-4 overflow-hidden">
                             <div class="px-3 pt-3">
                                 <div class="fs-20">
-                                    <span class=" d-block">{{  trans('messages.total') }}</span>
-                                    {{  trans('messages.enquiries') }}
+                                    <span class=" d-block">{{ trans('messages.total') }}</span>
+                                    {{ trans('messages.enquiries') }}
                                 </div>
                                 <div class="h3 fw-700 mb-3">{{ \App\Models\Contacts::count() }}</div>
                             </div>
@@ -78,11 +77,7 @@
 
         </div>
     @endif
-
-
 @endsection
 @section('script')
-    <script type="text/javascript">
-      
-    </script>
+    <script type="text/javascript"></script>
 @endsection
