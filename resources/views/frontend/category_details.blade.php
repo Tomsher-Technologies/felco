@@ -43,9 +43,9 @@
     @endif
 
     @if ($category->getTranslation('content1', $lang))
-        <section class="bg-gradient-to-tr from-stone-50 via-stone-100 to-stone-50 py-10 md:py-16">
+        <section class="bg-gradient-to-tr from-stone-50 via-stone-100 to-stone-50 pt-8 pb-12 md:pt-12 md:pb-16">
             <x-container class="mx-auto max-w-4xl">
-                <div class="animate-on-scroll relative overflow-hidden rounded-lg bg-white p-8 shadow-lg md:p-12">
+                <div class="animate-on-scroll relative overflow-hidden rounded-lg bg-white p-4 shadow-lg md:p-12">
                     {!! $category->getTranslation('content1', $lang) !!}
                 </div>
             </x-container>
@@ -58,7 +58,7 @@
             count($features) > 0 &&
             !empty($features[0]['feature_items']) &&
             count($features[0]['feature_items']) > 0)
-        <section class="mt-16 bg-[#454d4e] py-16 text-slate-300 md:py-24">
+        <section class="mt-8 mb-12 bg-[#454d4e] pt-8 pb-12 text-slate-300 md:mt-12 md:mb-16 md:pt-16 md:pb-20">
             <x-container>
                 <div class="space-y-16">
                     @foreach ($features as $featureSection)
@@ -89,7 +89,7 @@
     @if (
         $products->isNotEmpty() ||
             collect(request()->query())->except(['page'])->isNotEmpty())
-        <section class="bg-white py-16 md:py-20">
+        <section class="bg-white pt-8 pb-12 md:pt-16 md:pb-20">
             <x-container>
                 {{-- Filter UI --}}
                 <div class="mb-12">
@@ -260,6 +260,10 @@
                 </div>
             </x-container>
         </section>
+
+
+
+        
     @endif
 
     @if ($category->getTranslation('title2', $lang))
@@ -274,7 +278,7 @@
                     </div>
 
                     <div class="relative z-10 lg:-ml-20">
-                        <div class="animate-on-scroll rounded-lg bg-white p-10 shadow-2xl md:p-12" data-anim="fade-up">
+                        <div class="animate-on-scroll rounded-lg bg-white p-4 shadow-2xl md:p-12" data-anim="fade-up">
 
                             <h2 class="text-4xl font-light text-gray-800 md:text-5xl mb-4">
                                 {{ $category->getTranslation('title2', $lang) ?: 'Dive Into the Details' }}

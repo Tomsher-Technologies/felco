@@ -8,13 +8,16 @@
                 <span class="text-sm uppercase tracking-widest text-emerald-600 font-semibold block mb-4">
                     {{ $page->getTranslation('heading6', $lang) }}
                 </span>
-                <h2 class="text-4xl md:text-5xl font-normal leading-tight text-gray-800">
+                
+                {{-- Font size now scales from 3xl on mobile to 5xl on medium screens --}}
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight text-gray-800">
                     {{ $page->getTranslation('heading7', $lang) }}
                 </h2>
             </div>
 
             <div class="wow animate__animated animate__fadeInRight">
-                <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                {{-- Font size now scales from base on mobile to large on medium screens --}}
+                <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
                     {{ $page->getTranslation('content5', $lang) }}
                 </p>
                 
@@ -29,7 +32,6 @@
         </div>
     </x-container>
 </section>
-
 
 {{-- GSAP Animation Script --}}
 <script>
