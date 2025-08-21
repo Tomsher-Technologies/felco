@@ -380,12 +380,14 @@
                     </div>
                 </div>
             </li>
-            <li>
-                <a href="{{ route('contact') }}"
-                    class="block w-full mt-2 text-center text-sm px-4 py-2 leading-none border text-white bg-orange-500 hover:bg-orange-600">
-                    {{ trans('messages.get_in_touch') }}
-                </a>
-            </li>
+<li>
+    <x-button 
+        href="{{ route('contact') }}" 
+        text="{{ trans('messages.get_in_touch') }}" 
+        extraClasses="mt-2 w-full text-center"
+    />
+</li>
+
         </ul>
     </div>
 

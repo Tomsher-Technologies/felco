@@ -34,7 +34,7 @@
 #felco-hero .swiper,
 #felco-hero .swiper-wrapper,
 #felco-hero .swiper-slide {
-  height: 100% !important;
+  /* height: 100% !important; */
   min-height: 0;
 }
 
@@ -86,6 +86,14 @@
 
       color: #ffffff;
    
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .swiper-button-prev, .swiper-button-next{
+    display:  none !important;
+  }
 }
 
 

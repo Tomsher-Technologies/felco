@@ -89,177 +89,154 @@
     @if (
         $products->isNotEmpty() ||
             collect(request()->query())->except(['page'])->isNotEmpty())
-        <section class="bg-white pt-8 pb-12 md:pt-16 md:pb-20">
-            <x-container>
-                {{-- Filter UI --}}
-                <div class="mb-12">
-                    <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-                        <h2 class="text-3xl font-light text-gray-900">Filter Products</h2>
-                        <form class="flex w-full overflow-hidden rounded-md md:max-w-md" method="GET"
-                            action="{{ route('products.category', $category->slug) }}" autocomplete="off">
-                            <input name="keyword" type="text" value="{{ request('keyword') }}"
-                                placeholder="Search by ID or Name..."
-                                class="form-input w-full border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" />
-                            <button type="submit"
-                                class="relative inline-flex items-center justify-center gap-2 px-4 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Search</button>
-                        </form>
-                    </div>
+        
+        
 
-                    <div class="pt-6">
-                        <form id="live-filter-form"
-                            class="flex flex-wrap items-end gap-4 rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
-                            method="GET" action="{{ route('products.category', $category->slug) }}">
-                            @php
-                                $filterOptions = [
-                                    'frame_size' => $frameSizes,
-                                    'poles' => $poles,
-                                    'power' => $powers,
-                                    'mounting' => $mountings,
-                                    'voltage' => $voltages,
-                                ];
-                            @endphp
-                            @foreach ($filterOptions as $filter => $options)
-                                @if (collect($options)->isNotEmpty())
-                                    <div class="min-w-[150px] flex-1">
-                                        <label
-                                            class="mb-2 block text-sm font-semibold text-gray-800">{{ trans("messages.$filter") }}</label>
-                                        <select name="{{ $filter }}"
-                                            class="form-select w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
-                                            <option value="">All</option>
-                                            @foreach ($options as $opt)
-                                                <option value="{{ $opt }}" @selected(request($filter) == $opt)>
-                                                    {{ $opt }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-                            @endforeach
-                            <div class="flex items-end gap-2 pt-6">
-                                <button type="submit"
-                                    class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Apply</button>
-                                <a href="{{ route('products.category', $category->slug) }}"
-                                    class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Reset</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
-                {{-- Product Table --}}
-                <main>
-                    @if ($products->isNotEmpty())
-                        <div class="mb-8">
-                            {{-- Added data-total attribute to store the total count --}}
-                            <h2 class="text-3xl font-light text-gray-900" data-total-products="{{ $products->total() }}">
-                                Showing <span id="product-count">{{ $products->count() }}</span> of
-                                {{ $products->total() }} Products
-                            </h2>
-                        </div>
-                        <div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-                            <div role="table" class="min-w-full">
-                                <div role="rowheader"
-                                    class="grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] border-b-2 border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-600">
-                                    <div class="py-3 px-4 text-left">Product</div>
-                                    <div class="py-3 px-4 text-left">Power</div>
-                                    <div class="py-3 px-4 text-left">Poles</div>
-                                    <div class="py-3 px-4 text-left">Frame</div>
-                                    <div class="py-3 px-4 text-left">Voltage</div>
-                                    <div class="py-3 px-4 text-right"><span class="sr-only">Details</span></div>
-                                </div>
-                                <div id="product-table-body" role="rowgroup">
-                                    @foreach ($products as $prod)
-                                        <div role="row"
-                                            class="group relative grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] items-center border-b border-gray-200 transition-colors duration-300 last:border-b-0 hover:bg-orange-50/50">
-                                            <div class="whitespace-nowrap py-4 px-4">
-                                                <h4 class="truncate text-base font-bold text-gray-900">
-                                                    {{ $prod->unique_id }}</h4>
-                                                <p class="truncate text-sm text-gray-500">
-                                                    {{ $prod->getTranslation('name', $lang) }}</p>
-                                            </div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
-                                                {{ $prod->power }}</div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
-                                                {{ $prod->poles }}</div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
-                                                {{ $prod->frame_size }}</div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
-                                                {{ $prod->voltage }}</div>
-                                            <div class="relative z-30 flex items-center justify-end pr-6">
-                                                <div
-                                                    class="flex h-10 w-10 scale-75 items-center justify-center  bg-[#f16c31] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-                                                    <i class="fi fi-rr-arrow-right text-lg"></i>
-                                                </div>
-                                            </div>
-                                            <a href="{{ route('product-detail', ['slug' => $prod->slug]) }}"
-                                                class="absolute inset-0 z-20"
-                                                aria-label="View details for {{ $prod->unique_id }}"></a>
-                                        </div>
+
+
+<section class="bg-white pt-8 pb-12 md:pt-16 md:pb-20">
+    <x-container>
+        {{-- Filter UI --}}
+        <div class="mb-12">
+            <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+                <h2 class="text-3xl font-light text-gray-900">Filter Products</h2>
+                <form class="flex w-full overflow-hidden rounded-md md:max-w-md" method="GET"
+                    action="{{ route('products.category', $category->slug) }}" autocomplete="off">
+                    <input name="keyword" type="text" value="{{ request('keyword') }}"
+                        placeholder="Search by ID or Name..."
+                        class="form-input w-full border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500" />
+                    <button type="submit"
+                        class="relative inline-flex items-center justify-center gap-2 px-4 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Search</button>
+                </form>
+            </div>
+
+            <div class="pt-6">
+                <form id="live-filter-form"
+                    class="flex flex-wrap items-end gap-4 rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
+                    method="GET" action="{{ route('products.category', $category->slug) }}">
+                    @php
+                        $filterOptions = [
+                            'frame_size' => $frameSizes,
+                            'poles' => $poles,
+                            'power' => $powers,
+                            'mounting' => $mountings,
+                            'voltage' => $voltages,
+                        ];
+                    @endphp
+                    @foreach ($filterOptions as $filter => $options)
+                        @if (collect($options)->isNotEmpty())
+                            <div class="min-w-[150px] flex-1">
+                                <label
+                                    class="mb-2 block text-sm font-semibold text-gray-800">{{ trans("messages.$filter") }}</label>
+                                <select name="{{ $filter }}"
+                                    class="form-select w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500">
+                                    <option value="">All</option>
+                                    @foreach ($options as $opt)
+                                        <option value="{{ $opt }}" @selected(request($filter) == $opt)>{{ $opt }}</option>
                                     @endforeach
-                                </div>
-                            </div>
-                        </div>
-
-                        @if ($products->hasMorePages())
-                            <div class="mt-12 flex justify-center" id="load-more-container">
-                                <button id="load-more-button" data-next-page-url="{{ $products->nextPageUrl() }}"
-                                    class="relative inline-flex items-center justify-center gap-2 px-8 py-3 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">
-                                    <svg class="h-5 w-5 animate-spin hidden" id="loader-icon"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10"
-                                            stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor"
-                                            d="M4 12a8 8 0 018-8V4a10 10 0 00-10 10h2z"></path>
-                                    </svg>
-                                    <span id="load-more-label">Load More</span>
-                                </button>
+                                </select>
                             </div>
                         @endif
-                    @else
-                        <div class="rounded-lg border border-dashed border-gray-300 bg-white p-12 text-center">
-                            <h3 class="text-xl font-medium text-gray-800">No products found</h3>
-                            <p class="mt-2 text-gray-500">Try adjusting your filters or search term.</p>
-                            <a href="{{ route('products.category', $category->slug) }}"
-                                class="mt-6 inline-block border border-orange-400 bg-white px-6 py-2 text-orange-700 shadow-sm transition hover:bg-orange-50">Reset
-                                All Filters</a>
-                        </div>
-                    @endif
-                </main>
-            </x-container>
-        </section>
+                    @endforeach
+                    <div class="flex items-end gap-2 pt-6">
+                        <button type="submit"
+                            class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Apply</button>
+                        <a href="{{ route('products.category', $category->slug) }}"
+                            class="rounded-md relative inline-flex items-center justify-center gap-2 px-6 py-2 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">Reset</a>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    @endif
-
-    @if ($category->childs->isNotEmpty())
-        <section class="border-t border-stone-200 bg-stone-100 py-16">
-            <x-container>
-                <div class="mb-8 flex items-end justify-between">
-                    <h2 class="animate-on-scroll text-3xl font-light text-stone-900">Related Categories</h2>
+        {{-- Product Table --}}
+        <main>
+            @if ($products->isNotEmpty())
+                <div class="mb-8">
+                    <h2 class="text-3xl font-light text-gray-900" data-total-products="{{ $products->total() }}">
+                        Showing <span id="product-count">{{ $products->count() }}</span> of
+                        {{ $products->total() }} Products
+                    </h2>
                 </div>
-                <div class="custom-scrollbar animate-on-scroll -mx-4 overflow-x-auto pb-8">
-                    <div class="flex gap-6 px-4">
-                        @foreach ($category->childs as $cat)
-                            <a href="{{ route('products.category', ['category_slug' => $cat->slug]) }}"
-                                class="group relative block h-[30rem] w-80 flex-shrink-0 overflow-hidden rounded-lg shadow-lg md:w-96">
 
-                                <img src="{{ $cat->image_2 ? uploaded_asset($cat->image_2) : uploaded_asset($cat->image) }}"
-                                    alt="{{ $cat->getTranslation('name', $lang) }}"
-                                    class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
+                <div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+                    {{-- Added horizontal scrolling for small screens --}}
+                    <div role="table" class="min-w-full overflow-x-auto">
+                        <div role="rowheader"
+                            class="grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] border-b-2 border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-600">
+                            <div class="py-3 px-4 text-left">Product</div>
+                            <div class="py-3 px-4 text-left">Power</div>
+                            <div class="py-3 px-4 text-left">Poles</div>
+                            <div class="py-3 px-4 text-left">Frame</div>
+                            <div class="py-3 px-4 text-left">Voltage</div>
+                            <div class="py-3 px-4 text-right"><span class="sr-only">Details</span></div>
+                        </div>
 
-                                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
-                                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                                    <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h3>
+                        <div id="product-table-body" role="rowgroup">
+                            @foreach ($products as $prod)
+                                <div role="row"
+                                    class="group relative grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] items-center border-b border-gray-200 transition-colors duration-300 last:border-b-0 hover:bg-orange-50/50">
+                                    <div class="whitespace-nowrap py-4 px-4">
+                                        <h4 class="truncate text-base font-bold text-gray-900">
+                                            {{ $prod->unique_id }}</h4>
+                                        <p class="truncate text-sm text-gray-500">
+                                            {{ $prod->getTranslation('name', $lang) }}</p>
+                                    </div>
+                                    <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                        {{ $prod->power }}</div>
+                                    <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                        {{ $prod->poles }}</div>
+                                    <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                        {{ $prod->frame_size }}</div>
+                                    <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                        {{ $prod->voltage }}</div>
+                                    <div class="relative z-30 flex items-center justify-end pr-6">
+                                        <div
+                                            class="flex h-10 w-10 scale-75 items-center justify-center  bg-[#f16c31] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                            <i class="fi fi-rr-arrow-right text-lg"></i>
+                                        </div>
+                                    </div>
+                                    <a href="{{ route('product-detail', ['slug' => $prod->slug]) }}"
+                                        class="absolute inset-0 z-20"
+                                        aria-label="View details for {{ $prod->unique_id }}"></a>
                                 </div>
-                                <div
-                                    class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
-                                    <i class="fi fi-rr-arrow-right text-xl"></i>
-                                </div>
-                            </a>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </x-container>
-        </section>
+
+                @if ($products->hasMorePages())
+                    <div class="mt-12 flex justify-center" id="load-more-container">
+                        <button id="load-more-button" data-next-page-url="{{ $products->nextPageUrl() }}"
+                            class="relative inline-flex items-center justify-center gap-2 px-8 py-3 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">
+                            <svg class="h-5 w-5 animate-spin hidden" id="loader-icon" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V4a10 10 0 00-10 10h2z"></path>
+                            </svg>
+                            <span id="load-more-label">Load More</span>
+                        </button>
+                    </div>
+                @endif
+            @else
+                <div class="rounded-lg border border-dashed border-gray-300 bg-white p-12 text-center">
+                    <h3 class="text-xl font-medium text-gray-800">No products found</h3>
+                    <p class="mt-2 text-gray-500">Try adjusting your filters or search term.</p>
+                    <a href="{{ route('products.category', $category->slug) }}"
+                        class="mt-6 inline-block border border-orange-400 bg-white px-6 py-2 text-orange-700 shadow-sm transition hover:bg-orange-50">Reset
+                        All Filters</a>
+                </div>
+            @endif
+        </main>
+    </x-container>
+</section>
+
+
+
+
+        
 
 
 

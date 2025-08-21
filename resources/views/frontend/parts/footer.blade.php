@@ -50,7 +50,7 @@
         </div>
 
         {{-- 3. Footer Bottom --}}
-<div class="flex flex-col items-center gap-4 pt-8 !pb-8 mb-8 text-center text-xs text-[#cccccc] sm:flex-row sm:justify-between">
+<div class="flex flex-col items-center gap-4 pt-8 !pb-3 mb-8 text-center text-xs text-[#cccccc] sm:flex-row sm:justify-between">
     <p>&copy; {{ now()->year }} Felco Motors. All rights reserved.</p>
     <div class="sm:text-right w-full sm:w-auto">
         Designed by 
