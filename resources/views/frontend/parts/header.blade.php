@@ -3,9 +3,6 @@
     $currentLang = 'EN';
     $availableLangs = [
         'EN' => ['name' => 'English', 'route' => '#'],
-
-        'NL' => ['name' => 'Dutch', 'route' => '#'], // Updated from French to Dutch
-
     ];
 
     $lang = getActiveLanguage();
@@ -247,9 +244,9 @@
                                 <a href="#"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 lang-link"
                                     data-locale="en">English</a>
-                                <a href="#"
+                                {{-- <a href="#"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 lang-link"
-                                    data-locale="nl">Dutch</a>
+                                    data-locale="nl">Dutch</a> --}}
                             </div>
                         </div>
                     </div>
