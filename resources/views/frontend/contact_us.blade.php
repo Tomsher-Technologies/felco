@@ -9,11 +9,24 @@
             <div class="mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-x-10">
 
+                    
+
                     <div>
+                        @if (session('message'))
+                            <div class="mb-4 flex items-center justify-between rounded-lg border px-4 py-3 ">
+                                
+                                <span style="@if(session('alert-type') === 'success') color: green !important; @endif">{{ session('message') }}</span>
+
+                                <button type="button" class="ml-4 text-xl font-bold leading-none focus:outline-none" onclick="this.parentElement.remove()">
+                                    &times;
+                                </button>
+                            </div>
+                        @endif
                         {{-- Adjusted form padding for mobile --}}
                         <form action="{{ route('contact.submit') }}" method="post" class="space-y-6 bg-white border p-3 md:p-8">
                             @csrf
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                
                                 <div>
                                     <input type="text" name="firstName" placeholder="{{ trans('messages.first_name') }}*"
                                         class="form-input w-full focus:ring-2 focus:ring-[#f06425] hover:border-[#f06425]"
