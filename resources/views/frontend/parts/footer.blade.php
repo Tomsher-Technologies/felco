@@ -1,5 +1,8 @@
-<footer class="bg-[#707777] py-16 text-[#ededed]">
-    <x-container>
+<footer class="bg-[#707777]  text-[#ededed]">
+    <div class="pt-[50px] pb-[30px] h-full">
+    <x-container >
+        
+        {{-- 1. Top Section with Logo and Navigation --}}
 
         {{-- 1. Centered Logo & Main Navigation --}}
         <div class="mb-12 flex flex-col items-center text-center">
@@ -49,8 +52,9 @@
             </div>
         </div>
 
-        {{-- 3. Footer Bottom --}}
-<div class="flex flex-col items-center gap-4 pt-8 !pb-3 mb-8 text-center text-xs text-[#cccccc] sm:flex-row sm:justify-between">
+
+            {{-- 3. Footer Bottom --}}
+<div class="flex flex-col items-center gap-4 pt-8  text-center text-xs text-[#cccccc] sm:flex-row sm:justify-between">
     <p>&copy; {{ now()->year }} Felco Motors. All rights reserved.</p>
     <div class="sm:text-right w-full sm:w-auto">
         Designed by 
@@ -60,6 +64,11 @@
 
 
 
-
     </x-container>
+
+    
+    </div>
+
+
+
 </footer>

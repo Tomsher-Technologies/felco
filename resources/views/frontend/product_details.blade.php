@@ -43,6 +43,7 @@
 @endphp
 
 
+
 {{-- Main Product Section --}}
 <section class="py-16 md:py-24 text-slate-800 bg-gradient-to-br from-orange-50 via-white to-white border border-slate-200">
     <x-container>
@@ -57,13 +58,10 @@
                     {{ trans('messages.product') . ' ' . trans('messages.id') }}: {{ $product->unique_id }}
                 </p> --}}
             </div>
-            <div class="flex-shrink-0">
-                <a href="{{ Session::has('last_url') ? Session::get('last_url') : route('products') }}"
-                   class="inline-flex items-center gap-2 bg-orange-600 text-white px-5 py-3 shadow-md hover:bg-orange-700 transition-colors duration-300">
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
-                    <span>{{ trans('messages.go_back') }}</span>
-                </a>
-            </div>
+           
+
+
+
         </div>
 
         {{-- 2. Main Content Grid --}}
@@ -120,6 +118,15 @@
                         </div>
                     </dl>
                 </div>
+
+
+                   <div class="flex-shrink-0">
+    <x-button 
+        href="{{ Session::has('last_url') ? Session::get('last_url') : route('products') }}" 
+        text="{{ trans('messages.go_back') }}"
+        extraClasses="bg-orange-600 hover:bg-orange-700 shadow-md "
+    />
+</div>
 
                 {{-- Card 2: Downloads & Resources (UPDATED) --}}
                 {{-- @php
