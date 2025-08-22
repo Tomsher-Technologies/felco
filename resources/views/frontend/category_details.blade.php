@@ -145,6 +145,16 @@
                 </div>
 
                 {{-- Product Table --}}
+
+
+
+
+
+
+
+
+
+
                 <main>
                     @if ($products->isNotEmpty())
                         <div class="mb-8">
@@ -154,38 +164,39 @@
                                 {{ $products->total() }} Products
                             </h2>
                         </div>
+
                         <div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
                             <div role="table" class="min-w-full">
                                 <div role="rowheader"
-                                    class="grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] border-b-2 border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-600">
-                                    <div class="py-3 px-4 text-left">Product</div>
-                                    <div class="py-3 px-4 text-left">Power</div>
-                                    <div class="py-3 px-4 text-left">Poles</div>
-                                    <div class="py-3 px-4 text-left">Frame</div>
-                                    <div class="py-3 px-4 text-left">Voltage</div>
-                                    <div class="py-3 px-4 text-right"><span class="sr-only">Details</span></div>
+                                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 border-b-2 border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wider text-gray-600">
+                                    <div class="py-2 px-3 text-left">Product</div>
+                                    <div class="py-2 px-3 text-left">Power</div>
+                                    <div class="py-2 px-3 text-left">Poles</div>
+                                    <div class="py-2 px-3 text-left">Frame</div>
+                                    <div class="py-2 px-3 text-left">Voltage</div>
+                                    <div class="py-2 px-3 text-right"><span class="sr-only">Details</span></div>
                                 </div>
                                 <div id="product-table-body" role="rowgroup">
                                     @foreach ($products as $prod)
                                         <div role="row"
-                                            class="group relative grid grid-cols-[minmax(300px,_3fr)_repeat(4,_1fr)_minmax(80px,_auto)] items-center border-b border-gray-200 transition-colors duration-300 last:border-b-0 hover:bg-orange-50/50">
-                                            <div class="whitespace-nowrap py-4 px-4">
+                                            class="group relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center border-b border-gray-200 transition-colors duration-300 last:border-b-0 hover:bg-orange-50/50">
+                                            <div class="whitespace-nowrap py-3 px-3">
                                                 <h4 class="truncate text-base font-bold text-gray-900">
                                                     {{ $prod->unique_id }}</h4>
                                                 <p class="truncate text-sm text-gray-500">
                                                     {{ $prod->getTranslation('name', $lang) }}</p>
                                             </div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                            <div class="whitespace-nowrap py-3 px-3 text-sm text-gray-700">
                                                 {{ $prod->power }}</div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                            <div class="whitespace-nowrap py-3 px-3 text-sm text-gray-700">
                                                 {{ $prod->poles }}</div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                            <div class="whitespace-nowrap py-3 px-3 text-sm text-gray-700">
                                                 {{ $prod->frame_size }}</div>
-                                            <div class="whitespace-nowrap py-4 px-4 text-sm text-gray-700">
+                                            <div class="whitespace-nowrap py-3 px-3 text-sm text-gray-700">
                                                 {{ $prod->voltage }}</div>
                                             <div class="relative z-30 flex items-center justify-end pr-6">
                                                 <div
-                                                    class="flex h-10 w-10 scale-75 items-center justify-center  bg-[#f16c31] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                                                    class="flex h-8 w-8 scale-75 items-center justify-center bg-[#f16c31] text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                                     <i class="fi fi-rr-arrow-right text-lg"></i>
                                                 </div>
                                             </div>
@@ -201,7 +212,7 @@
                         @if ($products->hasMorePages())
                             <div class="mt-12 flex justify-center" id="load-more-container">
                                 <button id="load-more-button" data-next-page-url="{{ $products->nextPageUrl() }}"
-                                    class="relative inline-flex items-center justify-center gap-2 px-8 py-3 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500 ">
+                                    class="relative inline-flex items-center justify-center gap-2 px-8 py-3 font-semibold text-sm transition-colors duration-300 shadow-lg group overflow-hidden bg-orange-500 text-white border-2 border-orange-500 hover:bg-white hover:text-orange-500 hover:border-orange-500">
                                     <svg class="h-5 w-5 animate-spin hidden" id="loader-icon"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10"
@@ -223,6 +234,15 @@
                         </div>
                     @endif
                 </main>
+
+
+
+
+
+
+
+
+
             </x-container>
         </section>
 
@@ -245,11 +265,13 @@
                                     class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
 
                                 {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
-                                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                                    <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h3>
-                                </div>
+                                @if (!$cat->image_2)
+                                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                                        <h3 class="text-xl font-normal leading-tight text-white">
+                                            {{ $cat->getTranslation('name', $lang) }}
+                                        </h3>
+                                    </div>
+                                @endif
                                 <div
                                     class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                     <i class="fi fi-rr-arrow-right text-xl"></i>
@@ -260,10 +282,6 @@
                 </div>
             </x-container>
         </section>
-
-
-
-        
     @endif
 
     @if ($category->getTranslation('title2', $lang))
@@ -325,12 +343,13 @@
 
 
                                 {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
-
-                                <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                                    <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h3>
-                                </div>
+                                @if (!$cat->image_2)
+                                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                                        <h3 class="text-xl font-normal leading-tight text-white">
+                                            {{ $cat->getTranslation('name', $lang) }}
+                                        </h3>
+                                    </div>
+                                @endif
                                 <div
                                     class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                     <i class="fi fi-rr-arrow-right text-xl"></i>
@@ -343,7 +362,7 @@
         </section>
     @endif
 
-    
+
 
 @endsection
 
