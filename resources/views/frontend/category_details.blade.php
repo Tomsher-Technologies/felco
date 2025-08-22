@@ -265,11 +265,13 @@
                                     class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-in-out group-hover:scale-105">
 
                                 {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
-                                {{-- <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                                    <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h3>
-                                </div> --}}
+                                @if (!$cat->image_2)
+                                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                                        <h3 class="text-xl font-normal leading-tight text-white">
+                                            {{ $cat->getTranslation('name', $lang) }}
+                                        </h3>
+                                    </div>
+                                @endif
                                 <div
                                     class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                     <i class="fi fi-rr-arrow-right text-xl"></i>
@@ -341,12 +343,13 @@
 
 
                                 {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div> --}}
-
-                                {{-- <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                                    <h3 class="text-xl font-normal leading-tight text-white">
-                                        {{ $cat->getTranslation('name', $lang) }}
-                                    </h3>
-                                </div> --}}
+                                @if (!$cat->image_2)
+                                    <div class="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                                        <h3 class="text-xl font-normal leading-tight text-white">
+                                            {{ $cat->getTranslation('name', $lang) }}
+                                        </h3>
+                                    </div>
+                                @endif
                                 <div
                                     class="absolute bottom-6 right-6 z-10 flex h-12 w-12 scale-75 items-center justify-center bg-orange-500 text-white opacity-0 shadow-lg transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
                                     <i class="fi fi-rr-arrow-right text-xl"></i>
